@@ -1,0 +1,2010 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{6BF9E9E4-B6D6-418D-B6E0-DAEA5A375EA9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Transform_Load Dim LocationEnum"
+  DTS:PackageType="5"
+  DTS:VersionBuild="171"
+  DTS:VersionGUID="{1A9769A3-5750-481D-A669-45C5671BE796}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{634A7D50-35E1-4118-9F32-A9591699907C}"
+      DTS:ObjectName="localhost.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::StagingConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Staging;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{FD6C36E4-B51E-4F85-83CB-1C790B0F1F5D}localhost.Staging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{3B07B308-A556-4502-8BA0-C52D71325392}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{263F894F-1FDA-47E7-8159-E278BF4D3EBE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3E93B895-F85D-4367-8377-909BF204074F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">DWH_Test</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5733BBF8-C857-4570-BC9D-CE699114E3EF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A4E8BFB3-F8DD-4F68-96FF-B199358705F0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DCB02023-679B-4A39-96CE-1C54651EF55A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3AD50360-43EB-41C1-B133-4CCE4C79E520}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{52D2F66D-E0DD-4BB7-A27E-3D336F00C89D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1CFFEB2F-A060-4858-841B-C1BEFF401677}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3FAEAD7E-B644-4D36-9C57-D9F3BB8790AA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{090F8B18-14AB-491E-9515-B85C08BDC140}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7DA4E512-DB18-40E4-BDC3-2AE6E591A8F1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C93D000D-F5CD-405B-B229-39564258ED17}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D6F3552-0119-4589-9EE1-B046B3116E34}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80414CDB-2959-41AB-9BC3-270573D32D5B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">DimLocationEnum</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{99999BE7-9971-4351-AC58-2238C3DF699D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateDimensionType">
+      <DTS:VariableValue
+        DTS:DataType="2">1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A8BC82AF-E8E5-4CF6-9883-37FC757184DB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Dimension (LocationEnum)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C559E566-A75C-4712-9C5D-74A38BC6F4B4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Dimension (LocationEnum)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimension (LocationEnum)\Count Final Rows"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F0E49872-6379-4199-812D-909C3F4C846C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count Final Rows"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimLocationEnum"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="RowCountFinal"
+                SQLTask:DtsVariableName="User::RowCountFinal" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{913550B4-73A4-4BA0-BDC3-2C57449E5E72}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load DimLocationEnum"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join"
+                  componentClassID="Microsoft.MergeJoin"
+                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+                  name="Merge Join"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of join to perform."
+                      name="JoinType"
+                      typeConverter="JoinType">2</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of columns in the ordering key."
+                      name="NumKeyColumns">1</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the null values are treated as equal values."
+                      name="TreatNullsAsEqual">true</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Indicates the requested maximum buffers per input before blocking."
+                      name="MaxBuffersPerInput">5</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Left Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="LocationCode"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="LocationName"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[SettingName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="SettingName"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[SettingName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[FlagValue]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="FlagValue"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[FlagValue]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Right Input]"
+                      hasSideEffects="true"
+                      name="Merge Join Right Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Right Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Right Input].Columns[IdDimLocations]"
+                          cachedDataType="i4"
+                          cachedName="IdDimLocations"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[IdDimLocations]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output]"
+                      isSorted="true"
+                      name="Merge Join Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationCode]"
+                          name="LocationCode">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationCode]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationName]"
+                          name="LocationName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[LocationName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[SettingName]"
+                          name="SettingName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[SettingName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[FlagValue]"
+                          name="FlagValue">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input].Columns[FlagValue]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[IdDimLocations]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[IdDimLocations]"
+                          name="IdDimLocations">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="The input column associated with this output column"
+                              name="InputColumnID">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Right Input].Columns[IdDimLocations]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimLocationEnum]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWH_Test]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWH_Test]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          cachedSortKeyPosition="1"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LocationCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="LocationCode"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationCode]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LocationName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="LocationName"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationName]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[LocationName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SettingName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="SettingName"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SettingName]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[SettingName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FlagValue]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="FlagValue"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FlagValue]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[FlagValue]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IdDimLocations]"
+                          cachedDataType="i4"
+                          cachedName="IdDimLocations"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IdDimLocations]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output].Columns[IdDimLocations]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IdDimLocationEnum]"
+                          dataType="i4"
+                          name="IdDimLocationEnum" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LocationCode" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LocationName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="SettingName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="FlagValue" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IdDimLocations]"
+                          dataType="i4"
+                          name="IdDimLocations" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[SM_LocationEnum]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.Staging]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                          length="10"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]"
+                          name="LocationCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                          length="50"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationName]"
+                          name="LocationName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SettingName]"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingName]"
+                          name="SettingName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FlagValue]"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlagValue]"
+                          name="FlagValue"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="LocationCode" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LocationName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="SettingName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="FlagValue" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationCode]"
+                          name="LocationCode" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                          name="LocationName" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SettingName]"
+                          name="SettingName" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FlagValue]"
+                          name="FlagValue" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read DimLocations"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[DimLocations]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[localhost.DWH_Test]"
+                      connectionManagerRefId="Package.ConnectionManagers[localhost.DWH_Test]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[IdDimLocations]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[IdDimLocations]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[IdDimLocations]"
+                          name="IdDimLocations"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[IdDimLocations]"
+                          dataType="i4"
+                          name="IdDimLocations" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LocationCode" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LocationName" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[Flags]"
+                          dataType="i4"
+                          name="Flags" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="ProductDepartmentCode" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ProductDepartmentName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[IdDimLocations]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[IdDimLocations]"
+                          name="IdDimLocations" />
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Extracted">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountExtracts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Inserted">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountInserts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Inputs[Sort Input].Columns[IdDimLocations]"
+                          cachedDataType="i4"
+                          cachedName="IdDimLocations"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[IdDimLocations]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Inputs[Sort Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[IdDimLocations]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[IdDimLocations]"
+                          name="IdDimLocations">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[IdDimLocations]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output].Columns[LocationKey]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1"
+                  componentClassID="Microsoft.Sort"
+                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+                  name="Sort 1"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                      name="EliminateDuplicates">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the maximum number of threads to use for sorting."
+                      expressionType="Notify"
+                      name="MaximumThreads">-1</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input]"
+                      name="Sort Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationKey]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">1</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input].Columns[LocationCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="LocationCode"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input].Columns[LocationName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="LocationName"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input].Columns[SettingName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="SettingName"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingName]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input].Columns[FlagValue]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="FlagValue"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlagValue]">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the comparison options for character data."
+                              name="NewComparisonFlags">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Specifies the sort order of the column."
+                              name="NewSortKeyPosition">0</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output]"
+                      isSorted="true"
+                      name="Sort Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          sortKeyPosition="1">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationKey]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationCode]"
+                          name="LocationCode">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationCode]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[LocationName]"
+                          name="LocationName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[LocationName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[SettingName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[SettingName]"
+                          name="SettingName">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[SettingName]}</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[FlagValue]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output].Columns[FlagValue]"
+                          name="FlagValue">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the lineage identifier of the input column that is associated with this output column."
+                              name="SortColumnId">#{Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlagValue]}</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Merge Join Output]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted.Inputs[Row Count Input 1]"
+                  name="Merge Join Output"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Outputs[Merge Join Output]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[OLE DB Source Output]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Inputs[Sort Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[OLE DB Source Output1]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Row Count Output 1]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Inputs[Sort Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Row Count Output 11]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Sort Output]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Left Input]"
+                  name="Sort Output"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1.Outputs[Sort Output]" />
+                <path
+                  refId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Sort Output1]"
+                  endId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join.Inputs[Merge Join Right Input]"
+                  name="Sort Output"
+                  startId="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort.Outputs[Sort Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dimension (LocationEnum)\Truncate DimLocationEnum"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{40D59236-75CB-45F6-A9D7-E3A52E2C41F9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate DimLocationEnum"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+              SQLTask:SqlStatementSource="Truncate table DimLocationEnum" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5C1CDF69-052C-483D-BF8F-5F7F0DB25180}"
+          DTS:From="Package\Load Dimension (LocationEnum)\Truncate DimLocationEnum"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Dimension (LocationEnum)\Load DimLocationEnum" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{2C3F6B41-21EA-420A-B4FC-4B5D3F3EDD19}"
+          DTS:From="Package\Load Dimension (LocationEnum)\Load DimLocationEnum"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Load Dimension (LocationEnum)\Count Final Rows" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D5DF07FD-1514-4660-8CC1-55DB1434E51E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4711D108-7BE4-46A8-84A2-97ABECBE72F1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EFFDE413-24BB-4BA3-85F8-76668E2B0047}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{ADC0B72F-1B8E-4E67-A47E-C7992A8DD740}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1480AB0F-38D4-47D3-9813-7D9CB0D9EFFB}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Dimension (LocationEnum)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7A410B93-375F-4CB4-8306-A4D1DC9E6D8E}"
+      DTS:From="Package\Load Dimension (LocationEnum)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="78,228" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Load Dimension (LocationEnum)\Count Final Rows"
+          TopLeft="93,223" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum"
+          TopLeft="78,118" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint 4]"
+          TopLeft="173,160">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Load Dimension (LocationEnum)\Truncate DimLocationEnum"
+          TopLeft="72,25" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint]"
+          TopLeft="174.75,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="393,311"
+          Size="393,354"
+          Id="Package\Load Dimension (LocationEnum)"
+          TopLeft="340,69" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="101,93" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="829,219" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="177.5,135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,93"
+              Start="0,0"
+              End="0,85.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,34.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="280,247.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60,0"
+              Start="0,0"
+              End="52.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="52.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="733,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96,0"
+              Start="0,0"
+              End="88.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Dimension (LocationEnum)\Load DimLocationEnum">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Extracted"
+          TopLeft="60,125" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Row Count Inserted"
+          TopLeft="310,360" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations"
+          TopLeft="477,53" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort"
+          TopLeft="512,132" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[OLE DB Source Output]"
+          TopLeft="561.25,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Sort 1"
+          TopLeft="96,195" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Row Count Output 1]"
+          TopLeft="150.5,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Merge Join"
+          TopLeft="336,281" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Sort Output]"
+          TopLeft="149.5,237">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="251.5,44"
+              Start="0,0"
+              End="251.5,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="4,22" />
+                  <mssgle:LineSegment
+                    End="247.5,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="247.5,22"
+                    Point2="251.5,22"
+                    Point3="251.5,26" />
+                  <mssgle:LineSegment
+                    End="251.5,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Sort Output1]"
+          TopLeft="561,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-139.666666666667,107"
+              Start="0,0"
+              End="-139.666666666667,99.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.419452887538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.419452887538"
+                    Point2="0,63.419452887538"
+                    Point3="-4,63.419452887538" />
+                  <mssgle:LineSegment
+                    End="-135.666666666667,63.419452887538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-135.666666666667,63.419452887538"
+                    Point2="-139.666666666667,63.419452887538"
+                    Point3="-139.666666666667,67.419452887538" />
+                  <mssgle:LineSegment
+                    End="-139.666666666667,99.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Merge Join Output]"
+          TopLeft="398.75,323">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination"
+          TopLeft="313,458" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[Row Count Output 11]"
+          TopLeft="397.5,402">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source"
+          TopLeft="81,41" />
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum.Paths[OLE DB Source Output1]"
+          TopLeft="153.75,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\Read DimLocations">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (LocationEnum)\Load DimLocationEnum\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

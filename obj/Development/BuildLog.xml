@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ProjectInfo>
+    <Name>ETL</Name>
+    <LastWriteTime>2023-12-14T19:35:38.4599213Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>Data Profile.dtsx</Name>
+      <LastWriteTime>2023-11-17T20:46:01.0317192Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1_DWH_General_ETL_Process.dtsx</Name>
+      <LastWriteTime>2023-12-05T23:40:21.3422313Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>12_Extract.dtsx</Name>
+      <LastWriteTime>2023-12-14T19:04:13.2866099Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>13_Transform_Load.dtsx</Name>
+      <LastWriteTime>2023-12-08T17:05:50.3719757Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>121_DWH Template Package Extract.dtsx</Name>
+      <LastWriteTime>2023-11-09T14:15:20.5955064Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>122_DWH Extract ERP_ICS_Product.dtsx</Name>
+      <LastWriteTime>2023-11-14T18:33:28.4148894Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1321_DWH Template Package Transform_Load Fact.dtsx</Name>
+      <LastWriteTime>2023-11-10T14:10:05.4166211Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1311_DWH Template Package Transform_Load Dim.dtsx</Name>
+      <LastWriteTime>2023-11-27T17:16:35.1641252Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>11_Prepare Source_ERP.dtsx</Name>
+      <LastWriteTime>2023-12-14T17:00:37.3319611Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>124_DWH Extract ERP_ICS_Voyage.dtsx</Name>
+      <LastWriteTime>2023-11-09T17:54:10.3256713Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>123_DWH Extract ERP_SM_Ships.dtsx</Name>
+      <LastWriteTime>2023-11-20T14:44:01.0998361Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>125_DWH Extract ERP_ICS_Location.dtsx</Name>
+      <LastWriteTime>2023-11-09T17:53:12.8900367Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>126_DWH Extract ERP_ICS_LocationEvent.dtsx</Name>
+      <LastWriteTime>2023-11-09T17:53:12.8072404Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>127_DWH Extract ERP_ICS_ProductUnitMeasures.dtsx</Name>
+      <LastWriteTime>2023-11-13T14:42:00.2428131Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>128_DWH Extract ERP_ICS_Transfer.dtsx</Name>
+      <LastWriteTime>2023-12-13T17:53:55.4669119Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1312_DWH Transform_Load Dim Ship.dtsx</Name>
+      <LastWriteTime>2023-11-20T15:21:22.3048991Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1313_DWH Transform_Load Dim Locations.dtsx</Name>
+      <LastWriteTime>2023-11-10T16:50:34.4274884Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1314_DWH Transform_Load Dim LocationsEvents.dtsx</Name>
+      <LastWriteTime>2023-11-20T15:26:23.6219755Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1315_DWH Transform_Load Dim Product.dtsx</Name>
+      <LastWriteTime>2023-11-20T15:26:23.6624893Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1316_DWH Transform_Load Dim Voyage.dtsx</Name>
+      <LastWriteTime>2023-11-20T15:26:23.7530087Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1317_DWH Transform_Load Dim UnitMeasure.dtsx</Name>
+      <LastWriteTime>2023-11-20T15:27:45.7574365Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1322_DWH Transform_Load Fact Transfer.dtsx</Name>
+      <LastWriteTime>2023-12-13T17:57:40.834219Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>13221_DWH Transform_Load Fact Transfer Summarized.dtsx</Name>
+      <LastWriteTime>2023-12-14T18:19:42.6896836Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1320_Transform_Load_Facts.dtsx</Name>
+      <LastWriteTime>2023-12-08T20:58:32.3077952Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1310_Transform_Load_Dimensions.dtsx</Name>
+      <LastWriteTime>2023-12-14T19:41:41.6736128Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>129_DWH Extract ERP_ICS_Vendor.dtsx</Name>
+      <LastWriteTime>2023-12-08T14:32:51.0481266Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>129_DWH Extract ERP_ICS_Order.dtsx</Name>
+      <LastWriteTime>2023-12-13T17:53:55.5733187Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>129_DWH Extract ERP_ICS_ProductDepartment.dtsx</Name>
+      <LastWriteTime>2023-12-08T14:35:30.7032904Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1318_DWH Transform_Load Dim Vendor.dtsx</Name>
+      <LastWriteTime>2023-12-08T16:57:41.2956719Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1319_DWH Transform_Load Dim ProductDepartment.dtsx</Name>
+      <LastWriteTime>2023-12-08T16:57:49.6759123Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1323_DWH Transform_Load Fact Order.dtsx</Name>
+      <LastWriteTime>2023-12-14T16:39:27.3727674Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>13231_DWH Transform_Load Fact Order Enriched.dtsx</Name>
+      <LastWriteTime>2023-12-14T18:18:22.7963267Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>13131_DWH Transform_Load Dim LocationEnum.dtsx</Name>
+      <LastWriteTime>2023-12-14T19:36:25.8006895Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>1251_DWH Extract ERP_SM_LocationEnum.dtsx</Name>
+      <LastWriteTime>2023-12-14T20:03:56.7766266Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>
