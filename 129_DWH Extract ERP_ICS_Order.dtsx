@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_Order"
   DTS:PackageType="5"
-  DTS:VersionBuild="175"
-  DTS:VersionGUID="{166A52DC-FF09-46C9-8147-C40EB7E2A2B1}">
+  DTS:VersionBuild="180"
+  DTS:VersionGUID="{CB7CE2CD-E313-4CC4-8502-0CECF78F64D0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -240,7 +240,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Final Row Count 1"
           DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExpressionTask
@@ -277,7 +277,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset"></property>
+                      name="OpenRowset">[ERP].[v_StagingOrder]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -324,7 +324,7 @@ WHERE H.[Status] = 4
                       dataType="System.Int32"
                       description="Specifies the mode used to access the database."
                       name="AccessMode"
-                      typeConverter="AccessMode">2</property>
+                      typeConverter="AccessMode">0</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
@@ -333,8 +333,8 @@ WHERE H.[Status] = 4
                   <connections>
                     <connection
                       refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -502,6 +502,26 @@ WHERE H.[Status] = 4
                           precision="18"
                           scale="3"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -579,6 +599,16 @@ WHERE H.[Status] = 4
                           name="Amount"
                           precision="18"
                           scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -677,6 +707,18 @@ WHERE H.[Status] = 4
                           name="Amount"
                           precision="18"
                           scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail" />
                         <outputColumn
                           refId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -897,6 +939,20 @@ WHERE H.[Status] = 4
                           cachedScale="3"
                           externalMetadataColumnId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
                           lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[Amount]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].Columns[RowVersionHeader]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionHeader"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionHeader]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].Columns[RowVersionDetail]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionDetail"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          lineageId="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders.Outputs[OLE DB Source Output].Columns[RowVersionDetail]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -970,6 +1026,16 @@ WHERE H.[Status] = 4
                           name="Amount"
                           precision="9"
                           scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1028,7 +1094,7 @@ WHERE H.[Status] = 4
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A4787136-F167-47E3-899A-C7BE0AD2F530}"
-              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM [audit].&#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="0"
@@ -1097,7 +1163,7 @@ WHERE H.[Status] = 4
           DTS:LocaleID="-1"
           DTS:ObjectName="Row Count Inserts"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1119,12 +1185,12 @@ WHERE H.[Status] = 4
           DTS:LocaleID="-1"
           DTS:ObjectName="Set Incremental"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A4787136-F167-47E3-899A-C7BE0AD2F530}"
-              SQLTask:SqlStatementSource="UPDATE RunPackages&#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="UPDATE [audit].RunPackages&#xA; SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
                 SQLTask:DtsVariableName="User::TableName"
@@ -1315,7 +1381,7 @@ WHERE H.[Status] = 4
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{A4787136-F167-47E3-899A-C7BE0AD2F530}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1450,13 +1516,59 @@ WHERE H.[Status] = 4
           Id="Package\Extract from Source to Staging (Order)\Final Row Count"
           TopLeft="42,380" />
         <NodeLayout
+          Size="165,42"
+          Id="Package\Extract from Source to Staging (Order)\Final Row Count 1"
+          TopLeft="275,379" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Extract from Source to Staging (Order)\Full Load Order"
+          TopLeft="281,241" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Extract from Source to Staging (Order)\Get Incremental"
+          TopLeft="173,17" />
+        <NodeLayout
           Size="191,42"
           Id="Package\Extract from Source to Staging (Order)\Incremental Load Order"
           TopLeft="34,243" />
         <NodeLayout
+          Size="164,42"
+          Id="Package\Extract from Source to Staging (Order)\Incremental load?"
+          TopLeft="162,156" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (Order)\Row Count Inserts"
+          TopLeft="271,312" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Extract from Source to Staging (Order)\Set Incremental"
+          TopLeft="284,453" />
+        <NodeLayout
           Size="185,42"
           Id="Package\Extract from Source to Staging (Order)\Truncate staging table"
           TopLeft="155,89" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint]"
+          TopLeft="245.75,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 1]"
           TopLeft="127.25,285">
@@ -1501,32 +1613,6 @@ WHERE H.[Status] = 4
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="164,42"
-          Id="Package\Extract from Source to Staging (Order)\Incremental load?"
-          TopLeft="162,156" />
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint]"
-          TopLeft="245.75,131">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25"
-              Start="0,0"
-              End="0,17.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 3]"
           TopLeft="218,198">
@@ -1563,53 +1649,45 @@ WHERE H.[Status] = 4
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="151,42"
-          Id="Package\Extract from Source to Staging (Order)\Full Load Order"
-          TopLeft="283,241" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 4]"
           TopLeft="270,198">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="88.5,43"
+              EndConnector="86.5,43"
               Start="0,0"
-              End="88.5,35.5">
+              End="86.5,35.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.4492753623189" />
+                    End="0,13.4492753623188" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.4492753623189"
-                    Point2="0,17.4492753623189"
-                    Point3="4,17.4492753623189" />
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="4,17.4492753623188" />
                   <mssgle:LineSegment
-                    End="84.5,17.4492753623189" />
+                    End="82.5,17.4492753623188" />
                   <mssgle:CubicBezierSegment
-                    Point1="84.5,17.4492753623189"
-                    Point2="88.5,17.4492753623189"
-                    Point3="88.5,21.4492753623189" />
+                    Point1="82.5,17.4492753623188"
+                    Point2="86.5,17.4492753623188"
+                    Point3="86.5,21.4492753623188" />
                   <mssgle:LineSegment
-                    End="88.5,35.5" />
+                    End="86.5,35.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="16.583359375,22.4492753623189,55.33328125,16"
+              BoundingBox="15.583359375,22.4492753623188,55.33328125,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Extract from Source to Staging (Order)\Row Count Inserts"
-          TopLeft="271,312" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 5]"
-          TopLeft="356.25,283">
+          TopLeft="355.25,283">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1629,10 +1707,6 @@ WHERE H.[Status] = 4
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="165,42"
-          Id="Package\Extract from Source to Staging (Order)\Final Row Count 1"
-          TopLeft="275,379" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 6]"
           TopLeft="355.75,354">
@@ -1655,10 +1729,6 @@ WHERE H.[Status] = 4
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Extract from Source to Staging (Order)\Get Incremental"
-          TopLeft="173,17" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 7]"
           TopLeft="249,59">
@@ -1681,10 +1751,6 @@ WHERE H.[Status] = 4
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Extract from Source to Staging (Order)\Set Incremental"
-          TopLeft="284,453" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 8]"
           TopLeft="359.25,421">
@@ -1821,45 +1887,19 @@ WHERE H.[Status] = 4
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <PrecedenceConstraint
-    design-time-name="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 3]">
-    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
-  </PrecedenceConstraint>
   <TaskHost
     design-time-name="Package\Extract from Source to Staging (Order)\Full Load Order">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="159,42"
-          Id="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders"
-          TopLeft="121,87" />
-        <NodeLayout
           Size="166,42"
           Id="Package\Extract from Source to Staging (Order)\Full Load Order\Row Count Extract"
           TopLeft="119,174" />
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (Order)\Full Load Order.Paths[OLE DB Source Output]"
-          TopLeft="201.25,129">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,45"
-              Start="0,0"
-              End="0,37.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,37.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders"
+          TopLeft="121,87" />
         <NodeLayout
           Size="178,42"
           Id="Package\Extract from Source to Staging (Order)\Full Load Order\Write Staging Orders"
@@ -1886,18 +1926,41 @@ WHERE H.[Status] = 4
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Order)\Full Load Order.Paths[OLE DB Source Output]"
+          TopLeft="201.25,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PrecedenceConstraint
-    design-time-name="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 4]">
-    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
-  </PrecedenceConstraint>
   <PipelineComponentMetadata
     design-time-name="Package\Extract from Source to Staging (Order)\Full Load Order\Read ERP Orders">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -1914,5 +1977,13 @@ WHERE H.[Status] = 4
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 3]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Order).PrecedenceConstraints[Constraint 4]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

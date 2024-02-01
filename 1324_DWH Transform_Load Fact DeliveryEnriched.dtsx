@@ -1,0 +1,1650 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{D6E1187D-780B-4F9F-B26A-A578767FBE3B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Transform_Load Fact DeliveryEnriched"
+  DTS:PackageType="5"
+  DTS:VersionBuild="637"
+  DTS:VersionGUID="{B85064EE-2D87-42A6-BA8C-67A7423A105C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{450EF475-13EF-495F-9576-4199C977E4B3}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Error Logs\error1.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDateDateDim"
+              DTS:DTSID="{D94E4F49-8FAB-470A-A329-DE1FBAC4AB08}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QuantityRequested"
+              DTS:DTSID="{A0A5CDBE-52CD-45EF-82FC-690E95C30AEF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Quantity"
+              DTS:DTSID="{9C4E719C-E7BD-46BE-9629-EB3BD590F4B2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cost"
+              DTS:DTSID="{3F286228-DC92-46A1-B6DF-7A56A2CA74F1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDateDateDim"
+              DTS:DTSID="{50FAB0C9-D94B-4597-9638-94B875D576CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDateDateDim"
+              DTS:DTSID="{F3EA5500-4A9B-446E-A511-005724E91C86}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="11"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IsConfirmed"
+              DTS:DTSID="{DF7D553D-3FB6-42D7-9D21-46127895C268}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferHeadKey"
+              DTS:DTSID="{DF5489B8-AC8D-4B0F-9EC7-ECADD94154A9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferDetailKey"
+              DTS:DTSID="{4A741A32-141E-4505-8171-EEE65CD167A0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimShip"
+              DTS:DTSID="{8AACA237-11A2-4B31-9775-1247D450A7C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimVoyage"
+              DTS:DTSID="{991D45BE-BB8B-404A-A35E-2F50D5A02A4D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsFrom"
+              DTS:DTSID="{CFD9955B-0BD1-42CA-AF8C-841E24913C10}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsTo"
+              DTS:DTSID="{AF288A27-B53D-47A8-9137-610C4FAEF43D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimProduct"
+              DTS:DTSID="{B4C9F273-7847-4D5D-9EEE-63F498E5A631}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UnitMeasureReference"
+              DTS:DTSID="{F2B3A6E9-D3D4-4B37-BF4B-9BC28B659C70}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FactorReference"
+              DTS:DTSID="{1E8D9BE0-F0C3-4CA2-A424-CE08825B07C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimUnitMeasure"
+              DTS:DTSID="{5DF6AA98-40CA-4523-8711-A35877BBC87D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransfertUnitMeasure"
+              DTS:DTSID="{49779298-D4B3-4075-9E04-33921F2CAE99}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferFactor"
+              DTS:DTSID="{EB781A2B-7C62-4826-BB3B-CDE53147A253}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationEventKey"
+              DTS:DTSID="{BCCD0F8B-EA16-492E-B432-392EE7B1A341}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{744F0DE1-2F59-43DC-A61D-96BE81A7F24B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{9C50D45B-839A-4B45-A90A-A2C818D07A2B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{41CB7824-B180-435F-90C5-E9DABCCF5DA0}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Error Logs\error.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CompanyGroupShipKey"
+              DTS:DTSID="{B1887259-42F6-471C-9475-6BC9BC97C0D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VoyageCompanyGroupShipKey"
+              DTS:DTSID="{85CB8556-0621-4D87-A852-AE53A2857A39}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FromLocationKey"
+              DTS:DTSID="{BCA8F2CD-BD24-4158-B585-FE7A4873C924}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ToLocationKey"
+              DTS:DTSID="{CEEE06F9-E69F-420D-8439-22C462260505}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ToLocationEventKey"
+              DTS:DTSID="{C5E5ABF1-DA22-4FC6-81FA-527162F7C852}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDate"
+              DTS:DTSID="{1623E147-81F0-4165-BB09-3D69C126825F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="11"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductKey"
+              DTS:DTSID="{81CD9EA4-F733-4A71-A886-00413D7C5038}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductUnitMeasureKey"
+              DTS:DTSID="{59F777AE-DD12-4612-955E-65787EACC639}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDateDateDim"
+              DTS:DTSID="{03EB964D-47A2-4EEF-A685-E53E26BEF4C9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QuantityRequested"
+              DTS:DTSID="{E2B63ACA-C551-4C55-96EB-9A516A211E91}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Quantity"
+              DTS:DTSID="{55B80C08-2E3B-4AC6-831D-8A4C92B56DC9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cost"
+              DTS:DTSID="{CFC5CC74-7D07-40FA-BCA9-DBCC59493C99}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDate"
+              DTS:DTSID="{F96263CC-9C3F-4DC8-B201-19344A0DA526}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDateDateDim"
+              DTS:DTSID="{1D84944C-2506-4574-9151-10459927C87B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDate"
+              DTS:DTSID="{74024065-8715-4525-BD86-0A800ED5FF4B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDateDateDim"
+              DTS:DTSID="{7BD1F2A5-0FEB-48B4-B022-698AD4D9D4D2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimDate"
+              DTS:DTSID="{6631E1EF-5784-40A5-91BE-737996D73B76}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimShip"
+              DTS:DTSID="{08546756-00D1-4B17-8A0C-FA47BBCAC0E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimVoyage"
+              DTS:DTSID="{F262617A-89C8-45BB-A297-B5F3D74DA5FA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsFrom"
+              DTS:DTSID="{C6248E59-7160-4713-A4CC-0E1C6FEBFC71}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsTo"
+              DTS:DTSID="{F773399E-2033-4911-A97E-B2FB0FDC5D62}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimProduct"
+              DTS:DTSID="{F06DE822-4E3E-4F53-8E68-CFC91DE93D51}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DC476301-1469-417C-BB5E-22C9DBB1C9E9}"
+      DTS:ObjectName="localhost.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::StagingConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Staging;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{FD6C36E4-B51E-4F85-83CB-1C790B0F1F5D}localhost.Staging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{B1000F9F-1268-49D8-B710-0CB912BC4A3D}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EBA9F211-AFC3-49F4-A51F-8CEFF8562043}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{07F51660-C57C-4B3F-8E10-F4AA479FC14D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">DWH_Test</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E1C4D254-232B-4192-9E69-80BCD715D16F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA849F89-DC64-4031-8D52-FCCC6A585B08}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Incremental">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FB2756C6-65BD-4665-B346-EDD07DCDF29D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4AE0B335-C497-43FE-8D93-0E03A44CF2B7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1BB13701-0225-4D34-ACDF-5FC68D494F31}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ECE39264-0CA5-4EC8-936B-2A6532F26EB9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{111651B9-7F47-4D02-9D3B-FC780A67AF18}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BE8670FE-80EB-44A5-9796-5097AEACE699}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6D217C75-61CC-4702-98F4-A177C0FAF444}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9052916C-458B-48D0-B91E-8D809058D294}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5D477090-6A39-4BCE-92B3-E8F7C5FE7326}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6FA3863B-3D82-4C9C-A8B9-FED5753F7071}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BF97B834-ACD8-4101-8AF6-8050D69E4687}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">FactDeliveryEnriched</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Final row count"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1C74946B-0666-4D46-B219-0B5651412C38}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Final row count"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+          SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].FactDeliveryEnriched"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RowCountFinal" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6C282BAC-13C2-4349-BE86-C14DB95DC7A6}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Inserted rows"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{1362FE31-42DC-491A-ACF5-DD9334534735}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Inserted rows"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[User::RowCountInserts]= @[User::RowCountFinal]- @[User::RowCountInitial]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Fact DeliveryEnriched"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E0B9501A-33DB-47B4-93E7-E6C087DB5609}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Fact DeliveryEnriched">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{B2F4758A-EF6F-4AC1-A571-294CE6CC2866}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fact DeliveryEnriched Full Load">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Create Indexes DeliveryEnriched"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{1587B280-5865-4006-AA13-FD42468B594A}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Create Indexes DeliveryEnriched"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="ALTER TABLE [ERP].[FactDeliveryEnriched] ADD  CONSTRAINT [PK_FactDeliveryEnriched] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[IdFactDelivery] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-ShipCode] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[ShipCode] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-ProductDepartmentCode] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[ProductDepartmentCode] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-VendorCode] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[VendorCode] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-DocumentDate] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[DocumentDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-RequestDate] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[RequestDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-ProductCode] ON [ERP].[FactDeliveryEnriched]&#xA;(&#xA;&#x9;[ProductCode] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Drop Indexes DeliveryEnriched"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{B5B629AB-22CA-4268-B0FC-E78C25935730}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Drop Indexes DeliveryEnriched"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="-- Eliminar llave primaria&#xA;ALTER TABLE [ERP].FactDeliveryEnriched&#xA;DROP CONSTRAINT PK_FactDeliveryEnriched;&#xA;&#xA;-- Eliminar los indices&#xA;&#xA;EXEC DropIndexes @TableName=?, @SchemaName='ERP'&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::TableName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Insert in Fact DeliveryEnriched 1"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{021EF490-9033-41BD-AABB-F76DA9BDC3D6}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Insert in Fact DeliveryEnriched 1"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;&#xA;EXEC  spFactDeliveryEnrich&#xA;@incremental=?, &#xA;@RowCountExt = @Result1 OUTPUT, @RowCountUpd=@Result2 OUTPUT;&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::Incremental"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="11"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::RowCountExtracts"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowCountUpdates"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Set Incremental"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{94C76494-51B8-4A76-994A-C069266F5C9D}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Set Incremental"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="UPDATE [audit].RunPackages&#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::TableName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::DatabaseName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Truncate DeliveryEnriched"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{DA2914D5-613C-4B6F-B777-8727A09F33FC}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Truncate DeliveryEnriched"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="truncate table [ERP].FactDeliveryEnriched;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{062672B1-35EB-499B-8EC0-2B9C844C3845}"
+              DTS:From="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Truncate DeliveryEnriched"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Drop Indexes DeliveryEnriched" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{9B398F06-C483-42DE-B263-C4D080323CAE}"
+              DTS:From="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Drop Indexes DeliveryEnriched"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Insert in Fact DeliveryEnriched 1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{0BE38E25-DCC7-473A-BA21-2C026C87032C}"
+              DTS:From="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Insert in Fact DeliveryEnriched 1"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Create Indexes DeliveryEnriched" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{604CBA4F-16C5-4475-8B3A-E90E19104DBA}"
+              DTS:From="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Create Indexes DeliveryEnriched"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Set Incremental" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{0B009AB6-1369-4EB5-B1CA-2B6C7CD3D943}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fact DeliveryEnriched Incremental Load">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Initial row count"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{5D5FEE16-36E5-4E7A-A806-757416FD242C}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Initial row count"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].FactDeliveryEnriched"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::RowCountInitial" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Insert in Fact DeliveryEnriched"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{110D8AB2-5A80-4D09-849E-62D682377B4C}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Insert in Fact DeliveryEnriched"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+                  SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;&#xA;EXEC  spFactDeliveryEnrich&#xA;@incremental=?, &#xA;@RowCountExt = @Result1 OUTPUT, @RowCountUpd=@Result2 OUTPUT;&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::Incremental"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="11"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::RowCountExtracts"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowCountUpdates"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{5EB16F1A-8BFB-48BF-B8A1-3168715DE803}"
+              DTS:From="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Initial row count"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Insert in Fact DeliveryEnriched" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact DeliveryEnriched\Get Incremental?"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{472C0504-CE7F-4268-95B8-6E2F48470E18}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Incremental?"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Incremental" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact DeliveryEnriched\Incremental?"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{F9F1544B-1E2D-4FB8-B0C0-EE28B623980E}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental?"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::Incremental]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:Description="Incremental"
+          DTS:DTSID="{7EFED6FA-9CC3-44AE-9CCD-963C37F85EC9}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==True"
+          DTS:From="Package\Load Fact DeliveryEnriched\Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:Description="Full Load"
+          DTS:DTSID="{51057680-990E-435F-87E4-6DE422126ED4}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==False"
+          DTS:From="Package\Load Fact DeliveryEnriched\Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{19314036-9795-4F2F-B54F-CE6C548B9A87}"
+          DTS:From="Package\Load Fact DeliveryEnriched\Get Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Load Fact DeliveryEnriched\Incremental?" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{073FFF61-695C-4C19-84A3-5FC01AE77D9E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{543F25A8-1403-4011-B4B7-F820BD84675B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1575C9F6-E9BF-4B24-9187-0BB7071BC823}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:Description="execute"
+      DTS:DTSID="{FFB778FB-406F-4587-9F36-9D36ECC52AD4}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]==True"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E19C478-2D01-410C-AC4F-3C56C7FE223D}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Fact DeliveryEnriched" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0F786539-5712-4FDA-9F3D-24FD72657F75}"
+      DTS:From="Package\Load Fact DeliveryEnriched"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Final row count" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{2F1E482A-6122-4D78-A2F7-1B6866E40EBA}"
+      DTS:From="Package\Final row count"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Inserted rows" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{93EBDCD9-448E-44C7-81FF-9048D2C0ABE7}"
+      DTS:From="Package\Inserted rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Final row count"
+          TopLeft="1075,236" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="33,252" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Inserted rows"
+          TopLeft="1079,304" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Create Indexes DeliveryEnriched"
+          TopLeft="33,228" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Drop Indexes DeliveryEnriched"
+          TopLeft="32,87" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Insert in Fact DeliveryEnriched 1"
+          TopLeft="30,153" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Set Incremental"
+          TopLeft="74,312" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load\Truncate DeliveryEnriched"
+          TopLeft="46,21" />
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 2]"
+          TopLeft="147.5,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 3]"
+          TopLeft="150,270">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint]"
+          TopLeft="145.5,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load.PrecedenceConstraints[Constraint 1]"
+          TopLeft="145,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="340,409"
+          Size="340,452"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Full Load"
+          TopLeft="371,105" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Initial row count"
+          TopLeft="70,20.5" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load\Insert in Fact DeliveryEnriched"
+          TopLeft="33,88" />
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load.PrecedenceConstraints[Constraint]"
+          TopLeft="146.25,62.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.5"
+              Start="0,0"
+              End="0,18">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="310,187"
+          Size="310,230"
+          Id="Package\Load Fact DeliveryEnriched\Fact DeliveryEnriched Incremental Load"
+          TopLeft="32,105" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Load Fact DeliveryEnriched\Get Incremental?"
+          TopLeft="28,12" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Load Fact DeliveryEnriched\Incremental?"
+          TopLeft="303,16" />
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint]"
+          TopLeft="351,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164,47"
+              Start="0,0"
+              End="-164,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.1186440677966" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.1186440677966"
+                    Point2="0,19.1186440677966"
+                    Point3="-4,19.1186440677966" />
+                  <mssgle:LineSegment
+                    End="-160,19.1186440677966" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160,19.1186440677966"
+                    Point2="-164,19.1186440677966"
+                    Point3="-164,23.1186440677966" />
+                  <mssgle:LineSegment
+                    End="-164,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-117.60578125,24.1186440677966,71.2115625,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint 1]"
+          TopLeft="395,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="146,47"
+              Start="0,0"
+              End="146,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.1186440677966" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.1186440677966"
+                    Point2="0,19.1186440677966"
+                    Point3="4,19.1186440677966" />
+                  <mssgle:LineSegment
+                    End="142,19.1186440677966" />
+                  <mssgle:CubicBezierSegment
+                    Point1="142,19.1186440677966"
+                    Point2="146,19.1186440677966"
+                    Point3="146,23.1186440677966" />
+                  <mssgle:LineSegment
+                    End="146,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="43.988359375,24.1186440677966,58.02328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint 2]"
+          TopLeft="188,35">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="115,0"
+              Start="0,0"
+              End="107.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="107.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="714,612"
+          Size="714,655"
+          Id="Package\Load Fact DeliveryEnriched"
+          TopLeft="267.5,122.5" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="59,147" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="1040,387" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="134,189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.5,19.75,53,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="235,273">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.5,177"
+              Start="0,0"
+              End="25,177">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="12.25,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.25,0"
+                    Point2="16.25,0"
+                    Point3="16.25,4" />
+                  <mssgle:LineSegment
+                    End="16.25,173" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.25,173"
+                    Point2="16.25,177"
+                    Point3="20.25,177" />
+                  <mssgle:LineSegment
+                    End="25,177" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="981.5,450">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.5,-193"
+              Start="0,0"
+              End="86,-193">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.75,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.75,0"
+                    Point2="46.75,0"
+                    Point3="46.75,-4" />
+                  <mssgle:LineSegment
+                    End="46.75,-189" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.75,-189"
+                    Point2="46.75,-193"
+                    Point3="50.75,-193" />
+                  <mssgle:LineSegment
+                    End="86,-193" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1150.75,278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="1148,346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Fact DeliveryEnriched.PrecedenceConstraints[Constraint 1]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package.PrecedenceConstraints[Constraint]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

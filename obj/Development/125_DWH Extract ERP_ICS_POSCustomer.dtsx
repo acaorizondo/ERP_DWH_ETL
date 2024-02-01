@@ -1,0 +1,1522 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{1AD6F389-7DB2-40B5-A3C1-6D9789EDEEB0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="125_DWH Extract ERP_ICS_POSCustomer"
+  DTS:PackageType="5"
+  DTS:VersionBuild="216"
+  DTS:VersionGUID="{4BDB28B7-5059-4D6B-87BF-AB6E0041F8D8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BD9A8167-C815-413B-BC5B-7285372B6EB1}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{8C72461A-A41F-4C1F-B877-0344B7746ED8}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CF085162-98D5-47B5-A358-0E0069CC33B9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30406CD7-1C72-4640-8AC9-AB12ED1ADD8B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">Staging</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C6493AD3-BF08-4B60-9349-33610E385681}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CEE229B5-D583-49E2-BDAD-35135A78A513}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C04CAAE9-8594-4A13-A03E-4C6986FD9FB7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6283607F-63CD-4FF9-A3B3-6C75FF6B36FB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5FCE22ED-B732-44CE-B97F-62D1EC726BE0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{442764E4-F23D-40A1-9385-82B8E5A0DA07}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9F83CD81-5104-4F5B-8321-E232AFEBDFBA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CB62CC05-2A04-4E10-B95A-99F1365BB359}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E01E9EB6-2015-4D7F-BB04-2CE801E1F546}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A2D7C6AB-8249-48A3-B0EE-CC8280133E7F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D7924CC0-B0B8-47CF-BD45-50E04376450E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5C00B69-010B-4192-A4C0-145DAB78B987}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">ERP_ICS_POSCustomer</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract from Source to Staging (POSCustomer)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6B1909C3-F741-4F05-915A-42FCF4896DF9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract from Source to Staging (POSCustomer)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4C36C489-D8E3-4CC5-9482-8066A314CDF0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Copy data from source to staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read POSCustomer"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[v_StagingPOSCustomer]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        ICS.Location.LocationKey, ICS.Location.Code AS LocationCode, ICS.Location.Name AS LocationName, ICS.Location.Flags, ICS.ProductDepartment.Code AS ProductDepartmentCode, 
+                         ICS.ProductDepartment.Name AS ProductDepartmentName
+FROM            ICS.Location LEFT OUTER JOIN
+                         ICS.ProductDepartment ON ICS.Location.ProductDepartmentKey = ICS.ProductDepartment.ProductDepartmentKey</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ExternalCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ExternalCode]"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ExternalCode]"
+                          name="ExternalCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[POSCustomerKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[POSCustomerKey]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[POSCustomerKey]"
+                          name="POSCustomerKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerTypeCode]"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeCode]"
+                          name="CustomerTypeCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerTypeName]"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeName]"
+                          name="CustomerTypeName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerType]"
+                          length="100"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerType]"
+                          name="CustomerType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerCode]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerCode]"
+                          name="CustomerCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                          name="CustomerName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsActive]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsActive]"
+                          name="IsActive"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                          name="IsDeleted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsPassenger]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsPassenger]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsPassenger]"
+                          name="IsPassenger"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsSystem]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsSystem]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsSystem]"
+                          name="IsSystem"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupCode]"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]"
+                          name="CompanyGroupCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupName]"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupName]"
+                          name="CompanyGroupName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ShipCode]"
+                          length="6"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipCode]"
+                          name="ShipCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ShipName]"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipName]"
+                          name="ShipName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ExternalCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="ExternalCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[POSCustomerKey]"
+                          dataType="guid"
+                          name="POSCustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerTypeCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CustomerTypeCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerTypeName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="CustomerType" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerCode]"
+                          dataType="i4"
+                          name="CustomerCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
+                          dataType="bool"
+                          name="IsActive" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                          dataType="bool"
+                          name="IsDeleted" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsPassenger]"
+                          dataType="bool"
+                          name="IsPassenger" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[IsSystem]"
+                          dataType="bool"
+                          name="IsSystem" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CompanyGroupCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="CompanyGroupName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ShipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="ShipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].ExternalColumns[ShipName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="ShipName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[POSCustomerKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[POSCustomerKey]"
+                          name="POSCustomerKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ShipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ShipCode]"
+                          name="ShipCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ShipName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ShipName]"
+                          name="ShipName" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupCode]"
+                          name="CompanyGroupCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupName]"
+                          name="CompanyGroupName" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerTypeCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerTypeCode]"
+                          name="CustomerTypeCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerTypeName]"
+                          name="CustomerTypeName" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerType]"
+                          name="CustomerType" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerCode]"
+                          name="CustomerCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                          name="CustomerName" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ExternalCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ExternalCode]"
+                          name="ExternalCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsActive]"
+                          dataType="bool"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsActive]"
+                          name="IsActive" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                          dataType="bool"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                          name="IsDeleted" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsPassenger]"
+                          dataType="bool"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsPassenger]"
+                          name="IsPassenger" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsSystem]"
+                          dataType="bool"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[IsSystem]"
+                          name="IsSystem" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountExtracts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Write Staging POSCustomer"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[ICS_POSCustomer]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[ExternalCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="ExternalCode"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ExternalCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ExternalCode]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[POSCustomerKey]"
+                          cachedDataType="guid"
+                          cachedName="POSCustomerKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[POSCustomerKey]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[POSCustomerKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CustomerTypeCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CustomerTypeCode"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerTypeCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeCode]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CustomerTypeName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CustomerTypeName"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerTypeName]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerTypeName]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CustomerType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="CustomerType"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerType]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CustomerCode]"
+                          cachedDataType="i4"
+                          cachedName="CustomerCode"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerCode]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CustomerName"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[IsActive]"
+                          cachedDataType="bool"
+                          cachedName="IsActive"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsActive]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[IsDeleted]"
+                          cachedDataType="bool"
+                          cachedName="IsDeleted"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsDeleted]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsDeleted]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[IsPassenger]"
+                          cachedDataType="bool"
+                          cachedName="IsPassenger"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsPassenger]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsPassenger]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[IsSystem]"
+                          cachedDataType="bool"
+                          cachedName="IsSystem"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsSystem]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[IsSystem]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CompanyGroupCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CompanyGroupCode"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[CompanyGroupName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="CompanyGroupName"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[CompanyGroupName]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[ShipCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="ShipCode"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ShipCode]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipCode]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].Columns[ShipName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="ShipName"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ShipName]"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output].Columns[ShipName]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[POSCustomerKey]"
+                          dataType="guid"
+                          name="POSCustomerKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ShipCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="ShipCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ShipName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="ShipName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CompanyGroupCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="CompanyGroupName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerTypeCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CustomerTypeCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerTypeName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="CustomerType" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerCode]"
+                          dataType="i4"
+                          name="CustomerCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[ExternalCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="ExternalCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                          dataType="bool"
+                          name="IsActive" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsDeleted]"
+                          dataType="bool"
+                          name="IsDeleted" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsPassenger]"
+                          dataType="bool"
+                          name="IsPassenger" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input].ExternalColumns[IsSystem]"
+                          dataType="bool"
+                          name="IsSystem" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging.Paths[OLE DB Source Output]"
+                  endId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging.Paths[Row Count Output 1]"
+                  endId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer)\Count rows in staging"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E5086BF0-F5A9-4C24-8479-BE6EED4DD16D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count rows in staging"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_POSCustomer]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{AF8D3D14-CDE9-4E5C-8BE4-7C005DF60985}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer)\Truncate staging table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1EC8A4DE-3F5D-491C-BCBA-A800536CE6A0}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="Truncate table ERP.ICS_POSCustomer" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DE91BE95-8423-4B06-9B01-FAA3AD437960}"
+          DTS:From="Package\Extract from Source to Staging (POSCustomer)\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{314906A5-F6D8-4FE9-890F-C2737BDF27B7}"
+          DTS:From="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract from Source to Staging (POSCustomer)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8011842C-AF74-4CE8-B372-86319C61C159}"
+          DTS:From="Package\Extract from Source to Staging (POSCustomer)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (POSCustomer)\Final Row Count" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FF422D0A-7BD8-4F97-B133-A0AC6722679B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD9A8167-C815-413B-BC5B-7285372B6EB1}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F2E97706-2874-49B6-B828-22774279B1E8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD9A8167-C815-413B-BC5B-7285372B6EB1}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5A20384C-7E82-4BF0-A2E7-75E6FF3DC061}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD9A8167-C815-413B-BC5B-7285372B6EB1}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{15E014CD-20AD-4803-8C61-90940793D796}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{34A70591-B971-4E75-96DC-71FB7239CF95}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Extract from Source to Staging (POSCustomer)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1E7A9CF-B3AE-4DE8-8F6A-F1B4097D4246}"
+      DTS:From="Package\Extract from Source to Staging (POSCustomer)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging"
+          TopLeft="34,137" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Count rows in staging"
+          TopLeft="62,229" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Final Row Count"
+          TopLeft="69,315" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Truncate staging table"
+          TopLeft="55,49" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint]"
+          TopLeft="151.5,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint 1]"
+          TopLeft="154,179">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (POSCustomer).PrecedenceConstraints[Constraint 2]"
+          TopLeft="150.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="335,428"
+          Size="335,471"
+          Id="Package\Extract from Source to Staging (POSCustomer)"
+          TopLeft="413,71" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="75,236" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="106,72" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="852,238" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="178.5,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,122"
+              Start="0,0"
+              End="0,114.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,114.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,49.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="277,257">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="136,49.5"
+              Start="0,0"
+              End="128.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="64,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64,0"
+                    Point2="68,0"
+                    Point3="68,4" />
+                  <mssgle:LineSegment
+                    End="68,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68,45.5"
+                    Point2="68,49.5"
+                    Point3="72,49.5" />
+                  <mssgle:LineSegment
+                    End="128.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="748,306.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104,-47.5"
+              Start="0,0"
+              End="96.5,-47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="48,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="48,0"
+                    Point2="52,0"
+                    Point3="52,-4" />
+                  <mssgle:LineSegment
+                    End="52,-43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="52,-43.5"
+                    Point2="52,-47.5"
+                    Point3="56,-47.5" />
+                  <mssgle:LineSegment
+                    End="96.5,-47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Row Count"
+          TopLeft="146,182" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer"
+          TopLeft="127,108" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging.Paths[OLE DB Source Output]"
+          TopLeft="212.25,150">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer"
+          TopLeft="110,264" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging.Paths[Row Count Output 1]"
+          TopLeft="213.75,224">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Read POSCustomer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (POSCustomer)\Copy data from source to staging\Write Staging POSCustomer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

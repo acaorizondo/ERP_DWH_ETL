@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH_General_ETL_Process"
   DTS:PackageType="5"
-  DTS:VersionBuild="191"
-  DTS:VersionGUID="{8E79708C-326F-4038-A42C-FFCBECEE52EF}">
+  DTS:VersionBuild="194"
+  DTS:VersionGUID="{3961E3E5-5906-46D6-9763-9E3C3EC8BD4C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -214,12 +214,13 @@
       DTS:refId="Package\Create DWH SNAPSHOT"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{5CAA9D50-3E15-40F6-9115-E5767E4110D5}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Create DWH SNAPSHOT"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -244,12 +245,13 @@
       DTS:refId="Package\Drop DWH SNAPSHOT"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{EB729E9E-C8C0-4B60-8542-23737C10E1EE}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Drop DWH SNAPSHOT"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -347,7 +349,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Get available backup"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -385,7 +387,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Get ERP Physical BackUp Path"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -411,7 +413,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Get name of last backup used"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -439,7 +441,7 @@
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Get only BackUp file name"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
@@ -1066,7 +1068,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Insert row into audit table"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1168,7 +1170,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Update last_backup_available"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1268,36 +1270,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{3D5F46F7-1CD3-43CF-A964-EE67BDEE55C9}"
-      DTS:From="Package\Create DWH SNAPSHOT"
+      DTS:DTSID="{DEFE5932-66C0-429E-AE8A-5BF0665DBD5E}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::FileName]!= @[User::lastBackupUsed] || @[User::ReloadDWH]"
+      DTS:From="Package\Prepare Source"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\ETL PROCESS" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{BAB2709F-6B52-4670-BE8E-CEE065475D3E}"
+      DTS:DTSID="{3D4FBEAA-A060-42C3-97C1-4090E67D06A5}"
       DTS:From="Package\ETL PROCESS"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Drop DWH SNAPSHOT" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
-      DTS:CreationName=""
-      DTS:DTSID="{61C9A769-6BE1-45E9-A4DB-67244D2B3FF1}"
-      DTS:EvalOp="1"
-      DTS:Expression="@[User::FileName]!= @[User::lastBackupUsed] || @[User::ReloadDWH]"
-      DTS:From="Package\Prepare Source"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Create DWH SNAPSHOT" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
-      DTS:CreationName=""
-      DTS:DTSID="{1548C53E-2384-4527-A684-06EF3D9119CF}"
-      DTS:From="Package\Drop DWH SNAPSHOT"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 3"
       DTS:To="Package\Update EndDateTime in audit table" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
@@ -1363,11 +1349,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="205,42"
           Id="Package\Create DWH SNAPSHOT"
-          TopLeft="598.5,38.5" />
+          TopLeft="692.5,12.5" />
         <NodeLayout
           Size="195,42"
           Id="Package\Drop DWH SNAPSHOT"
-          TopLeft="1189,36" />
+          TopLeft="982,9" />
         <NodeLayout
           Size="156,42"
           Id="Package\ETL PROCESS\Execute Extract"
@@ -1553,145 +1539,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <NodeLayout
           Size="250,42"
           Id="Package\Update EndDateTime in audit table"
-          TopLeft="1291,123" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="733.833333333333,80.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="321.166666666667,37.5"
-              Start="0,0"
-              End="321.166666666667,30">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.8040443163394" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.8040443163394"
-                    Point2="0,18.8040443163394"
-                    Point3="4,18.8040443163394" />
-                  <mssgle:LineSegment
-                    End="317.166666666667,18.8040443163394" />
-                  <mssgle:CubicBezierSegment
-                    Point1="317.166666666667,18.8040443163394"
-                    Point2="321.166666666667,18.8040443163394"
-                    Point3="321.166666666667,22.8040443163394" />
-                  <mssgle:LineSegment
-                    End="321.166666666667,30" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="1150,118">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="105.333333333333,-40"
-              Start="0,0"
-              End="105.333333333333,-32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-15.9325428920514" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-15.9325428920514"
-                    Point2="0,-19.9325428920514"
-                    Point3="4,-19.9325428920514" />
-                  <mssgle:LineSegment
-                    End="101.333333333333,-19.9325428920514" />
-                  <mssgle:CubicBezierSegment
-                    Point1="101.333333333333,-19.9325428920514"
-                    Point2="105.333333333333,-19.9325428920514"
-                    Point3="105.333333333333,-23.9325428920514" />
-                  <mssgle:LineSegment
-                    End="105.333333333333,-32.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="620,117">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="48.1666666666666,-36.5"
-              Start="0,0"
-              End="48.1666666666666,-29">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-17.7303969022265" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-17.7303969022265"
-                    Point2="0,-21.7303969022265"
-                    Point3="4,-21.7303969022265" />
-                  <mssgle:LineSegment
-                    End="44.1666666666666,-21.7303969022265" />
-                  <mssgle:CubicBezierSegment
-                    Point1="44.1666666666666,-21.7303969022265"
-                    Point2="48.1666666666666,-21.7303969022265"
-                    Point3="48.1666666666666,-25.7303969022265" />
-                  <mssgle:LineSegment
-                    End="48.1666666666666,-29" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="16.0833333333333,-16.7303969022265,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="1317.66666666667,78">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="98.3333333333335,45"
-              Start="0,0"
-              End="98.3333333333335,37.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.2197355035605" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.2197355035605"
-                    Point2="0,18.2197355035605"
-                    Point3="4,18.2197355035605" />
-                  <mssgle:LineSegment
-                    End="94.3333333333335,18.2197355035605" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94.3333333333335,18.2197355035605"
-                    Point2="98.3333333333335,18.2197355035605"
-                    Point3="98.3333333333335,22.2197355035605" />
-                  <mssgle:LineSegment
-                    End="98.3333333333335,37.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="1299,289" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="280.5,308.5">
@@ -1714,6 +1562,52 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             <mssgm:EdgeLabel
               BoundingBox="6.195546875,5,50.60890625,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="889,306.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67,0"
+              Start="0,0"
+              End="59.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="21.75,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1249,308.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50,0"
+              Start="0,0"
+              End="42.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

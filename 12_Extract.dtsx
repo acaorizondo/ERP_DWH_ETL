@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract Jobs"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{B3C4DDDC-554C-4943-810D-13D70C955485}">
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{335997B7-250F-4D6D-A4E6-447F6605FEE7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -83,6 +83,27 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Execute ERP_ICS_AdjustmentType"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{413DAB8B-3686-404D-8AB2-03257C0F720E}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute ERP_ICS_AdjustmentType"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>125_DWH Extract ERP_ICS_AdjustmentType.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract Jobs\Execute Extract Table"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -96,6 +117,132 @@
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
               <PackageName>121_DWH Template Package Extract.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Adjustment"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{21B4BE93-D2AB-4836-A464-A480DA021976}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_Adjustment"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_Adjustment.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Delivery"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{7E3B84DA-2E36-4A1D-AAA3-39262AA18F58}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_Delivery"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_Delivery.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_DeliveryDetail"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{77494C54-AD50-48D1-AA2F-EE5533F7D282}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_DeliveryDetail"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_DeliveryDetail.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_InventoryMonth"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{89F9CB8D-37F4-4BA8-BE38-2E3EC2A0AF9D}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_InventoryMonth"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_InventoryMonth.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_InventoryVoyage"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{A321F614-5AFB-48D4-A365-FA2031A978F2}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_InventoryVoyage"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_InventoryVoyage.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Invoice"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{25272B0C-AB29-4BEE-B488-F02FD9140849}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_Invoice"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_Invoice.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ParentAuditKey</ParameterName>
                 <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
@@ -167,6 +314,111 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_PhysicalCount"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{6C0D8F9D-725E-40FD-9BCA-F2E9D0A4E56D}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_PhysicalCount"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_PhysicalCount.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_POSCustomer"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{DF1F531E-543E-4312-88B7-C23244F87DB7}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_POSCustomer"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>125_DWH Extract ERP_ICS_POSCustomer.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_POSEmployee"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{D43752B7-ED74-4475-963B-4E64E12FC8DB}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_POSEmployee"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>125_DWH Extract ERP_ICS_POSEmployee.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_POSInvoice"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{F64A8BBF-DC56-4BF1-8C2C-BDC413FBF49C}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_POSInvoice"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_POSInvoice.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_POSRecipe"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{DA4A2EAA-1544-4EE9-8CCF-4F53AA4AC40B}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_POSRecipe"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>125_DWH Extract ERP_ICS_POSRecipe.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Product"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -209,6 +461,27 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Receiving"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{A7FD1DC5-36DE-4F7E-9355-6F9E48373CD1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_Receiving"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>129_DWH Extract ERP_ICS_Receiving.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract Jobs\Extract ERP_ICS_Transfer"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -221,7 +494,28 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>128_DWH Extract ERP_ICS_Transfer.dtsx</PackageName>
+              <PackageName>128_DWH Extract ERP_ICS_TransferV2.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract Jobs\Extract ERP_ICS_UnitMeasure"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{0D02AE99-168A-41C7-A1F8-48F488760943}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Extract ERP_ICS_UnitMeasure"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>127_DWH Extract ERP_ICS_ProductUnitMeasures.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ParentAuditKey</ParameterName>
                 <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
@@ -444,75 +738,111 @@
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="231,42"
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_Adjustment"
+          TopLeft="607,431.6" />
+        <NodeLayout
+          Size="253,42"
+          Id="Package\Extract Jobs\Execute ERP_ICS_AdjustmentType"
+          TopLeft="286,124" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_Delivery"
+          TopLeft="607,295.4" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_DeliveryDetail"
+          TopLeft="607,340.8" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_Invoice"
+          TopLeft="607,250" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_PhysicalCount"
+          TopLeft="607,204.6" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_Receiving"
+          TopLeft="607,386.2" />
+        <NodeLayout
+          Size="234,42"
           Id="Package\Extract Jobs\Execute Extract Table"
-          TopLeft="25,19" />
+          TopLeft="20,19" />
         <NodeLayout
-          Size="231,42"
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_InventoryMonth"
+          TopLeft="607,113.8" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_InventoryVoyage"
+          TopLeft="607,159.2" />
+        <NodeLayout
+          Size="234,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Location"
-          TopLeft="22,259" />
+          TopLeft="20,226" />
         <NodeLayout
-          Size="231,42"
+          Size="234,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_LocationEvent"
-          TopLeft="20,381" />
+          TopLeft="20,278" />
         <NodeLayout
-          Size="229,42"
+          Size="242,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Order"
-          TopLeft="612,103" />
+          TopLeft="607,68.4" />
         <NodeLayout
-          Size="231,42"
+          Size="234,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_POSCustomer"
+          TopLeft="20,379" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_POSEmployee"
+          TopLeft="20,329" />
+        <NodeLayout
+          Size="234,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Product"
-          TopLeft="25,81" />
+          TopLeft="20,70" />
         <NodeLayout
           Size="253,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_ProductDepartment"
-          TopLeft="286,83" />
+          TopLeft="286,71" />
         <NodeLayout
-          Size="231,42"
+          Size="242,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Transfer"
-          TopLeft="608,44" />
+          TopLeft="607,23" />
         <NodeLayout
-          Size="231,42"
+          Size="253,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_UnitMeasure"
+          TopLeft="286,176" />
+        <NodeLayout
+          Size="253,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Vendor"
           TopLeft="286,23" />
         <NodeLayout
-          Size="231,42"
+          Size="234,42"
           Id="Package\Extract Jobs\Extract ERP_ICS_Voyage"
-          TopLeft="25,203" />
+          TopLeft="20,171" />
         <NodeLayout
-          Size="231,42"
-          Id="Package\Extract Jobs\Extract ERP_SM_Ship"
-          TopLeft="25,142" />
-        <NodeLayout
-          Size="226,42"
+          Size="253,42"
           Id="Package\Extract Jobs\Extract ERP_SM_LocationEnum"
-          TopLeft="65,326" />
+          TopLeft="286,229" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Extract Jobs\Extract ERP_SM_Ship"
+          TopLeft="20,121" />
         <EdgeLayout
           Id="Package\Extract Jobs.PrecedenceConstraints[Constraint]"
-          TopLeft="137.5,301">
+          TopLeft="254,248.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="40.5,25"
+              EndConnector="32,0"
               Start="0,0"
-              End="40.5,17.5">
+              End="24.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.5"
-                    Point2="0,12.5"
-                    Point3="4,12.5" />
-                  <mssgle:LineSegment
-                    End="36.5,12.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="36.5,12.5"
-                    Point2="40.5,12.5"
-                    Point3="40.5,16.5" />
-                  <mssgle:LineSegment
-                    End="40.5,17.5" />
+                    End="24.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -521,11 +851,19 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_POSRecipe"
+          TopLeft="20,430" />
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Extract Jobs\Extract ERP_ICS_POSInvoice"
+          TopLeft="607,477" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="878,491"
-          Size="878,534"
+          PanelSize="878,658"
+          Size="878,701"
           Id="Package\Extract Jobs"
           TopLeft="103,122" />
         <NodeLayout

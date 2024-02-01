@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load Dim Product"
   DTS:PackageType="5"
-  DTS:VersionBuild="174"
-  DTS:VersionGUID="{0E635BB0-D7E7-4C94-B21A-CD2CF165101D}">
+  DTS:VersionBuild="183"
+  DTS:VersionGUID="{1AA590F4-9FDA-496B-A18C-1728E479B41D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -284,7 +284,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{19F1E7FF-73E8-41C3-86F3-8010766252DC}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimProduct"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimProduct"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -306,7 +306,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{19F1E7FF-73E8-41C3-86F3-8010766252DC}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimProduct"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimProduct"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -328,7 +328,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{19F1E7FF-73E8-41C3-86F3-8010766252DC}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from DimProduct"
+              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].DimProduct"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountInitial"
@@ -351,6 +351,256 @@
               version="1">
               <components>
                 <component
+                  refId="Package\Load Dimension (Product)\Load DimProduct\Any change?"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Any change?"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[IsDeleted]"
+                          cachedDataType="bool"
+                          cachedName="IsDeleted"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsDeleted]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimIsDeleted]"
+                          cachedDataType="bool"
+                          cachedName="DimIsDeleted"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsDeleted]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[ProductCode]"
+                          cachedDataType="i8"
+                          cachedName="ProductCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[ProductName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="ProductName"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[UnitMeasure]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="UnitMeasure"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[UnitMeasure]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[Factor]"
+                          cachedDataType="numeric"
+                          cachedName="Factor"
+                          cachedPrecision="18"
+                          cachedScale="5"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Factor]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[Flags]"
+                          cachedDataType="i4"
+                          cachedName="Flags"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Flags]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DepartmentCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="DepartmentCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[DepartmentCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[Department]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Department"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Department]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[CategoryCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="CategoryCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[CategoryCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[Category]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Category"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Category]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[SubCategoryCody]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="SubCategoryCody"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategoryCody]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[SubCategory]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="SubCategory"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategory]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[IsActive]"
+                          cachedDataType="bool"
+                          cachedName="IsActive"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsActive]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimProductCode]"
+                          cachedDataType="i8"
+                          cachedName="DimProductCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimProductName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="DimProductName"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductName]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimUnitMeasure]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="DimUnitMeasure"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimUnitMeasure]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimFactor]"
+                          cachedDataType="numeric"
+                          cachedName="DimFactor"
+                          cachedPrecision="18"
+                          cachedScale="5"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFactor]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimFlags]"
+                          cachedDataType="i4"
+                          cachedName="DimFlags"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFlags]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimDepartmentCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="DimDepartmentCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartmentCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimDepartment]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DimDepartment"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartment]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimCategoryCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="DimCategoryCode"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategoryCode]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimCategory]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DimCategory"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategory]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimSubCategoryCody]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="DimSubCategoryCody"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategoryCody]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimSubCategory]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="DimSubCategory"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategory]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input].Columns[DimIsActive]"
+                          cachedDataType="bool"
+                          cachedName="DimIsActive"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsActive]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[change]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="change"
+                      synchronousInputId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsDeleted]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsDeleted]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsDeleted]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsDeleted]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsActive]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsActive]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[IsActive]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsActive]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategory]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategory]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategory]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategory]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategoryCody]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategoryCody]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[SubCategoryCody]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategoryCody]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductCode]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductCode]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductCode]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductCode]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductName]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductName]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[ProductName]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductName]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[UnitMeasure]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimUnitMeasure]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[UnitMeasure]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimUnitMeasure]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Factor]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFactor]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Factor]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFactor]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Flags]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFlags]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Flags]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFlags]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[DepartmentCode]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartmentCode]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[DepartmentCode]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartmentCode]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Department]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartment]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Department]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartment]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[CategoryCode]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategoryCode]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[CategoryCode]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategoryCode]} || ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Category]}) &amp;&amp; ![ISNULL](#{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategory]}) &amp;&amp; #{Package\Load Dimension (Product)\Load DimProduct\Read Staging Product.Outputs[OLE DB Source Output].Columns[Category]} != #{Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategory]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">!ISNULL(IsDeleted) &amp;&amp; !ISNULL(DimIsDeleted) &amp;&amp; IsDeleted != DimIsDeleted || !ISNULL(IsActive) &amp;&amp; !ISNULL(DimIsActive) &amp;&amp; IsActive != DimIsActive || !ISNULL(SubCategory) &amp;&amp; !ISNULL(DimSubCategory) &amp;&amp; SubCategory != DimSubCategory || !ISNULL(SubCategoryCody) &amp;&amp; !ISNULL(DimSubCategoryCody) &amp;&amp; SubCategoryCody != DimSubCategoryCody || !ISNULL(ProductCode) &amp;&amp; !ISNULL(DimProductCode) &amp;&amp; ProductCode != DimProductCode || !ISNULL(ProductName) &amp;&amp; !ISNULL(DimProductName) &amp;&amp; ProductName != DimProductName || !ISNULL(UnitMeasure) &amp;&amp; !ISNULL(DimUnitMeasure) &amp;&amp; UnitMeasure != DimUnitMeasure || !ISNULL(Factor) &amp;&amp; !ISNULL(DimFactor) &amp;&amp; Factor != DimFactor || !ISNULL(Flags) &amp;&amp; !ISNULL(DimFlags) &amp;&amp; Flags != DimFlags || !ISNULL(DepartmentCode) &amp;&amp; !ISNULL(DimDepartmentCode) &amp;&amp; DepartmentCode != DimDepartmentCode || !ISNULL(Department) &amp;&amp; !ISNULL(DimDepartment) &amp;&amp; Department != DimDepartment || !ISNULL(CategoryCode) &amp;&amp; !ISNULL(DimCategoryCode) &amp;&amp; CategoryCode != DimCategoryCode || !ISNULL(Category) &amp;&amp; !ISNULL(DimCategory) &amp;&amp; Category != DimCategory</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Load Dimension (Product)\Load DimProduct\Full Updated DimProduct"
                   componentClassID="Microsoft.OLEDBCommand"
                   contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
@@ -368,7 +618,7 @@
                       description="The SQL command to be executed."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimProduct]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [ERP].[DimProduct]
    SET 
        [ProductCode] = ?
       ,[ProductName] = ?
@@ -733,7 +983,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[DimProduct]</property>
+                      name="OpenRowset">[ERP].[DimProduct]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1014,13 +1264,13 @@
                       description="Specifies the SQL statement that generates the lookup table."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProduct]</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [ERP].[DimProduct]</property>
                     <property
                       dataType="System.String"
                       description="Specifies a SQL statement that uses parameters to generate the lookup table."
                       expressionType="Notify"
                       name="SqlCommandParam"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProduct]) [refTable]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [ERP].[DimProduct]) [refTable]
 where [refTable].[ProductKey] = ?</property>
                     <property
                       dataType="System.Int32"
@@ -1052,7 +1302,7 @@ where [refTable].[ProductKey] = ?</property>
                     <property
                       dataType="System.String"
                       description="Indicates whether to reference metadata in an XML format."
-                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="IdDimProduct" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductKey" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductCode" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductName" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="UnitMeasure" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Factor" dataType="DT_NUMERIC" length="0" precision="18" scale="5" codePage="0"/&gt;&lt;referenceColumn name="Flags" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentCode" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Department" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CategoryCode" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Category" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubCategoryCody" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubCategory" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="IsActive" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsDeleted" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="IdDimProduct" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductKey" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductCode" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductName" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="UnitMeasure" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Factor" dataType="DT_NUMERIC" length="0" precision="18" scale="5" codePage="0"/&gt;&lt;referenceColumn name="Flags" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DepartmentCode" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Department" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CategoryCode" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Category" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubCategoryCody" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubCategory" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="IsActive" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsDeleted" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -1107,6 +1357,208 @@ where [refTable].[ProductKey] = ?</property>
                       exclusionGroup="1"
                       name="Lookup Match Output"
                       synchronousInputId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Inputs[Lookup Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductCode]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductCode]"
+                          name="DimProductCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">ProductCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="255"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimProductName]"
+                          name="DimProductName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">ProductName</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimUnitMeasure]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="10"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimUnitMeasure]"
+                          name="DimUnitMeasure"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">UnitMeasure</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFactor]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFactor]"
+                          name="DimFactor"
+                          precision="18"
+                          scale="5"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Factor</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFlags]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimFlags]"
+                          name="DimFlags"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Flags</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartmentCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="2"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartmentCode]"
+                          name="DimDepartmentCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">DepartmentCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartment]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimDepartment]"
+                          name="DimDepartment"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Department</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategoryCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="3"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategoryCode]"
+                          name="DimCategoryCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">CategoryCode</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimCategory]"
+                          name="DimCategory"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">Category</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategoryCody]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="2"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategoryCody]"
+                          name="DimSubCategoryCody"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">SubCategoryCody</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategory]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Copy Column"
+                          length="50"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimSubCategory]"
+                          name="DimSubCategory"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">SubCategory</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsActive]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsActive]"
+                          name="DimIsActive"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">IsActive</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsDeleted]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output].Columns[DimIsDeleted]"
+                          name="DimIsDeleted"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">IsDeleted</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
                       <externalMetadataColumns />
                     </output>
                     <output
@@ -1583,6 +2035,35 @@ where [refTable].[ProductKey] = ?</property>
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Filtered">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::FilteredRowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Load Dimension (Product)\Load DimProduct\Row Count Inserted"
                   componentClassID="Microsoft.RowCount"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -1643,8 +2124,18 @@ where [refTable].[ProductKey] = ?</property>
               </components>
               <paths>
                 <path
-                  refId="Package\Load Dimension (Product)\Load DimProduct.Paths[Lookup Match Output]"
+                  refId="Package\Load Dimension (Product)\Load DimProduct.Paths[change]"
                   endId="Package\Load Dimension (Product)\Load DimProduct\Row Count Updated.Inputs[Row Count Input 1]"
+                  name="change"
+                  startId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[change]" />
+                <path
+                  refId="Package\Load Dimension (Product)\Load DimProduct.Paths[Conditional Split Default Output]"
+                  endId="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered.Inputs[Row Count Input 1]"
+                  name="Conditional Split Default Output"
+                  startId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Outputs[Conditional Split Default Output]" />
+                <path
+                  refId="Package\Load Dimension (Product)\Load DimProduct.Paths[Lookup Match Output]"
+                  endId="Package\Load Dimension (Product)\Load DimProduct\Any change?.Inputs[Conditional Split Input]"
                   name="Lookup Match Output"
                   startId="Package\Load Dimension (Product)\Load DimProduct\Lookup.Outputs[Lookup Match Output]" />
                 <path
@@ -1769,7 +2260,7 @@ where [refTable].[ProductKey] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{19F1E7FF-73E8-41C3-86F3-8010766252DC}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -2151,11 +2642,11 @@ where [refTable].[ProductKey] = ?</property>
     design-time-name="Package\Load Dimension (Product)\Load DimProduct">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="176,42"
-          Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Inserted"
-          TopLeft="184,256" />
+          Size="178,42"
+          Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Updated"
+          TopLeft="904,260" />
         <NodeLayout
           Size="115,42"
           Id="Package\Load Dimension (Product)\Load DimProduct\Lookup"
@@ -2165,14 +2656,6 @@ where [refTable].[ProductKey] = ?</property>
           Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Extracted"
           TopLeft="412,74" />
         <NodeLayout
-          Size="178,42"
-          Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Updated"
-          TopLeft="654,268" />
-        <NodeLayout
-          Size="202,42"
-          Id="Package\Load Dimension (Product)\Load DimProduct\Full Updated DimProduct"
-          TopLeft="635,359" />
-        <NodeLayout
           Size="186,42"
           Id="Package\Load Dimension (Product)\Load DimProduct\Read Staging Product"
           TopLeft="126,76" />
@@ -2180,9 +2663,17 @@ where [refTable].[ProductKey] = ?</property>
           Size="167,42"
           Id="Package\Load Dimension (Product)\Load DimProduct\Insert DimProduct"
           TopLeft="185,352" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Load Dimension (Product)\Load DimProduct\Full Updated DimProduct"
+          TopLeft="885,351" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Inserted"
+          TopLeft="184,256" />
         <EdgeLayout
           Id="Package\Load Dimension (Product)\Load DimProduct.Paths[Row Count Output 12]"
-          TopLeft="739.5,310">
+          TopLeft="989.5,302">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2316,39 +2807,95 @@ where [refTable].[ProductKey] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Load Dimension (Product)\Load DimProduct\Row Count Filtered"
+          TopLeft="565,354" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Load Dimension (Product)\Load DimProduct\Any change?"
+          TopLeft="580,259" />
         <EdgeLayout
           Id="Package\Load Dimension (Product)\Load DimProduct.Paths[Lookup Match Output]"
           TopLeft="544.333333333333,207">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="198.666666666667,61"
+              EndConnector="105.166666666667,52"
               Start="0,0"
-              End="198.666666666667,53.5">
+              End="105.166666666667,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.9022298456261" />
+                    End="0,17.2281303602058" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.9022298456261"
-                    Point2="0,24.9022298456261"
-                    Point3="4,24.9022298456261" />
+                    Point1="0,17.2281303602058"
+                    Point2="0,21.2281303602058"
+                    Point3="4,21.2281303602058" />
                   <mssgle:LineSegment
-                    End="194.666666666667,24.9022298456261" />
+                    End="101.166666666667,21.2281303602058" />
                   <mssgle:CubicBezierSegment
-                    Point1="194.666666666667,24.9022298456261"
-                    Point2="198.666666666667,24.9022298456261"
-                    Point3="198.666666666667,28.9022298456261" />
+                    Point1="101.166666666667,21.2281303602058"
+                    Point2="105.166666666667,21.2281303602058"
+                    Point3="105.166666666667,25.2281303602058" />
                   <mssgle:LineSegment
-                    End="198.666666666667,53.5" />
+                    End="105.166666666667,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="51.1419466145833,29.9022298456261,96.3827734375,11.609375"
+              BoundingBox="4.39194661458331,26.2281303602058,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Product)\Load DimProduct.Paths[change]"
+          TopLeft="719,280.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="185,0"
+              Start="0,0"
+              End="177.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="177.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="72.11904296875,5,33.2619140625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Product)\Load DimProduct.Paths[Conditional Split Default Output]"
+          TopLeft="649.5,301">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,16.9208984375,141.2278125,11.658203125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2361,12 +2908,12 @@ where [refTable].[ProductKey] = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[DimProduct]</Value>
+          type="q3:string">[ERP].[DimProduct]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transform Load Jobs"
   DTS:PackageType="5"
-  DTS:VersionBuild="62"
-  DTS:VersionGUID="{7A2B434D-E542-4822-A819-BD4B4AD5D8B9}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{6CA4269E-3FF5-4886-A9B6-14CED920076F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -103,7 +103,59 @@
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dimension Transform_Load Jobs\Reload Dimensions?"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8867D658-8392-4F3B-80B5-69F135B3E6FD}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Reload Dimensions?"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EE77D065-B3D5-4F0E-BE21-A83B2580E544}"
+              SQLTask:SqlStatementSource="TruncateDataWarehouseTables" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Dimension Transform_Load Jobs\Set incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0264DDE1-BAE7-4A6A-B2CD-C82E57045E27}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EE77D065-B3D5-4F0E-BE21-A83B2580E544}"
+              SQLTask:SqlStatementSource="UPDATE [audit].[RunPackages]&#xA;   SET [Incremental] = 1    &#xA; WHERE [DatabaseName]='DWH_Test' and [TableName]= 'AllTables'&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dimension Transform_Load Jobs.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AFA9EF01-72F0-45C8-A711-C734F7A1F858}"
+          DTS:From="Package\Dimension Transform_Load Jobs\Reload Dimensions?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Dimension Transform_Load Jobs\Load Dimensions" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Dimension Transform_Load Jobs.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{E617EFF1-9979-4479-94E3-3025EB7D69A5}"
+          DTS:From="Package\Dimension Transform_Load Jobs\Load Dimensions"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Dimension Transform_Load Jobs\Set incremental" />
+      </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Fact Transform_Load Jobs"
@@ -115,6 +167,23 @@
       DTS:ObjectName="Fact Transform_Load Jobs">
       <DTS:Variables />
       <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\CalculateTotalRows in Facts"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{CC86CECE-1649-4E18-A416-A62E25258810}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CalculateTotalRows in Facts"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EE77D065-B3D5-4F0E-BE21-A83B2580E544}"
+              SQLTask:SqlStatementSource="[audit].spUpdateFactTableRowCount" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Fact Transform_Load Jobs\Load Facts"
           DTS:CreationName="Microsoft.ExecutePackageTask"
@@ -137,6 +206,16 @@
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{880429C4-605F-4E34-A480-A8CFF6B0AC53}"
+          DTS:From="Package\Fact Transform_Load Jobs\Load Facts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Fact Transform_Load Jobs\CalculateTotalRows in Facts" />
+      </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Insert row into audit table"
@@ -308,23 +387,101 @@
         <NodeLayout
           Size="159,42"
           Id="Package\Dimension Transform_Load Jobs\Load Dimensions"
-          TopLeft="48,26" />
+          TopLeft="58,92" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Dimension Transform_Load Jobs\Reload Dimensions?"
+          TopLeft="58,22" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Dimension Transform_Load Jobs\Set incremental"
+          TopLeft="61,158" />
+        <EdgeLayout
+          Id="Package\Dimension Transform_Load Jobs.PrecedenceConstraints[Constraint]"
+          TopLeft="141,64">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimension Transform_Load Jobs.PrecedenceConstraints[Constraint 1]"
+          TopLeft="137.25,134">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="284,123"
-          Size="284,166"
+          PanelSize="284,256"
+          Size="284,299"
           Id="Package\Dimension Transform_Load Jobs"
           TopLeft="220,308" />
         <NodeLayout
+          Size="210,42"
+          Id="Package\Fact Transform_Load Jobs\CalculateTotalRows in Facts"
+          TopLeft="48,94" />
+        <NodeLayout
           Size="129,42"
           Id="Package\Fact Transform_Load Jobs\Load Facts"
-          TopLeft="88,25" />
+          TopLeft="82,21" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint]"
+          TopLeft="149.75,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="306,129"
-          Size="306,172"
+          PanelSize="306,257"
+          Size="306,300"
           Id="Package\Fact Transform_Load Jobs"
           TopLeft="562,305" />
         <NodeLayout
@@ -371,7 +528,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="504,391">
+          TopLeft="504,456.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

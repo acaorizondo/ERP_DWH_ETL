@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transform_Load_Facts"
   DTS:PackageType="5"
-  DTS:VersionBuild="63"
-  DTS:VersionGUID="{A6D21187-7B4F-4970-8BE4-FEE5C4F0E993}">
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{8FDA3FB2-83A2-4FB6-B0E4-80FADDBD94F3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -83,46 +83,68 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Fact Transform_Load Jobs\Fact Order"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{EE5600EE-3C45-4CC2-AB14-CF7A92F43F6C}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:refId="Package\Fact Transform_Load Jobs\Adjustment"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{93CF02C9-765D-4E07-9592-760C3F49406C}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Fact Order"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          DTS:ObjectName="Adjustment">
           <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>1323_DWH Transform_Load Fact Order.dtsx</PackageName>
-              <ParameterAssignment>
-                <ParameterName>ParentAuditKey</ParameterName>
-                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
-              </ParameterAssignment>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Fact Transform_Load Jobs\Fact Order Enriched"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{238BAEAD-AF7D-404A-95F5-9E80977B3D79}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Fact Order Enriched"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>13231_DWH Transform_Load Fact Order Enriched.dtsx</PackageName>
-              <ParameterAssignment>
-                <ParameterName>ParentAuditKey</ParameterName>
-                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
-              </ParameterAssignment>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Adjustment\Fact Adjustment"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{FADC48A4-8173-44A3-B5B5-2E92FC0526A6}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact Adjustment"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact Adjustment.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Adjustment\Fact AdjustmentEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{D81A1533-D8AE-48A6-BC19-A4CEB469BAA9}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact AdjustmentEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact AdjustmentEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Adjustment.PrecedenceConstraints[Constraint 7]"
+              DTS:CreationName=""
+              DTS:DTSID="{44612129-A5CF-47F7-A669-FFDD877E0727}"
+              DTS:From="Package\Fact Transform_Load Jobs\Adjustment\Fact Adjustment"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 7"
+              DTS:To="Package\Fact Transform_Load Jobs\Adjustment\Fact AdjustmentEnriched" />
+          </DTS:PrecedenceConstraints>
         </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Fact Transform_Load Jobs\Fact TableGrowth"
@@ -146,65 +168,667 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Fact Transform_Load Jobs\Fact Transfer"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{3D1DD56B-003A-4213-B93F-E70636ABF8B5}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:refId="Package\Fact Transform_Load Jobs\Inventory"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{8603B4F3-E9DC-4916-BD12-1F13E983C9D3}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Fact Transfer"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          DTS:ObjectName="Inventory">
           <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>1322_DWH Transform_Load Fact Transfer.dtsx</PackageName>
-              <ParameterAssignment>
-                <ParameterName>ParentAuditKey</ParameterName>
-                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
-              </ParameterAssignment>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonth"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{71F25355-9259-45C0-8062-6AC74B4BD0A9}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact InventoryMonth"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact InventoryMonth.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonthEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{EB713631-FEDA-4550-83DE-32352B71D0C6}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact InventoryMonthEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact InventoryMonthEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyage"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{E3D5E669-38A3-4B83-AEE6-67D89FA08BC0}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact InventoryVoyage"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact InventoryVoyage.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyageEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{78A4F372-628C-4ADB-B703-A851B0D93A7B}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact InventoryVoyageEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact InventoryVoyageEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{B07DA83F-6773-40CD-A0D8-A41D2F23A1AE}"
+              DTS:From="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyage"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyageEnriched" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Inventory.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{0CDF51CE-0ABC-41F2-8879-4F2F71E47917}"
+              DTS:From="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonth"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonthEnriched" />
+          </DTS:PrecedenceConstraints>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Fact Transform_Load Jobs\TransferSummarized"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{81443140-3830-4577-8EA9-F804E95EDBA5}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:refId="Package\Fact Transform_Load Jobs\Invoice"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{33382824-4E0E-4BDE-96C4-29F6BC95A99E}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
           DTS:LocaleID="-1"
-          DTS:ObjectName="TransferSummarized"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          DTS:ObjectName="Invoice">
           <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>13221_DWH Transform_Load Fact Transfer Summarized.dtsx</PackageName>
-              <ParameterAssignment>
-                <ParameterName>ParentAuditKey</ParameterName>
-                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
-              </ParameterAssignment>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Invoice\Fact Invoice"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{538770BF-4F87-4183-9C4F-C97630F779B8}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact Invoice"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact Invoice.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Invoice\Fact InvoiceEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{9B31AADE-85EA-4AC4-9F61-DB2C4F9AFC1E}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact InvoiceEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact InvoiceEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Invoice.PrecedenceConstraints[Constraint 4]"
+              DTS:CreationName=""
+              DTS:DTSID="{FAAD5413-D7BF-4B56-9B79-41274212BAC0}"
+              DTS:From="Package\Fact Transform_Load Jobs\Invoice\Fact Invoice"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 4"
+              DTS:To="Package\Fact Transform_Load Jobs\Invoice\Fact InvoiceEnriched" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\Physical count"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{ACA248CB-DB03-4DB1-B60A-5037C611AF8F}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Physical count">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Physical count\Fact Physical Count Enriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{0CE30A6C-9177-4756-A656-407997579355}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact Physical Count Enriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact PhysicalCountEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Physical count\Fact PhysicalCount"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{2A5936C5-D56C-4945-983C-E6890AC0CDDA}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact PhysicalCount"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact PhysicalCount.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Physical count.PrecedenceConstraints[Constraint 5]"
+              DTS:CreationName=""
+              DTS:DTSID="{D54A656C-CCD2-4D56-B073-728F2C6B810E}"
+              DTS:From="Package\Fact Transform_Load Jobs\Physical count\Fact PhysicalCount"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 5"
+              DTS:To="Package\Fact Transform_Load Jobs\Physical count\Fact Physical Count Enriched" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\POS Invoice"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{0BF5955F-4EA1-43FB-9707-8835B9CD2A60}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="POS Invoice">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoice"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{171984BD-0D17-4079-A082-DFCF0EF72098}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact POSInvoice"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact POSInvoice.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoiceEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:Disabled="True"
+              DTS:DTSID="{63D83517-515C-420A-8C07-20C944AE5492}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact POSInvoiceEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact POSInvoiceEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\POS Invoice.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{C4A40637-B389-4776-9EAA-7D888CF00C83}"
+              DTS:From="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoice"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoiceEnriched" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\Receiving"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{F9F108B1-3514-4DBE-BC3B-F236A1222D0A}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Receiving">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Receiving\Fact Receiving"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{3CE535E8-239F-47C1-AC6E-1A8D5F84B156}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact Receiving"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact Receiving.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Receiving\Fact ReceivingEnriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{E7B82628-44FE-4667-8AD7-5FF01D7D623C}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact ReceivingEnriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1324_DWH Transform_Load Fact ReceivingEnriched.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Receiving.PrecedenceConstraints[Constraint 6]"
+              DTS:CreationName=""
+              DTS:DTSID="{7541503E-CB50-4AC7-8DA4-89B48DBDD2A8}"
+              DTS:From="Package\Fact Transform_Load Jobs\Receiving\Fact Receiving"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 6"
+              DTS:To="Package\Fact Transform_Load Jobs\Receiving\Fact ReceivingEnriched" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{9415CC86-9058-4E5E-9A94-72CA6C90DDEA}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Sequence Container">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delete Orders"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{496FFD72-5FA8-4F48-A397-0AD3538DBD0E}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete Orders"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6A377B9F-3180-46CB-89DB-D815A4B29FAD}"
+                  SQLTask:SqlStatementSource="spDeleteOrders" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{4FF9BB4D-E7EC-403F-A8E2-235DCB54ECCC}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delivery">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact Delivery"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{FA81FFCD-A47B-4350-97DF-3A06BAA13126}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact Delivery"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>1324_DWH Transform_Load Fact Delivery.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetail"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{850462D1-B8DF-474A-BF7C-566779C27937}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact DeliveryDetail"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>1324_DWH Transform_Load Fact DeliveryDetail.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetailEnriched"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{EC89C857-9DE7-443A-8CCA-36F72F9860E2}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact DeliveryDetailEnriched"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>1324_DWH Transform_Load Fact DeliveryDetailEnriched.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryEnriched"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{F27E5187-9D19-4ECE-95DF-E818960E0DC8}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact DeliveryEnriched"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>1324_DWH Transform_Load Fact DeliveryEnriched.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery.PrecedenceConstraints[Constraint 6]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{AE3EFB62-9F14-404D-9847-9A2EC10FD864}"
+                  DTS:From="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact Delivery"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 6"
+                  DTS:To="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryEnriched" />
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Delivery.PrecedenceConstraints[Constraint 7]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{24598B08-C8D9-49C7-BAD9-A96CDA06CB33}"
+                  DTS:From="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetail"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 7"
+                  DTS:To="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetailEnriched" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Order"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{722910B0-7CDC-4BB7-BF46-5A4349E53279}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Order">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{EE5600EE-3C45-4CC2-AB14-CF7A92F43F6C}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact Order"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>1323_DWH Transform_Load Fact Order.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order Enriched"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{238BAEAD-AF7D-404A-95F5-9E80977B3D79}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Fact Order Enriched"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables />
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>13231_DWH Transform_Load Fact Order Enriched.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>ParentAuditKey</ParameterName>
+                        <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container\Order.PrecedenceConstraints[Constraint 1]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{29C87700-F379-46A7-8BA8-B8A3E9CCD7FE}"
+                  DTS:From="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint 1"
+                  DTS:To="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order Enriched" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Sequence Container.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{2D839571-19A7-45BA-8FF5-76095ABE8D1B}"
+              DTS:From="Package\Fact Transform_Load Jobs\Sequence Container\Order"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Fact Transform_Load Jobs\Sequence Container\Delete Orders" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fact Transform_Load Jobs\Transfer"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{E0B49A66-DE5F-4541-A037-5D730121E46F}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transfer">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Transfer\Fact Transfer"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{3D1DD56B-003A-4213-B93F-E70636ABF8B5}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fact Transfer"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1322_DWH Transform_Load Fact TransferV2.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Fact Transform_Load Jobs\Transfer\Transfer Enriched"
+              DTS:CreationName="Microsoft.ExecutePackageTask"
+              DTS:Description="Execute Package Task"
+              DTS:DTSID="{81443140-3830-4577-8EA9-F804E95EDBA5}"
+              DTS:ExecutableType="Microsoft.ExecutePackageTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Transfer Enriched"
+              DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExecutePackageTask>
+                  <UseProjectReference>True</UseProjectReference>
+                  <PackageName>1322_DWH Transform_Load Fact TransferEnrichedV2.dtsx</PackageName>
+                  <ParameterAssignment>
+                    <ParameterName>ParentAuditKey</ParameterName>
+                    <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+                  </ParameterAssignment>
+                </ExecutePackageTask>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Fact Transform_Load Jobs\Transfer.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{46D50F00-861A-4E07-8DC2-8F0524477AA3}"
+              DTS:From="Package\Fact Transform_Load Jobs\Transfer\Fact Transfer"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Fact Transform_Load Jobs\Transfer\Transfer Enriched" />
+          </DTS:PrecedenceConstraints>
         </DTS:Executable>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint]"
-          DTS:CreationName=""
-          DTS:DTSID="{46D50F00-861A-4E07-8DC2-8F0524477AA3}"
-          DTS:From="Package\Fact Transform_Load Jobs\Fact Transfer"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint"
-          DTS:To="Package\Fact Transform_Load Jobs\TransferSummarized" />
-        <DTS:PrecedenceConstraint
           DTS:refId="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{29C87700-F379-46A7-8BA8-B8A3E9CCD7FE}"
-          DTS:From="Package\Fact Transform_Load Jobs\Fact Order"
+          DTS:DTSID="{29AF019C-EDD2-43EF-80B9-12C98A790531}"
+          DTS:From="Package\Fact Transform_Load Jobs\Sequence Container"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Fact Transform_Load Jobs\Fact Order Enriched" />
+          DTS:To="Package\Fact Transform_Load Jobs\Receiving" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -365,87 +989,29 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="166,42"
-          Id="Package\Fact Transform_Load Jobs\Fact TableGrowth"
-          TopLeft="21,12" />
+          Size="156,42"
+          Id="Package\Fact Transform_Load Jobs\Adjustment\Fact Adjustment"
+          TopLeft="45.5,3.5" />
         <NodeLayout
-          Size="161,42"
-          Id="Package\Fact Transform_Load Jobs\Fact Transfer"
-          TopLeft="22,66" />
-        <NodeLayout
-          Size="176,42"
-          Id="Package\Fact Transform_Load Jobs\TransferSummarized"
-          TopLeft="107,133" />
+          Size="210,42"
+          Id="Package\Fact Transform_Load Jobs\Adjustment\Fact AdjustmentEnriched"
+          TopLeft="11.5,69.5" />
         <EdgeLayout
-          Id="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint]"
-          TopLeft="102.5,108">
+          Id="Package\Fact Transform_Load Jobs\Adjustment.PrecedenceConstraints[Constraint 7]"
+          TopLeft="120,45.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="92.5,25"
+              EndConnector="0,24"
               Start="0,0"
-              End="92.5,17.5">
+              End="0,16.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.5"
-                    Point2="0,12.5"
-                    Point3="4,12.5" />
-                  <mssgle:LineSegment
-                    End="88.5,12.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="88.5,12.5"
-                    Point2="92.5,12.5"
-                    Point3="92.5,16.5" />
-                  <mssgle:LineSegment
-                    End="92.5,17.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="129,42"
-          Id="Package\Fact Transform_Load Jobs\Fact Order"
-          TopLeft="222,63" />
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Fact Transform_Load Jobs\Fact Order Enriched"
-          TopLeft="307,131" />
-        <EdgeLayout
-          Id="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint 1]"
-          TopLeft="286.5,105">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="107,26"
-              Start="0,0"
-              End="107,18.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,9" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9"
-                    Point2="0,13"
-                    Point3="4,13" />
-                  <mssgle:LineSegment
-                    End="103,13" />
-                  <mssgle:CubicBezierSegment
-                    Point1="103,13"
-                    Point2="107,13"
-                    Point3="107,17" />
-                  <mssgle:LineSegment
-                    End="107,18.5" />
+                    End="0,16.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -457,44 +1023,466 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="1026,251"
-          Size="1026,294"
-          Id="Package\Fact Transform_Load Jobs"
-          TopLeft="156,177" />
+          PanelSize="232,122"
+          Size="232,165"
+          Id="Package\Fact Transform_Load Jobs\Adjustment"
+          TopLeft="236,13" />
         <NodeLayout
-          Size="202,42"
-          Id="Package\Insert row into audit table"
-          TopLeft="169,68" />
+          Size="166,42"
+          Id="Package\Fact Transform_Load Jobs\Fact TableGrowth"
+          TopLeft="1094,21" />
         <NodeLayout
-          Size="250,42"
-          Id="Package\Update EndDateTime in audit table"
-          TopLeft="928,67" />
+          Size="177,42"
+          Id="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonth"
+          TopLeft="25.5,1" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryMonthEnriched"
+          TopLeft="8.5,68" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyage"
+          TopLeft="245.5,4" />
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Fact Transform_Load Jobs\Inventory\Fact InventoryVoyageEnriched"
+          TopLeft="232.5,70" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="270,110">
+          Id="Package\Fact Transform_Load Jobs\Inventory.PrecedenceConstraints[Constraint 2]"
+          TopLeft="340,46">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="229.333333333333,67"
+              EndConnector="0,24"
               Start="0,0"
-              End="229.333333333333,59.5">
+              End="0,16.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.1374075515765" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,36.1374075515765"
-                    Point2="0,40.1374075515765"
-                    Point3="4,40.1374075515765" />
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Inventory.PrecedenceConstraints[Constraint 3]"
+          TopLeft="115.5,43">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="225.333333333333,40.1374075515765" />
-                  <mssgle:CubicBezierSegment
-                    Point1="225.333333333333,40.1374075515765"
-                    Point2="229.333333333333,40.1374075515765"
-                    Point3="229.333333333333,44.1374075515765" />
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="462,123"
+          Size="462,166"
+          Id="Package\Fact Transform_Load Jobs\Inventory"
+          TopLeft="9,371" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Fact Transform_Load Jobs\Invoice\Fact Invoice"
+          TopLeft="35,4" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Fact Transform_Load Jobs\Invoice\Fact InvoiceEnriched"
+          TopLeft="10,72" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Invoice.PrecedenceConstraints[Constraint 4]"
+          TopLeft="100.75,46">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="229.333333333333,59.5" />
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="206,131"
+          Size="206,174"
+          Id="Package\Fact Transform_Load Jobs\Invoice"
+          TopLeft="10,188" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Fact Transform_Load Jobs\Physical count\Fact Physical Count Enriched"
+          TopLeft="14.5,71" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Fact Transform_Load Jobs\Physical count\Fact PhysicalCount"
+          TopLeft="42.5,6" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Physical count.PrecedenceConstraints[Constraint 5]"
+          TopLeft="123.75,48">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="234,129"
+          Size="234,172"
+          Id="Package\Fact Transform_Load Jobs\Physical count"
+          TopLeft="234,189" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoice"
+          TopLeft="44,13" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Fact Transform_Load Jobs\POS Invoice\Fact POSInvoiceEnriched"
+          TopLeft="21,82" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\POS Invoice.PrecedenceConstraints[Constraint]"
+          TopLeft="120.25,55">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="255,145"
+          Size="255,188"
+          Id="Package\Fact Transform_Load Jobs\POS Invoice"
+          TopLeft="11,547" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Fact Transform_Load Jobs\Receiving\Fact Receiving"
+          TopLeft="24,7.5" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Fact Transform_Load Jobs\Receiving\Fact ReceivingEnriched"
+          TopLeft="11,72.5" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Receiving.PrecedenceConstraints[Constraint 6]"
+          TopLeft="101,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="207,124"
+          Size="207,167"
+          Id="Package\Fact Transform_Load Jobs\Receiving"
+          TopLeft="1094.5,190" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delete Orders"
+          TopLeft="289,264" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact Delivery"
+          TopLeft="28.5,8.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetail"
+          TopLeft="218.5,8.5" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryDetailEnriched"
+          TopLeft="205.5,76.5" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery\Fact DeliveryEnriched"
+          TopLeft="14.5,75.5" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery.PrecedenceConstraints[Constraint 6]"
+          TopLeft="101.5,50.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery.PrecedenceConstraints[Constraint 7]"
+          TopLeft="305.5,50.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="425,136"
+          Size="425,179"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Delivery"
+          TopLeft="14,12" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order"
+          TopLeft="46.5,9.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Order\Fact Order Enriched"
+          TopLeft="20.5,74.5" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Order.PrecedenceConstraints[Constraint 1]"
+          TopLeft="109,51.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="222,132"
+          Size="222,175"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container\Order"
+          TopLeft="16,204" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="238,288.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51,0"
+              Start="0,0"
+              End="43.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="43.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="548,479"
+          Size="548,522"
+          Id="Package\Fact Transform_Load Jobs\Sequence Container"
+          TopLeft="516,14" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Fact Transform_Load Jobs\Transfer\Fact Transfer"
+          TopLeft="18.5,3.5" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Fact Transform_Load Jobs\Transfer\Transfer Enriched"
+          TopLeft="16.5,68.5" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs\Transfer.PrecedenceConstraints[Constraint]"
+          TopLeft="98.25,45.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204,122"
+          Size="204,165"
+          Id="Package\Fact Transform_Load Jobs\Transfer"
+          TopLeft="11,11" />
+        <EdgeLayout
+          Id="Package\Fact Transform_Load Jobs.PrecedenceConstraints[Constraint 1]"
+          TopLeft="1064,274.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.5,0"
+              Start="0,0"
+              End="23,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1475,1043"
+          Size="1475,1086"
+          Id="Package\Fact Transform_Load Jobs"
+          TopLeft="164,121" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="162,17" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\Update EndDateTime in audit table"
+          TopLeft="1389,18" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="263,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="394,62"
+              Start="0,0"
+              End="394,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.1596911824462" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.1596911824462"
+                    Point2="0,37.1596911824462"
+                    Point3="4,37.1596911824462" />
+                  <mssgle:LineSegment
+                    End="390,37.1596911824462" />
+                  <mssgle:CubicBezierSegment
+                    Point1="390,37.1596911824462"
+                    Point2="394,37.1596911824462"
+                    Point3="394,41.1596911824462" />
+                  <mssgle:LineSegment
+                    End="394,54.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -505,30 +1493,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="838.666666666667,177">
+          TopLeft="1146,121">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="214.333333333333,-68"
+              EndConnector="368,-61"
               Start="0,0"
-              End="214.333333333333,-60.5">
+              End="368,-53.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-23.2635266640716" />
+                    End="0,-20.4396586753352" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-23.2635266640716"
-                    Point2="0,-27.2635266640716"
-                    Point3="4,-27.2635266640716" />
+                    Point1="0,-20.4396586753352"
+                    Point2="0,-24.4396586753352"
+                    Point3="4,-24.4396586753352" />
                   <mssgle:LineSegment
-                    End="210.333333333333,-27.2635266640716" />
+                    End="364,-24.4396586753352" />
                   <mssgle:CubicBezierSegment
-                    Point1="210.333333333333,-27.2635266640716"
-                    Point2="214.333333333333,-27.2635266640716"
-                    Point3="214.333333333333,-31.2635266640716" />
+                    Point1="364,-24.4396586753352"
+                    Point2="368,-24.4396586753352"
+                    Point3="368,-28.4396586753352" />
                   <mssgle:LineSegment
-                    End="214.333333333333,-60.5" />
+                    End="368,-53.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

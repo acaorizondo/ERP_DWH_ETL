@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_LocationEvent"
   DTS:PackageType="5"
-  DTS:VersionBuild="190"
-  DTS:VersionGUID="{C0E58445-AFCF-45C0-9728-9B89DEF92FD6}">
+  DTS:VersionBuild="194"
+  DTS:VersionGUID="{EC7D7512-A6C5-4D28-9094-6B45A09E23B7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -369,7 +369,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[ICS].[LocationEvent]</property>
+                      name="OpenRowset">[ERP].[v_StagingLocationEvent]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -407,8 +407,8 @@ FROM            ICS.Location LEFT OUTER JOIN
                   <connections>
                     <connection
                       refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -463,21 +463,9 @@ FROM            ICS.Location LEFT OUTER JOIN
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
-                          dataType="guid"
-                          name="LocationKey" />
-                        <externalMetadataColumn
                           refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[LocationEventKey]"
                           dataType="guid"
                           name="LocationEventKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[SiteID]"
-                          dataType="i2"
-                          name="SiteID" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
-                          dataType="guid"
-                          name="CompanyGroupShipKey" />
                         <externalMetadataColumn
                           refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[Code]"
                           codePage="1252"
@@ -490,39 +478,6 @@ FROM            ICS.Location LEFT OUTER JOIN
                           dataType="str"
                           length="50"
                           name="Name" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
-                          dataType="bool"
-                          name="IsActive" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
-                          dataType="bool"
-                          name="IsDeleted" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[CreationUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CreationUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[CreationDate]"
-                          dataType="dbTimeStamp"
-                          name="CreationDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="LastModifiedUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="LastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                          dataType="bytes"
-                          length="8"
-                          name="RowVersion" />
                         <externalMetadataColumn
                           refId="Package\Extract from Source to Staging (LocationEvent)\Copy data from source to staging\Read LocationsEvent.Outputs[OLE DB Source Output].ExternalColumns[Budget]"
                           dataType="numeric"
@@ -647,6 +602,22 @@ FROM            ICS.Location LEFT OUTER JOIN
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (LocationEvent)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{dbe33725-8c75-41c3-ae94-4571c5c2c9f4}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract from Source to Staging (LocationEvent)\Truncate staging table"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
@@ -681,6 +652,14 @@ FROM            ICS.Location LEFT OUTER JOIN
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Extract from Source to Staging (LocationEvent)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (LocationEvent).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{0FA2FAC5-3327-453C-83BD-302E45F89E5A}"
+          DTS:From="Package\Extract from Source to Staging (LocationEvent)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (LocationEvent)\Final Row Count" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -759,7 +738,7 @@ FROM            ICS.Location LEFT OUTER JOIN
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2BD054FB-6072-43E0-9479-3AA7D2F34069}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -894,6 +873,10 @@ FROM            ICS.Location LEFT OUTER JOIN
           Id="Package\Extract from Source to Staging (LocationEvent)\Count rows in staging"
           TopLeft="62,229" />
         <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (LocationEvent)\Final Row Count"
+          TopLeft="79,320" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Extract from Source to Staging (LocationEvent)\Truncate staging table"
           TopLeft="55,49" />
@@ -941,11 +924,33 @@ FROM            ICS.Location LEFT OUTER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (LocationEvent).PrecedenceConstraints[Constraint 2]"
+          TopLeft="155.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="311,318"
-          Size="331,361"
+          PanelSize="331,428"
+          Size="331,471"
           Id="Package\Extract from Source to Staging (LocationEvent)"
           TopLeft="413,71" />
         <NodeLayout
@@ -986,18 +991,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="277,254.25">
+          TopLeft="277,257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="136,0"
+              EndConnector="136,49.5"
               Start="0,0"
-              End="128.5,0">
+              End="128.5,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="128.5,0" />
+                    End="64,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64,0"
+                    Point2="68,0"
+                    Point3="68,4" />
+                  <mssgle:LineSegment
+                    End="68,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68,45.5"
+                    Point2="68,49.5"
+                    Point3="72,49.5" />
+                  <mssgle:LineSegment
+                    End="128.5,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1008,18 +1025,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="744,255.25">
+          TopLeft="744,306.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="108,0"
+              EndConnector="108,-47.5"
               Start="0,0"
-              End="100.5,0">
+              End="100.5,-47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="100.5,0" />
+                    End="50,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="50,0"
+                    Point2="54,0"
+                    Point3="54,-4" />
+                  <mssgle:LineSegment
+                    End="54,-43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54,-43.5"
+                    Point2="54,-47.5"
+                    Point3="58,-47.5" />
+                  <mssgle:LineSegment
+                    End="100.5,-47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1104,7 +1133,7 @@ FROM            ICS.Location LEFT OUTER JOIN
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

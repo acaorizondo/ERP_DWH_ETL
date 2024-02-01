@@ -10,6 +10,7 @@
         <WinAuthDomain />
         <ServerName>.</ServerName>
         <PathOnServer>/SSISDB/ETL_ERP/ETL</PathOnServer>
+        <StartObjectID>1312_DWH Transform_Load Dim POSEmployee.dtsx</StartObjectID>
         <UserIDs />
         <UserPasswords />
         <OfflineMode>false</OfflineMode>

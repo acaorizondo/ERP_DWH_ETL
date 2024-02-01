@@ -1,0 +1,2081 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{02B16BBA-568F-446C-9CAA-1D49DEAD2FEB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Extract ERP_ICS_TransferV2"
+  DTS:PackageType="5"
+  DTS:VersionBuild="229"
+  DTS:VersionGUID="{DF6B255D-FF4C-4E55-922F-4265EE531DFE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{A6768E1A-0CF2-4FF6-912A-3A4439AEC053}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{03CDAA36-B28F-44D8-B53D-ECA99078BEAC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2685C36-C913-4E34-82FF-8C53B3E5BD76}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">Staging</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A99BA016-C3C6-4359-9F8E-E840D5D4F74E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B6CB9691-66FB-4AD1-B241-9405CFCDCADD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Incremental">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{801913AD-6592-4A15-B413-F2D543E71692}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0D5E49CF-8DB0-48AD-9E44-6B1D47B8D04E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{036D6150-137D-4CBD-A1B1-5015A8D97C9E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F1A6F25D-41A5-44C5-8195-7917EB1E25B1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D7271718-4B6C-423F-9290-120F1E89820C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2700BDE3-D23A-4BF6-AD55-1FD791C6AA51}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E05342EA-5CFA-4EAA-9FB5-613237AE7446}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A2CB3421-90FD-49D5-82F1-C48F07A65DDB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8CB46F68-FE94-4C1A-9458-83739F9FA546}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1163CBA5-3D7A-4B50-8108-D7381725F9CD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6B64A216-345A-488F-A204-C404E10DF601}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">ERP_ICS_Transfer</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract from Source to Staging (Transfer)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C8230A5F-6510-4194-9F8A-AA8166BF6602}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract from Source to Staging (Transfer)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Count rows in staging"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BF6E0FD1-6FBA-4204-941D-9215A80B81EF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count rows in staging"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_Transfer]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{729719E8-0181-40AE-A72E-F920BB664204}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Final Row Count 1"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{F305E7AF-2A66-45B2-841E-254A1EF64682}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count 1"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{8611E646-4B23-4A9B-BEA3-F29709955D50}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Full Load Transfer"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferMaxRows="100000"
+              defaultBufferSize="104857600"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read ERP Transfer"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[v_StagingTransfer]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [InventorySnapshotKey]
+		,[SnapshotDate]
+		,[InventoryKey]
+		,[CompanyGroupShipKey]
+		,[LocationKey]
+		,[SiteId]
+		,[ProductKey]
+		,[ProductUnitMeasureKey]
+		,[QuantityOnHand]
+		,[Cost]
+		,[LastModifiedDate]
+		,[RowVersion]
+	FROM [ApolloERP].[ICS].[InventorySnapshot]
+	WHERE IsDeleted = 0</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Cost]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                          name="DocumentNo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                          name="DocumentDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate]"
+                          name="ConfirmedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          name="Quantity"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferHeadKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[TransferHeadKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferHeadKey]"
+                          name="TransferHeadKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferDetailKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[TransferDetailKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferDetailKey]"
+                          name="TransferDetailKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[IsConfirmed]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[IsConfirmed]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[IsConfirmed]"
+                          name="IsConfirmed"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[FromLocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[FromLocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[FromLocationKey]"
+                          name="FromLocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ToLocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationKey]"
+                          name="ToLocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationEventKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ToLocationEventKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationEventKey]"
+                          name="ToLocationEventKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RequestDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate]"
+                          name="RequestDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate_dim_date]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RequestDate_dim_date]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate_dim_date]"
+                          name="RequestDate_dim_date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate_dim_date]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate_dim_date]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate_dim_date]"
+                          name="ConfirmedDate_dim_date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate_dim_date]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate_dim_date]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate_dim_date]"
+                          name="DocumentDate_dim_date"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[QuantityRequested]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[QuantityRequested]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[QuantityRequested]"
+                          name="QuantityRequested"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                          dataType="i8"
+                          name="DocumentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                          dataType="dbDate"
+                          name="DocumentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          name="ConfirmedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          dataType="numeric"
+                          name="Quantity"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[TransferHeadKey]"
+                          dataType="guid"
+                          name="TransferHeadKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[TransferDetailKey]"
+                          dataType="guid"
+                          name="TransferDetailKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[IsConfirmed]"
+                          dataType="bool"
+                          name="IsConfirmed" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[FromLocationKey]"
+                          dataType="guid"
+                          name="FromLocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ToLocationKey]"
+                          dataType="guid"
+                          name="ToLocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ToLocationEventKey]"
+                          dataType="guid"
+                          name="ToLocationEventKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RequestDate]"
+                          dataType="dbDate"
+                          name="RequestDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RequestDate_dim_date]"
+                          dataType="i4"
+                          name="RequestDate_dim_date" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate_dim_date]"
+                          dataType="i4"
+                          name="ConfirmedDate_dim_date" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate_dim_date]"
+                          dataType="i4"
+                          name="DocumentDate_dim_date" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[QuantityRequested]"
+                          dataType="numeric"
+                          name="QuantityRequested"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[TransferHeadKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[TransferHeadKey]"
+                          name="TransferHeadKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[TransferDetailKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[TransferDetailKey]"
+                          name="TransferDetailKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[IsConfirmed]"
+                          dataType="bool"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[IsConfirmed]"
+                          name="IsConfirmed" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                          dataType="i8"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                          name="DocumentNo" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[FromLocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[FromLocationKey]"
+                          name="FromLocationKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ToLocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ToLocationKey]"
+                          name="ToLocationKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ToLocationEventKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ToLocationEventKey]"
+                          name="ToLocationEventKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RequestDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RequestDate]"
+                          name="RequestDate" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RequestDate_dim_date]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RequestDate_dim_date]"
+                          name="RequestDate_dim_date" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                          name="DocumentDate" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate_dim_date]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate_dim_date]"
+                          name="ConfirmedDate_dim_date" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate]"
+                          name="ConfirmedDate" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentDate_dim_date]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[DocumentDate_dim_date]"
+                          name="DocumentDate_dim_date" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          name="Quantity"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[QuantityRequested]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[QuantityRequested]"
+                          name="QuantityRequested"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Extract">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountExtracts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Write Staging Transfer"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[ICS_Transfer]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[CompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="CompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ProductUnitMeasureKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductUnitMeasureKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[Cost]"
+                          cachedDataType="numeric"
+                          cachedName="Cost"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Cost]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[VoyageCompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="VoyageCompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[DocumentNo]"
+                          cachedDataType="i8"
+                          cachedName="DocumentNo"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentNo]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[DocumentDate]"
+                          cachedDataType="dbDate"
+                          cachedName="DocumentDate"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ConfirmedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ConfirmedDate"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                          cachedDataType="numeric"
+                          cachedName="Quantity"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[FromLocationKey]"
+                          cachedDataType="guid"
+                          cachedName="FromLocationKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[FromLocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[FromLocationKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ToLocationKey]"
+                          cachedDataType="guid"
+                          cachedName="ToLocationKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ToLocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ToLocationEventKey]"
+                          cachedDataType="guid"
+                          cachedName="ToLocationEventKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ToLocationEventKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ToLocationEventKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[RequestDate]"
+                          cachedDataType="dbDate"
+                          cachedName="RequestDate"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RequestDate]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[RequestDate_dim_date]"
+                          cachedDataType="i4"
+                          cachedName="RequestDate_dim_date"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RequestDateDateDim]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RequestDate_dim_date]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[QuantityRequested]"
+                          cachedDataType="numeric"
+                          cachedName="QuantityRequested"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[QuantityRequested]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[QuantityRequested]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[ConfirmedDate_dim_date]"
+                          cachedDataType="i4"
+                          cachedName="ConfirmedDate_dim_date"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDateDateDim]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[ConfirmedDate_dim_date]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[DocumentDate_dim_date]"
+                          cachedDataType="i4"
+                          cachedName="DocumentDate_dim_date"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDateDateDim]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[DocumentDate_dim_date]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[IsConfirmed]"
+                          cachedDataType="bool"
+                          cachedName="IsConfirmed"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[IsConfirmed]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[IsConfirmed]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[TransferHeadKey]"
+                          cachedDataType="guid"
+                          cachedName="TransferHeadKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[TransferHeadKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferHeadKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[TransferDetailKey]"
+                          cachedDataType="guid"
+                          cachedName="TransferDetailKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[TransferDetailKey]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[TransferDetailKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[RowVersionDetail]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionDetail"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionDetail]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].Columns[RowVersionHeader]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionHeader"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output].Columns[RowVersionHeader]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                          dataType="i8"
+                          name="DocumentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                          dataType="dbDate"
+                          name="DocumentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          name="ConfirmedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          dataType="numeric"
+                          name="Quantity"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[FromLocationKey]"
+                          dataType="guid"
+                          name="FromLocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ToLocationKey]"
+                          dataType="guid"
+                          name="ToLocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ToLocationEventKey]"
+                          dataType="guid"
+                          name="ToLocationEventKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RequestDate]"
+                          dataType="dbDate"
+                          name="RequestDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RequestDateDateDim]"
+                          dataType="i4"
+                          name="RequestDateDateDim" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[QuantityRequested]"
+                          dataType="numeric"
+                          name="QuantityRequested"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDateDateDim]"
+                          dataType="i4"
+                          name="ConfirmedDateDateDim" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDateDateDim]"
+                          dataType="i4"
+                          name="DocumentDateDateDim" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[IsConfirmed]"
+                          dataType="bool"
+                          name="IsConfirmed" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[TransferHeadKey]"
+                          dataType="guid"
+                          name="TransferHeadKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[TransferDetailKey]"
+                          dataType="guid"
+                          name="TransferDetailKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[IdTransfer]"
+                          dataType="guid"
+                          name="IdTransfer" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer.Paths[OLE DB Source Output]"
+                  endId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer.Paths[Row Count Output 1]"
+                  endId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Get Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{28829C91-A1DE-4C7D-856B-13C281E390E7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM [audit].&#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Incremental" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Incremental Load Transfer"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6E3F6A00-F6D8-4EE9-AE03-CD731CB3A75F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental Load Transfer"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+              SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spStagingTransferIncrementalLoad  @RowCountExt = @Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::RowCountExtracts"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Incremental load?"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{68EB3FBD-2102-4400-8A90-12E8960C4C83}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental load?"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::Incremental]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Row Count Inserts"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0D59419C-68C5-4D07-AC29-F51500CB0259}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Row Count Inserts"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_Transfer]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Set Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E139F708-365F-4132-A53D-7B1CB6CF5330}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+              SQLTask:SqlStatementSource="UPDATE [audit].RunPackages &#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Transfer)\Truncate staging table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{138C8800-2CF8-4000-AE25-32FF5E1E0BB7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="Truncate table [ERP].[ICS_Transfer]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{456A7BDD-6A59-4497-812A-AE4958BB865F}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Incremental load?" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{DFE824B1-12A4-4ACD-851C-479B476A9BF7}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Incremental Load Transfer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{CE9E26AA-6F4D-40CC-9703-A7CC1BC7F907}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Final Row Count" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:Description="Incremental"
+          DTS:DTSID="{8932E71D-33E3-4EFB-A687-389FD581E948}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==True"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Incremental Load Transfer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:Description="Full load"
+          DTS:DTSID="{E018A856-9BA9-442D-B4CD-0E23359D3BBD}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==False"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Full Load Transfer" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{30532D18-8A97-4571-B9DF-07B751CC1F2A}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Full Load Transfer"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Row Count Inserts" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{8487A82F-9CB7-4264-A57B-A12A227C917E}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Row Count Inserts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Final Row Count 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{356FA398-5BC2-4FE0-A4B8-C65CE7FC66AC}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Get Incremental"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Truncate staging table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{59FE16BB-2597-4B72-977A-3B969D32AF5C}"
+          DTS:From="Package\Extract from Source to Staging (Transfer)\Final Row Count 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Extract from Source to Staging (Transfer)\Set Incremental" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DEAAF594-1269-49B1-BA7A-E1130F0A41BE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7C539FF4-11B3-40E9-8D99-C27BFD463C80}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0CF872C4-DA53-4A4E-8687-5F92125F23D9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BD2F1076-8DA2-4F17-82B4-8E226A37BB21}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{06ED085D-C97D-44DB-869E-83495F44DEA9}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8F86E97B-6268-492D-915A-DB79F05D04A0}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Extract from Source to Staging (Transfer)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{73764A60-63AB-4545-B3E1-DFBD57E4C4A3}"
+      DTS:From="Package\Extract from Source to Staging (Transfer)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Count rows in staging"
+          TopLeft="17,308" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Final Row Count"
+          TopLeft="30,383" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Final Row Count 1"
+          TopLeft="303,379" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer"
+          TopLeft="304,241" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Get Incremental"
+          TopLeft="173,17" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Incremental Load Transfer"
+          TopLeft="10,241" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Incremental load?"
+          TopLeft="162,156" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Row Count Inserts"
+          TopLeft="304,310" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Set Incremental"
+          TopLeft="307,449" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Truncate staging table"
+          TopLeft="155,89" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint]"
+          TopLeft="245.75,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 1]"
+          TopLeft="110.5,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 2]"
+          TopLeft="108.5,350">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 3]"
+          TopLeft="218,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-106,43"
+              Start="0,0"
+              End="-106,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="-4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-102,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-102,17.4492753623188"
+                    Point2="-106,17.4492753623188"
+                    Point3="-106,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-106,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-88.60578125,22.4492753623188,71.2115625,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 4]"
+          TopLeft="270,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116,43"
+              Start="0,0"
+              End="116,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="112,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="112,17.4492753623188"
+                    Point2="116,17.4492753623188"
+                    Point3="116,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="116,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.333359375,22.4492753623188,55.33328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 5]"
+          TopLeft="386.5,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 6]"
+          TopLeft="386.25,352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 7]"
+          TopLeft="249,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 8]"
+          TopLeft="384.75,421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="497,545"
+          Size="497,588"
+          Id="Package\Extract from Source to Staging (Transfer)"
+          TopLeft="374,38" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="101,292" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="134,87" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="946,278" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="205.5,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,163"
+              Start="0,0"
+              End="0,155.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,155.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,69.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="303,313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71,19"
+              Start="0,0"
+              End="63.5,19">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.5,0"
+                    Point2="35.5,0"
+                    Point3="35.5,4" />
+                  <mssgle:LineSegment
+                    End="35.5,15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.5,15"
+                    Point2="35.5,19"
+                    Point3="39.5,19" />
+                  <mssgle:LineSegment
+                    End="63.5,19" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="871,332">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75,-33"
+              Start="0,0"
+              End="67.5,-33">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.5,0"
+                    Point2="37.5,0"
+                    Point3="37.5,-4" />
+                  <mssgle:LineSegment
+                    End="37.5,-29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.5,-29"
+                    Point2="37.5,-33"
+                    Point3="41.5,-33" />
+                  <mssgle:LineSegment
+                    End="67.5,-33" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract from Source to Staging (Transfer)\Full Load Transfer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Row Count Extract"
+          TopLeft="119,174" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer"
+          TopLeft="115,267" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer"
+          TopLeft="119,85" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer.Paths[Row Count Output 1]"
+          TopLeft="204.75,216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Transfer)\Full Load Transfer.Paths[OLE DB Source Output]"
+          TopLeft="202.25,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Write Staging Transfer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (Transfer)\Full Load Transfer\Read ERP Transfer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 3]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Transfer).PrecedenceConstraints[Constraint 4]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

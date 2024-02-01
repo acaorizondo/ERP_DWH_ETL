@@ -1,0 +1,1907 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{F1ADC364-2D82-4334-85A9-8C6106F845C2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Extract ERP_ICS_PhysicalCount"
+  DTS:PackageType="5"
+  DTS:VersionBuild="211"
+  DTS:VersionGUID="{66ACB004-7E03-4197-88A7-3336DACA4FEF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CA308028-A62D-4749-A3E8-C218721D2429}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{6227BA58-23E6-4EF3-AEAB-35654F2E4849}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F70FBE03-B825-4D96-8210-FF3AAE2A6DC5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7E9A9314-36BC-4162-95B5-FD03FCE3E72F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">Staging</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{24216D98-8B06-4697-BDA2-AF967A5FE65E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1904AB27-7184-4474-8A63-529E175AC2FA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Incremental">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{699EC3C7-570C-4FB1-BF3A-E9F14A86515B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DE55B1D6-4ED4-4D52-B014-27E974E54FB4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CA3701D9-A376-4A37-ACFF-82718A354FE5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6A6B1E70-DB81-4419-9CF9-A2D858DC2F29}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6C459C13-6CE9-4959-9929-DCE2F336E8F9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{04B1F4B3-4196-43BD-A962-C07D6F8C30EA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C18C68A3-60E1-42B9-820F-871A3973F0CF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3C259AEE-9D63-4C76-89DC-12CC1B321ACD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4213CF17-6E04-418A-A495-3765B9202404}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A7E75F61-1D75-44F6-BB15-55005248F4C7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4E8490C0-65F3-4151-A336-FD4C9F23B1B5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">ERP_ICS_PhysicalCount</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract from Source to Staging (PhysicalCount)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{77FE7827-B7BC-4280-A10E-6B9613FC2459}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract from Source to Staging (PhysicalCount)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Count rows in staging"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C7837C77-5C12-491D-81BE-8EB282A75D87}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count rows in staging"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_PhysicalCount]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{69419E98-B22F-4D8D-B0F9-0E52A2F0B1C7}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count 1"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{4DD1E473-544C-4CB9-824D-06DE0BAC5FE7}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count 1"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{ECEB0D26-A1C5-42AE-B74C-A15F79FEA0B5}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Full Load Physical Count"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read ERP Physical Count"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[v_StagingPhysicalCount]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [InventorySnapshotKey]
+		,[SnapshotDate]
+		,[InventoryKey]
+		,[CompanyGroupShipKey]
+		,[LocationKey]
+		,[SiteId]
+		,[ProductKey]
+		,[ProductUnitMeasureKey]
+		,[QuantityOnHand]
+		,[Cost]
+		,[LastModifiedDate]
+		,[RowVersion]
+	FROM [ApolloERP].[ICS].[InventorySnapshot]
+	WHERE IsDeleted = 0</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[QuantityOnHand]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[QuantityOnHand]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[QuantityOnHand]"
+                          name="QuantityOnHand"
+                          precision="18"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Cost]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountHeadKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalCountHeadKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountHeadKey]"
+                          name="PhysicalCountHeadKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                          name="DocumentNo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                          name="DocumentDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Type]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Type]"
+                          name="Type"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ConfirmedDate]"
+                          name="ConfirmedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountDetailKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalCountDetailKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountDetailKey]"
+                          name="PhysicalCountDetailKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalQuantity]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalQuantity]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalQuantity]"
+                          name="PhysicalQuantity"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[QuantityOnHand]"
+                          dataType="numeric"
+                          name="QuantityOnHand"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalCountHeadKey]"
+                          dataType="guid"
+                          name="PhysicalCountHeadKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                          dataType="i8"
+                          name="DocumentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                          dataType="dbDate"
+                          name="DocumentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                          dataType="i4"
+                          name="Type" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          name="ConfirmedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalCountDetailKey]"
+                          dataType="guid"
+                          name="PhysicalCountDetailKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[PhysicalQuantity]"
+                          dataType="numeric"
+                          name="PhysicalQuantity"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalCountHeadKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalCountHeadKey]"
+                          name="PhysicalCountHeadKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                          dataType="i8"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                          name="DocumentNo" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                          name="DocumentDate" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[Type]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[Type]"
+                          name="Type" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ConfirmedDate]"
+                          name="ConfirmedDate" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalCountDetailKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalCountDetailKey]"
+                          name="PhysicalCountDetailKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[QuantityOnHand]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[QuantityOnHand]"
+                          name="QuantityOnHand"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalQuantity]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[PhysicalQuantity]"
+                          name="PhysicalQuantity"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                          name="RowVersionDetail" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                          name="RowVersionHeader" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Extract">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountExtracts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Write Staging Physical Count"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[ICS_PhysicalCount]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[CompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="CompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[ProductUnitMeasureKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductUnitMeasureKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[QuantityOnHand]"
+                          cachedDataType="numeric"
+                          cachedName="QuantityOnHand"
+                          cachedPrecision="18"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[QuantityOnHand]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[QuantityOnHand]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[Cost]"
+                          cachedDataType="numeric"
+                          cachedName="Cost"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Cost]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[VoyageCompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="VoyageCompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[PhysicalCountHeadKey]"
+                          cachedDataType="guid"
+                          cachedName="PhysicalCountHeadKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalCountHeadKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountHeadKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[PhysicalCountDetailKey]"
+                          cachedDataType="guid"
+                          cachedName="PhysicalCountDetailKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalCountDetailKey]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalCountDetailKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[DocumentNo]"
+                          cachedDataType="i8"
+                          cachedName="DocumentNo"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentNo]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[DocumentDate]"
+                          cachedDataType="dbDate"
+                          cachedName="DocumentDate"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[DocumentDate]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[ConfirmedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ConfirmedDate"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDate]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[ConfirmedDate]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[Type]"
+                          cachedDataType="i4"
+                          cachedName="Type"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[Type]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[PhysicalQuantity]"
+                          cachedDataType="numeric"
+                          cachedName="PhysicalQuantity"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalQuantity]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[PhysicalQuantity]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[RowVersionDetail]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionDetail"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionDetail]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].Columns[RowVersionHeader]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersionHeader"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output].Columns[RowVersionHeader]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[QuantityOnHand]"
+                          dataType="numeric"
+                          name="QuantityOnHand"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalCountHeadKey]"
+                          dataType="guid"
+                          name="PhysicalCountHeadKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalCountDetailKey]"
+                          dataType="guid"
+                          name="PhysicalCountDetailKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                          dataType="i8"
+                          name="DocumentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                          dataType="dbDate"
+                          name="DocumentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDate]"
+                          dataType="dbDate"
+                          name="ConfirmedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                          dataType="ui1"
+                          name="Type" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[PhysicalQuantity]"
+                          dataType="numeric"
+                          name="PhysicalQuantity"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionDetail" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionHeader" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count.Paths[OLE DB Source Output]"
+                  endId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count.Paths[Row Count Output 1]"
+                  endId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Get Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5037E20C-52EE-4CF2-B26E-E8243EFC064E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM [audit].&#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Incremental" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Incremental Load Physical Count"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{580D8505-0A23-43C3-9756-25A578A9E3BB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental Load Physical Count"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+              SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spStagingPhysicalCountIncrementalLoad  @RowCountExt = @Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::RowCountExtracts"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Incremental load?"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{B3274F24-C2A1-4FD7-9C6B-C5CD402C7B63}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental load?"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::Incremental]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Row Count Inserts"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2E055265-8C27-4139-A5C6-780F8D04AD79}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Row Count Inserts"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_PhysicalCount]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Set Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{EA3363F8-4FC6-4347-A2B8-E7BE28897A46}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+              SQLTask:SqlStatementSource="UPDATE [audit].RunPackages&#xA; SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount)\Truncate staging table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{75C9E9CA-E4AE-478D-A82C-1807A2E19FCD}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="Truncate table [ERP].[ICS_PhysicalCount]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{477496D5-F8F2-4409-AEB4-7EECEC00EF97}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Incremental load?" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{48923A51-3AF3-49BD-BD0A-B16F5DB28509}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Incremental Load Physical Count"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{ADCE9CBC-3751-4158-9DB9-2FF15B5EB4F8}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:Description="Incremental"
+          DTS:DTSID="{0566C455-CC25-4364-A83F-6317BA919654}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==True"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Incremental Load Physical Count" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:Description="Full load"
+          DTS:DTSID="{FAF56F66-49CE-43AA-B498-FAB64C04B061}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==False"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{CBC4291A-36F1-4A24-AC50-9BD975EB5156}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Row Count Inserts" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{65EFFD38-3934-45A2-A4A2-0B0EE5FA0D7E}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Row Count Inserts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{C96CBD70-3A20-411E-8AC2-25C001E992AA}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Get Incremental"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Truncate staging table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{BFDCA863-5C5B-4CE5-88E3-700B72292815}"
+          DTS:From="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Extract from Source to Staging (PhysicalCount)\Set Incremental" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{75731F51-2EBB-43D5-B8B4-F7F9FA2932A2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A487E791-4BA8-4F7C-BEFA-0564D1529DC1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1A1AA1BE-E727-49E3-B79A-ED073B398B11}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CA308028-A62D-4749-A3E8-C218721D2429}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{31CF1E00-CB35-4AF2-9AD4-14E656AAD541}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0B506D29-10AB-4DBF-8C81-905C15D05ECC}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Extract from Source to Staging (PhysicalCount)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{37F7042D-8039-43B5-BC89-558AB96F422D}"
+      DTS:From="Package\Extract from Source to Staging (PhysicalCount)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Count rows in staging"
+          TopLeft="39,307" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count"
+          TopLeft="48,380" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Final Row Count 1"
+          TopLeft="303,379" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count"
+          TopLeft="283,241" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Get Incremental"
+          TopLeft="173,17" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Incremental Load Physical Count"
+          TopLeft="10,241" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Incremental load?"
+          TopLeft="162,156" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Row Count Inserts"
+          TopLeft="304,310" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Set Incremental"
+          TopLeft="307,449" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Truncate staging table"
+          TopLeft="155,89" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint]"
+          TopLeft="245.75,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 1]"
+          TopLeft="128.75,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 2]"
+          TopLeft="128.5,349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 3]"
+          TopLeft="218,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-91.5,43"
+              Start="0,0"
+              End="-91.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="-4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-87.5,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-87.5,17.4492753623188"
+                    Point2="-91.5,17.4492753623188"
+                    Point3="-91.5,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-91.5,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-81.35578125,22.4492753623188,71.2115625,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 4]"
+          TopLeft="270,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.5,43"
+              Start="0,0"
+              End="109.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="105.5,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.5,17.4492753623188"
+                    Point2="109.5,17.4492753623188"
+                    Point3="109.5,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="109.5,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="27.083359375,22.4492753623188,55.33328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 5]"
+          TopLeft="383.25,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 6]"
+          TopLeft="386.25,352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 7]"
+          TopLeft="249,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 8]"
+          TopLeft="384.75,421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="497,545"
+          Size="497,588"
+          Id="Package\Extract from Source to Staging (PhysicalCount)"
+          TopLeft="413,36" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="76,288" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="109,83" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="998,290" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="180.5,125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,163"
+              Start="0,0"
+              End="0,155.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,155.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,69.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="278,309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="135,21"
+              Start="0,0"
+              End="127.5,21">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="63.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.5,0"
+                    Point2="67.5,0"
+                    Point3="67.5,4" />
+                  <mssgle:LineSegment
+                    End="67.5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.5,17"
+                    Point2="67.5,21"
+                    Point3="71.5,21" />
+                  <mssgle:LineSegment
+                    End="127.5,21" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="910,330">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88,-19"
+              Start="0,0"
+              End="80.5,-19">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40,0"
+                    Point2="44,0"
+                    Point3="44,-4" />
+                  <mssgle:LineSegment
+                    End="44,-15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44,-15"
+                    Point2="44,-19"
+                    Point3="48,-19" />
+                  <mssgle:LineSegment
+                    End="80.5,-19" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count"
+          TopLeft="91,276" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Row Count Extract"
+          TopLeft="119,174" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count"
+          TopLeft="102,86" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count.Paths[OLE DB Source Output]"
+          TopLeft="201,128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count.Paths[Row Count Output 1]"
+          TopLeft="200,216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Write Staging Physical Count">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (PhysicalCount)\Full Load Physical Count\Read ERP Physical Count">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 3]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (PhysicalCount).PrecedenceConstraints[Constraint 4]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

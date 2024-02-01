@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_SM_LocationEnum"
   DTS:PackageType="5"
-  DTS:VersionBuild="158"
-  DTS:VersionGUID="{65A97548-CF46-4492-92A9-4B8CC1783964}">
+  DTS:VersionBuild="161"
+  DTS:VersionGUID="{A45F0F26-5E93-41D7-9662-C2F0A0B226E6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -647,6 +647,22 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (LocationEnum)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{abffbcd5-338c-4fa7-bfdc-7a003b7d47f2}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract from Source to Staging (LocationEnum)\Truncate staging table"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
@@ -681,6 +697,14 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Extract from Source to Staging (LocationEnum)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (LocationEnum).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{ACA9EDB1-C115-4584-AB95-FB6E3F18D3CE}"
+          DTS:From="Package\Extract from Source to Staging (LocationEnum)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (LocationEnum)\Final Row Count" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -759,7 +783,7 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{5F2793B0-2EA1-4802-918D-08069332446A}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -894,6 +918,10 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
           Id="Package\Extract from Source to Staging (LocationEnum)\Count rows in staging"
           TopLeft="59,265" />
         <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (LocationEnum)\Final Row Count"
+          TopLeft="80,343" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Extract from Source to Staging (LocationEnum)\Truncate staging table"
           TopLeft="58,92" />
@@ -941,11 +969,33 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (LocationEnum).PrecedenceConstraints[Constraint 2]"
+          TopLeft="154.5,307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="325,362"
-          Size="325,405"
+          PanelSize="325,464"
+          Size="325,507"
           Id="Package\Extract from Source to Staging (LocationEnum)"
           TopLeft="413,71" />
         <NodeLayout
@@ -986,18 +1036,30 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="278,270.25">
+          TopLeft="278,267">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="135,0"
+              EndConnector="135,57.5"
               Start="0,0"
-              End="127.5,0">
+              End="127.5,57.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="127.5,0" />
+                    End="63.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.5,0"
+                    Point2="67.5,0"
+                    Point3="67.5,4" />
+                  <mssgle:LineSegment
+                    End="67.5,53.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.5,53.5"
+                    Point2="67.5,57.5"
+                    Point3="71.5,57.5" />
+                  <mssgle:LineSegment
+                    End="127.5,57.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1008,18 +1070,30 @@ LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGrou
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="738,272.75">
+          TopLeft="738,324.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="119,0"
+              EndConnector="119,-52.5"
               Start="0,0"
-              End="111.5,0">
+              End="111.5,-52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="111.5,0" />
+                    End="55.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5,0"
+                    Point2="59.5,0"
+                    Point3="59.5,-4" />
+                  <mssgle:LineSegment
+                    End="59.5,-48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="59.5,-48.5"
+                    Point2="59.5,-52.5"
+                    Point3="63.5,-52.5" />
+                  <mssgle:LineSegment
+                    End="111.5,-52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

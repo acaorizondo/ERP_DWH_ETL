@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load Fact Order Enriched"
   DTS:PackageType="5"
-  DTS:VersionBuild="594"
-  DTS:VersionGUID="{8337C4A3-D061-4979-ACF4-81F1385B844B}">
+  DTS:VersionBuild="615"
+  DTS:VersionGUID="{F9307539-FDEF-4437-A969-2ECE99D4F01E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -627,7 +627,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-          SQLTask:SqlStatementSource="select count(*) as RowCountFinal from FactOrderEnriched"
+          SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].FactOrderEnriched"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -748,7 +748,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="CREATE NONCLUSTERED INDEX [NonClusteredIndex-ShipName] ON [dbo].[FactOrderEnriched]&#xA;(&#xA;&#x9;[ShipName] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-VendorName] ON [dbo].[FactOrderEnriched]&#xA;(&#xA;&#x9;[VendorName] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-DocumentNo] ON [dbo].[FactOrderEnriched]&#xA;(&#xA;&#x9;[DocumentNo] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-Date] ON [dbo].[FactOrderEnriched]&#xA;(&#xA;&#x9;[RequestDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  SQLTask:SqlStatementSource="CREATE NONCLUSTERED INDEX [NonClusteredIndex-ShipName] ON [ERP].[FactOrderEnriched]&#xA;(&#xA;&#x9;[ShipName] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-VendorName] ON [ERP].[FactOrderEnriched]&#xA;(&#xA;&#x9;[VendorName] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-DocumentNo] ON [ERP].[FactOrderEnriched]&#xA;(&#xA;&#x9;[DocumentNo] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-Date] ON [ERP].[FactOrderEnriched]&#xA;(&#xA;&#x9;[RequestDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
               </DTS:ObjectData>
             </DTS:Executable>
             <DTS:Executable
@@ -765,7 +765,14 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="-- Variables para los nombres de los índices&#xA;DECLARE @indexNames TABLE (IndexName NVARCHAR(128));&#xA;&#xA;INSERT INTO @indexNames (IndexName)&#xA;VALUES &#xA;('NonClusteredIndex-ShipName'),&#xA;('NonClusteredIndex-VendorName'),&#xA;('NonClusteredIndex-DocumentNo'),&#xA;('NonClusteredIndex-Date')&#xA;;&#xA;&#xA;-- Bucle para verificar y borrar índices&#xA;DECLARE @currentIndexName NVARCHAR(128);&#xA;&#xA;DECLARE indexCursor CURSOR FOR&#xA;SELECT IndexName FROM @indexNames;&#xA;&#xA;OPEN indexCursor;&#xA;&#xA;FETCH NEXT FROM indexCursor INTO @currentIndexName;&#xA;&#xA;WHILE @@FETCH_STATUS = 0&#xA;BEGIN&#xA;    -- Verificar si el índice existe&#xA;    IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = @currentIndexName AND object_id = OBJECT_ID('[dbo].[FactOrderEnriched]'))&#xA;    BEGIN&#xA;        -- Eliminar el índice si existe&#xA;        EXEC('DROP INDEX [' + @currentIndexName + '] ON [dbo].[FactOrderEnriched];');&#xA;    END;&#xA;&#xA;    FETCH NEXT FROM indexCursor INTO @currentIndexName;&#xA;END;&#xA;&#xA;CLOSE indexCursor;&#xA;DEALLOCATE indexCursor;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  SQLTask:SqlStatementSource="EXEC DropIndexes @TableName=?, @SchemaName='ERP'&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::TableName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
               </DTS:ObjectData>
             </DTS:Executable>
             <DTS:Executable
@@ -782,7 +789,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spFactOrderEnrich @incremental=?,@RowCountExt=@Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;&#xA;EXEC spFactOrderEnrich @incremental=?, @RowCountExt = @Result1 OUTPUT, @RowCountUpd=@Result2 OUTPUT;&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="User::Incremental"
@@ -792,6 +799,12 @@
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="1"
                     SQLTask:DtsVariableName="User::RowCountExtracts"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowCountUpdates"
                     SQLTask:ParameterDirection="Output"
                     SQLTask:DataType="3"
                     SQLTask:ParameterSize="-1" />
@@ -812,7 +825,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="UPDATE RunPackages&#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="UPDATE [audit].RunPackages&#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="User::TableName"
@@ -842,7 +855,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="truncate table FactOrderEnriched;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  SQLTask:SqlStatementSource="truncate table [ERP].FactOrderEnriched;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
               </DTS:ObjectData>
             </DTS:Executable>
           </DTS:Executables>
@@ -850,16 +863,16 @@
             <DTS:PrecedenceConstraint
               DTS:refId="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint]"
               DTS:CreationName=""
-              DTS:DTSID="{D176977B-B96D-4946-BCE9-F414ED9AFCEE}"
-              DTS:From="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Drop Indexes Order Enriched"
+              DTS:DTSID="{FA0822A0-347B-4265-9F2A-4FBAF5CC740C}"
+              DTS:From="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Truncate Order Enriched"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint"
-              DTS:To="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Truncate Order Enriched" />
+              DTS:To="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Drop Indexes Order Enriched" />
             <DTS:PrecedenceConstraint
               DTS:refId="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint 1]"
               DTS:CreationName=""
-              DTS:DTSID="{A78E3111-30F2-4AE4-885F-C408E0792AEC}"
-              DTS:From="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Truncate Order Enriched"
+              DTS:DTSID="{826DA32A-42E4-48E2-840C-07C8E293B0D8}"
+              DTS:From="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Drop Indexes Order Enriched"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint 1"
               DTS:To="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Insert in Fact Order Enriched 1" />
@@ -905,7 +918,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="select count(*) as RowCountInitial from FactOrderEnriched"
+                  SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].FactOrderEnriched"
                   SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ResultBinding
                     SQLTask:ResultName="0"
@@ -927,7 +940,7 @@
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-                  SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spFactOrderEnrich @incremental=?,@RowCountExt=@Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;&#xA;EXEC spFactOrderEnrich @incremental=?, @RowCountExt = @Result1 OUTPUT, @RowCountUpd=@Result2 OUTPUT;&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
                     SQLTask:DtsVariableName="User::Incremental"
@@ -937,6 +950,12 @@
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="1"
                     SQLTask:DtsVariableName="User::RowCountExtracts"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowCountUpdates"
                     SQLTask:ParameterDirection="Output"
                     SQLTask:DataType="3"
                     SQLTask:ParameterSize="-1" />
@@ -969,7 +988,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="0"
@@ -1052,7 +1071,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{F7A8CF86-C972-493B-BE75-4F5B3D53002C}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1202,7 +1221,7 @@
         <NodeLayout
           Size="202,42"
           Id="Package\Insert row into audit table"
-          TopLeft="34,123" />
+          TopLeft="24,248" />
         <NodeLayout
           Size="144,42"
           Id="Package\Inserted rows"
@@ -1214,7 +1233,7 @@
         <NodeLayout
           Size="216,42"
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Drop Indexes Order Enriched"
-          TopLeft="38,19" />
+          TopLeft="33,86" />
         <NodeLayout
           Size="225,42"
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Insert in Fact Order Enriched 1"
@@ -1226,51 +1245,7 @@
         <NodeLayout
           Size="195,42"
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load\Truncate Order Enriched"
-          TopLeft="47,85" />
-        <EdgeLayout
-          Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint]"
-          TopLeft="145.25,61">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,24"
-              Start="0,0"
-              End="0,16.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint 1]"
-          TopLeft="143.5,127">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,26"
-              Start="0,0"
-              End="0,18.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="41,17" />
         <EdgeLayout
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint 2]"
           TopLeft="143.75,195">
@@ -1315,6 +1290,50 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint]"
+          TopLeft="139.75,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load.PrecedenceConstraints[Constraint 1]"
+          TopLeft="141.75,128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
@@ -1323,13 +1342,13 @@
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Full Load"
           TopLeft="34,102" />
         <NodeLayout
-          Size="215,42"
-          Id="Package\Load Fact Order Enrich\Fact Order Enriched Incremental Load\Insert in Fact Order Enriched"
-          TopLeft="41,90" />
-        <NodeLayout
           Size="156,42"
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Incremental Load\Initial row count"
           TopLeft="71,13.5" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Load Fact Order Enrich\Fact Order Enriched Incremental Load\Insert in Fact Order Enriched"
+          TopLeft="41,90" />
         <EdgeLayout
           Id="Package\Load Fact Order Enrich\Fact Order Enriched Incremental Load.PrecedenceConstraints[Constraint]"
           TopLeft="148.75,55.5">
@@ -1471,33 +1490,67 @@
         <NodeLayout
           Size="150,42"
           Id="Package\Run package?"
-          TopLeft="60,18" />
+          TopLeft="50,142" />
         <NodeLayout
           Size="210,42"
           Id="Package\Update row into audit table"
           TopLeft="1069,302" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="135,60">
+          TopLeft="125,184">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,63"
+              EndConnector="0,64"
               Start="0,0"
-              End="0,55.5">
+              End="0,56.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,55.5" />
+                    End="0,56.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-26.5,19.75,53,16"
+              BoundingBox="-26.5,20.25,53,16"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="226,269">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.5,188"
+              Start="0,0"
+              End="33,188">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="16.25,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.25,0"
+                    Point2="20.25,0"
+                    Point3="20.25,4" />
+                  <mssgle:LineSegment
+                    End="20.25,184" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.25,184"
+                    Point2="20.25,188"
+                    Point3="24.25,188" />
+                  <mssgle:LineSegment
+                    End="33,188" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1570,40 +1623,6 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,33.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="236,144">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="30.5,313"
-              Start="0,0"
-              End="23,313">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="11.25,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="11.25,0"
-                    Point2="15.25,0"
-                    Point3="15.25,4" />
-                  <mssgle:LineSegment
-                    End="15.25,309" />
-                  <mssgle:CubicBezierSegment
-                    Point1="15.25,309"
-                    Point2="15.25,313"
-                    Point3="19.25,313" />
-                  <mssgle:LineSegment
-                    End="23,313" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

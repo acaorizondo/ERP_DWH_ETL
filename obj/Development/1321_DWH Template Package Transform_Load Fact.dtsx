@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Template Package Transform_Load Fact"
   DTS:PackageType="5"
-  DTS:VersionBuild="301"
-  DTS:VersionGUID="{8901DA4B-5789-4E28-A3D5-5D220006EEF4}">
+  DTS:VersionBuild="307"
+  DTS:VersionGUID="{42386F96-B43A-4563-BBA5-019B2A7A942D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1395,6 +1395,35 @@ where [refTable].[id_table] = ? and [refTable].[database_name] = ?</property>
                       </outputs>
                     </component>
                     <component
+                      refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert"
+                      componentClassID="Microsoft.RowCount"
+                      contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                      name="Row Count Insert">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable to hold the row count."
+                          name="VariableName">User::RowCountInserts</property>
+                      </properties>
+                      <inputs>
+                        <input
+                          refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert.Inputs[Row Count Input 1]"
+                          hasSideEffects="true"
+                          name="Row Count Input 1">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert.Outputs[Row Count Output 1]"
+                          name="Row Count Output 1"
+                          synchronousInputId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert.Inputs[Row Count Input 1]">
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
                       refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row_count change"
                       componentClassID="Microsoft.ConditionalSplit"
                       contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -1821,6 +1850,11 @@ WHERE id_dim_date=? and id_dim_table =?</property>
                       name="change_number_rows"
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row_count change.Outputs[change_number_rows]" />
                     <path
+                      refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Conditional Split Default Output]"
+                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Filtered Row Count.Inputs[Row Count Input 1]"
+                      name="Conditional Split Default Output"
+                      startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Get only new rows.Outputs[Conditional Split Default Output]" />
+                    <path
                       refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Lookup Match Output]"
                       endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row_count change.Inputs[Conditional Split Input]"
                       name="Lookup Match Output"
@@ -1832,7 +1866,7 @@ WHERE id_dim_date=? and id_dim_table =?</property>
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Lookup Dim_Table with active rows.Outputs[Lookup Match Output]" />
                     <path
                       refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Lookup No Match Output]"
-                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert Fact TableGrowth.Inputs[OLE DB Destination Input]"
+                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert.Inputs[Row Count Input 1]"
                       name="Lookup No Match Output"
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert or Update.Outputs[Lookup No Match Output]" />
                     <path
@@ -1857,17 +1891,17 @@ WHERE id_dim_date=? and id_dim_table =?</property>
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Read Staging Table.Outputs[OLE DB Source Output]" />
                     <path
                       refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 1]"
-                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Lookup Dim_Table with active rows.Inputs[Lookup Input]"
-                      name="Row Count Output 1"
-                      startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Filtered Row Count.Outputs[Row Count Output 1]" />
-                    <path
-                      refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 11]"
                       endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Discard null rows.Inputs[Conditional Split Input]"
                       name="Row Count Output 1"
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Extracted Row Count.Outputs[Row Count Output 1]" />
                     <path
+                      refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 11]"
+                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert Fact TableGrowth.Inputs[OLE DB Destination Input]"
+                      name="Row Count Output 1"
+                      startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert.Outputs[Row Count Output 1]" />
+                    <path
                       refId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Sort Output]"
-                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Filtered Row Count.Inputs[Row Count Input 1]"
+                      endId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Lookup Dim_Table with active rows.Inputs[Lookup Input]"
                       name="Sort Output"
                       startId="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Sort Table.Outputs[Sort Output]" />
                   </paths>
@@ -1888,7 +1922,7 @@ WHERE id_dim_date=? and id_dim_table =?</property>
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
                   SQLTask:Connection="{7D2BD7E5-08F7-411F-8DC5-01C38354362B}"
-                  SQLTask:SqlStatementSource="SELECT        MAX(Dim_Date.Date) AS MaxDateInserted&#xA;FROM            audit.Fact_TableGrowth INNER JOIN&#xA;                      Dim_Date ON audit.Fact_TableGrowth.id_dim_date = Dim_Date.DateKey"
+                  SQLTask:SqlStatementSource="SELECT        MAX([GLOBAL].Dim_Date.Date) AS MaxDateInserted&#xA;FROM            audit.Fact_TableGrowth INNER JOIN&#xA;                      [GLOBAL].Dim_Date ON audit.Fact_TableGrowth.id_dim_date = [GLOBAL].Dim_Date.DateKey"
                   SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ResultBinding
                     SQLTask:ResultName="0"
@@ -2087,7 +2121,7 @@ WHERE id_dim_date=? and id_dim_table =?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{7D2BD7E5-08F7-411F-8DC5-01C38354362B}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -2637,23 +2671,23 @@ WHERE id_dim_date=? and id_dim_table =?</property>
         <NodeLayout
           Size="169,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Get only new rows"
-          TopLeft="48,200" />
+          TopLeft="48,236" />
         <NodeLayout
           Size="158,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert or Update"
           TopLeft="376,413" />
         <NodeLayout
-          Size="173,42"
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Filtered Row Count"
-          TopLeft="51,345" />
-        <NodeLayout
           Size="130,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Sort Table"
-          TopLeft="67,279" />
+          TopLeft="68,327" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Filtered Row Count"
+          TopLeft="385,235" />
         <NodeLayout
           Size="183,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Extracted Row Count"
-          TopLeft="181,65" />
+          TopLeft="41,82" />
         <NodeLayout
           Size="252,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Lookup Dim_Table with active rows"
@@ -2667,13 +2701,17 @@ WHERE id_dim_date=? and id_dim_table =?</property>
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row_count change"
           TopLeft="558,517" />
         <NodeLayout
+          Size="161,42"
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Row Count Insert"
+          TopLeft="565,331" />
+        <NodeLayout
           Size="176,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Read Staging Table"
-          TopLeft="80,10" />
+          TopLeft="48,11" />
         <NodeLayout
           Size="163,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Discard null rows"
-          TopLeft="55,122" />
+          TopLeft="53,156" />
         <NodeLayout
           Size="153,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Count Updated"
@@ -2681,28 +2719,210 @@ WHERE id_dim_date=? and id_dim_table =?</property>
         <NodeLayout
           Size="197,42"
           Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert Fact TableGrowth"
-          TopLeft="547,318" />
+          TopLeft="794,328" />
         <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[new_rows]"
-          TopLeft="132.25,242">
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Conditional Split Default Output]"
+          TopLeft="217,256.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,37"
+              EndConnector="168,0"
               Start="0,0"
-              End="0,29.5">
+              End="160.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.5" />
+                    End="160.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-22.88919921875,10.21484375,45.7783984375,9.0703125"
+              BoundingBox="9.63609374999999,5,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[change_number_rows]"
+          TopLeft="731,541">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132,0"
+              Start="0,0"
+              End="124.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="124.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="12.6928125,5,99.114375,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Sort Output]"
+          TopLeft="135,369">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 11]"
+          TopLeft="726,350.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68,0"
+              Start="0,0"
+              End="60.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="60.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 1]"
+          TopLeft="133.5,124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[OLE DB Source Output]"
+          TopLeft="134.25,53">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[OLE DB Command Output]"
+          TopLeft="967.5,523">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-37"
+              Start="0,0"
+              End="0,-29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[not_null_keys]"
+          TopLeft="133.5,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.91919921875,9.4453125,61.8383984375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[new_rows]"
+          TopLeft="132.75,278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-22.88919921875,16.21484375,45.7783984375,9.0703125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2712,33 +2932,33 @@ WHERE id_dim_date=? and id_dim_table =?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="190.5,-53"
+              EndConnector="190.5,-40"
               Start="0,0"
-              End="190.5,-45.5">
+              End="190.5,-32.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-22.5" />
+                    End="0,-16" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-22.5"
-                    Point2="0,-26.5"
-                    Point3="4,-26.5" />
+                    Point1="0,-16"
+                    Point2="0,-20"
+                    Point3="4,-20" />
                   <mssgle:LineSegment
-                    End="186.5,-26.5" />
+                    End="186.5,-20" />
                   <mssgle:CubicBezierSegment
-                    Point1="186.5,-26.5"
-                    Point2="190.5,-26.5"
-                    Point3="190.5,-30.5" />
+                    Point1="186.5,-20"
+                    Point2="190.5,-20"
+                    Point3="190.5,-24" />
                   <mssgle:LineSegment
-                    End="190.5,-45.5" />
+                    End="190.5,-32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="39.44361328125,-21.5,111.6127734375,11.609375"
+              BoundingBox="39.44361328125,-15,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2802,202 +3022,9 @@ WHERE id_dim_date=? and id_dim_table =?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[change_number_rows]"
-          TopLeft="731,541">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="132,0"
-              Start="0,0"
-              End="124.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="124.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="12.6928125,5,99.114375,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Sort Output]"
-          TopLeft="134.75,321">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,24"
-              Start="0,0"
-              End="0,16.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 11]"
-          TopLeft="181,86">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-44.5,36"
-              Start="0,0"
-              End="-44.5,28.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-40.5,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-40.5,0"
-                    Point2="-44.5,0"
-                    Point3="-44.5,4" />
-                  <mssgle:LineSegment
-                    End="-44.5,28.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[Row Count Output 1]"
-          TopLeft="137.25,387">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25"
-              Start="0,0"
-              End="0,17.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[OLE DB Source Output]"
-          TopLeft="256,31">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="16.5,34"
-              Start="0,0"
-              End="16.5,26.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="12.5,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="12.5,0"
-                    Point2="16.5,0"
-                    Point3="16.5,4" />
-                  <mssgle:LineSegment
-                    End="16.5,26.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[OLE DB Command Output]"
-          TopLeft="967.5,523">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,-37"
-              Start="0,0"
-              End="0,-29.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-29.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact.Paths[not_null_keys]"
-          TopLeft="134.5,164">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,36"
-              Start="0,0"
-              End="0,28.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-30.91919921875,8.4453125,61.8383984375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Read Staging Table">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Insert or Update">
     <Properties>
@@ -3041,6 +3068,19 @@ WHERE id_dim_date=? and id_dim_table =?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Fact\Incremental Load\Get new data from Staging &amp; Load Fact\Read Staging Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

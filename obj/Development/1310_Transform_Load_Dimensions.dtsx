@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transform_Load_Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{0CDB1233-57BB-4F0D-824C-63BB130D18C6}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{2C60AB21-EE78-4891-8F51-A3A2D3B0B50B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -146,6 +146,27 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Transfrom Load Dimensions\Dim Adjustment Type"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{EC537E2C-71C3-475A-BB49-E3E32B6E85C2}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dim Adjustment Type"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>1318_DWH Transform_Load Dim AdjustmentType.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Transfrom Load Dimensions\Dim Location Event"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -188,6 +209,69 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Transfrom Load Dimensions\Dim POSCustomer"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{2A66C2A3-5F98-4126-9AB9-19A96EE0C5AF}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dim POSCustomer"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>1312_DWH Transform_Load Dim POSCustomer.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transfrom Load Dimensions\Dim POSEmployee"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{A0849B73-0BB0-4A70-B712-963912E2903D}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dim POSEmployee"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>1312_DWH Transform_Load Dim POSEmployee.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Transfrom Load Dimensions\Dim POSRecipe"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{236021DE-86AC-4DF1-B1C1-7CB4D47412D1}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dim POSRecipe"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>1312_DWH Transform_Load Dim POSRecipeV2.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>ParentAuditKey</ParameterName>
+                <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Transfrom Load Dimensions\Dim Product"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
@@ -209,13 +293,13 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Transfrom Load Dimensions\Dim ProductDepartment"
+          DTS:refId="Package\Transfrom Load Dimensions\Dim Product Department"
           DTS:CreationName="Microsoft.ExecutePackageTask"
           DTS:Description="Execute Package Task"
           DTS:DTSID="{CD3F3827-9459-426E-87F0-FC9B3D577D8D}"
           DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Dim ProductDepartment"
+          DTS:ObjectName="Dim Product Department"
           DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
@@ -263,7 +347,7 @@
           <DTS:ObjectData>
             <ExecutePackageTask>
               <UseProjectReference>True</UseProjectReference>
-              <PackageName>1311_DWH Template Package Transform_Load Dim.dtsx</PackageName>
+              <PackageName>1311_DWH Transform_Load Dim Table.dtsx</PackageName>
               <ParameterAssignment>
                 <ParameterName>ParentAuditKey</ParameterName>
                 <BindedVariableOrParameterName>User::AuditKey</BindedVariableOrParameterName>
@@ -421,65 +505,81 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="202,42"
           Id="Package\Insert row into audit table"
           TopLeft="164,25" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
+          Id="Package\Transfrom Load Dimensions\Dim Adjustment Type"
+          TopLeft="16,465" />
+        <NodeLayout
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Location Event"
-          TopLeft="20,183" />
+          TopLeft="16,173" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Locations"
-          TopLeft="20,130" />
+          TopLeft="16,124.333333333333" />
         <NodeLayout
-          Size="149,42"
+          Size="165,42"
+          Id="Package\Transfrom Load Dimensions\Dim POSCustomer"
+          TopLeft="383,28" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Transfrom Load Dimensions\Dim POSEmployee"
+          TopLeft="384,78" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Transfrom Load Dimensions\Dim POSRecipe"
+          TopLeft="386,131" />
+        <NodeLayout
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Product"
-          TopLeft="20,237" />
+          TopLeft="16,221.666666666667" />
         <NodeLayout
-          Size="193,42"
-          Id="Package\Transfrom Load Dimensions\Dim ProductDepartment"
-          TopLeft="24,463" />
+          Size="157,42"
+          Id="Package\Transfrom Load Dimensions\Dim Product Department"
+          TopLeft="16,416.333333333333" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Ship"
-          TopLeft="20,78" />
+          TopLeft="16,75.6666666666667" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Table"
-          TopLeft="20,27" />
+          TopLeft="16,27" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Unit Measure"
-          TopLeft="20,348" />
+          TopLeft="16,319" />
         <NodeLayout
-          Size="138,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Vendor"
-          TopLeft="24,404" />
+          TopLeft="16,367.666666666667" />
         <NodeLayout
-          Size="149,42"
+          Size="157,42"
           Id="Package\Transfrom Load Dimensions\Dim Voyage"
-          TopLeft="20,291" />
+          TopLeft="16,270.333333333333" />
         <NodeLayout
           Size="164,42"
           Id="Package\Transfrom Load Dimensions\DimLocationEnum"
           TopLeft="202,129" />
         <EdgeLayout
           Id="Package\Transfrom Load Dimensions.PrecedenceConstraints[Constraint]"
-          TopLeft="169,150.5">
+          TopLeft="173,147.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="33,0"
+              EndConnector="29,0"
               Start="0,0"
-              End="25.5,0">
+              End="21.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="25.5,0" />
+                    End="21.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -491,8 +591,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="878,571"
-          Size="878,614"
+          PanelSize="878,623"
+          Size="878,666"
           Id="Package\Transfrom Load Dimensions"
           TopLeft="103,122" />
         <NodeLayout

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load DimShip"
   DTS:PackageType="5"
-  DTS:VersionBuild="171"
-  DTS:VersionGUID="{2FC2E363-3F79-4204-B1EE-A4A0236C1D26}">
+  DTS:VersionBuild="176"
+  DTS:VersionGUID="{B47A53FE-651D-41A9-B0CB-1EA8CC44E102}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -285,7 +285,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{F21EDAFD-2652-45F5-97FE-F8100FA11650}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimShip"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimProductDepartment"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -307,7 +307,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{F21EDAFD-2652-45F5-97FE-F8100FA11650}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimProductDepartment"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimProductDepartment"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -329,7 +329,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{F21EDAFD-2652-45F5-97FE-F8100FA11650}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from DimProductDepartment"
+              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].DimProductDepartment"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountInitial"
@@ -507,7 +507,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[DimProductDepartment]</property>
+                      name="OpenRowset">[ERP].[DimProductDepartment]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -678,13 +678,13 @@
                       description="Specifies the SQL statement that generates the lookup table."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProductDepartment]</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [ERP].[DimProductDepartment]</property>
                     <property
                       dataType="System.String"
                       description="Specifies a SQL statement that uses parameters to generate the lookup table."
                       expressionType="Notify"
                       name="SqlCommandParam"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProductDepartment]) [refTable]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [ERP].[DimProductDepartment]) [refTable]
 where [refTable].[ProductDepartmentKey] = ?</property>
                     <property
                       dataType="System.Int32"
@@ -889,7 +889,7 @@ where [refTable].[ProductDepartmentKey] = ?</property>
                       description="The SQL command to be executed."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimProductDepartment]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [ERP].[DimProductDepartment]
    SET 
        [Code] = ?
       ,[Name] = ?
@@ -1513,7 +1513,7 @@ where [refTable].[ProductDepartmentKey] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{F21EDAFD-2652-45F5-97FE-F8100FA11650}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1662,7 +1662,7 @@ where [refTable].[ProductDepartmentKey] = ?</property>
         <NodeLayout
           Size="238,42"
           Id="Package\Load Dimension (ProductDepartment)\Load SCD DimProductDepartment"
-          TopLeft="273,180" />
+          TopLeft="273,179" />
         <NodeLayout
           Size="206,42"
           Id="Package\Load Dimension (ProductDepartment)\Update Dimension Type 2"
@@ -1731,50 +1731,50 @@ where [refTable].[ProductDepartmentKey] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="93,49"
+              EndConnector="93,48"
               Start="0,0"
-              End="93,41.5">
+              End="93,40.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.8265895953757" />
+                    End="0,15.4219653179191" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.8265895953757"
-                    Point2="0,19.8265895953757"
-                    Point3="4,19.8265895953757" />
+                    Point1="0,15.4219653179191"
+                    Point2="0,19.4219653179191"
+                    Point3="4,19.4219653179191" />
                   <mssgle:LineSegment
-                    End="89,19.8265895953757" />
+                    End="89,19.4219653179191" />
                   <mssgle:CubicBezierSegment
-                    Point1="89,19.8265895953757"
-                    Point2="93,19.8265895953757"
-                    Point3="93,23.8265895953757" />
+                    Point1="89,19.4219653179191"
+                    Point2="93,19.4219653179191"
+                    Point3="93,23.4219653179191" />
                   <mssgle:LineSegment
-                    End="93,41.5" />
+                    End="93,40.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="38.5,24.8265895953757,16,16"
+              BoundingBox="38.5,24.4219653179191,16,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (ProductDepartment).PrecedenceConstraints[Constraint 3]"
-          TopLeft="395,222">
+          TopLeft="395,221">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,50"
+              EndConnector="0,51"
               Start="0,0"
-              End="0,42.5">
+              End="0,43.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.5" />
+                    End="0,43.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1897,29 +1897,111 @@ where [refTable].[ProductDepartmentKey] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="178,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row Count Updated"
-          TopLeft="890,397" />
-        <NodeLayout
-          Size="236,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Read Staging ProductDepartment"
-          TopLeft="71,44" />
-        <NodeLayout
           Size="133,42"
           Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row Count"
           TopLeft="275,286" />
         <NodeLayout
+          Size="122,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Lookup 1"
+          TopLeft="457,154" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\OLE DB Command"
+          TopLeft="897,269" />
+        <NodeLayout
           Size="183,42"
           Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row Count Extracted"
-          TopLeft="412,41" />
+          TopLeft="421,41" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row CountFiltered"
+          TopLeft="609,400" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row Count Updated"
+          TopLeft="890,397" />
         <NodeLayout
           Size="232,42"
           Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Insert in DimProductDepartment"
           TopLeft="224,398" />
         <NodeLayout
-          Size="165,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Row CountFiltered"
-          TopLeft="609,400" />
+          Size="236,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Read Staging ProductDepartment"
+          TopLeft="71,44" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Conditional Split"
+          TopLeft="616,272" />
+        <EdgeLayout
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[Conditional Split Default Output]"
+          TopLeft="692.5,314">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,86"
+              Start="0,0"
+              End="0,78.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,78.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,33.4208984375,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[change]"
+          TopLeft="771,291.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126,0"
+              Start="0,0"
+              End="118.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="118.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="42.61904296875,5,33.2619140625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[Row Count Output 11]"
+          TopLeft="515.25,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[Row Count Output 1]"
           TopLeft="340.75,328">
@@ -1948,14 +2030,14 @@ where [refTable].[ProductDepartmentKey] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="105,0"
+              EndConnector="114,0"
               Start="0,0"
-              End="97.5,0">
+              End="106.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="97.5,0" />
+                    End="106.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1964,40 +2046,20 @@ where [refTable].[ProductDepartmentKey] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Conditional Split"
-          TopLeft="616,272" />
-        <NodeLayout
-          Size="122,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Lookup 1"
-          TopLeft="457,154" />
         <EdgeLayout
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[Row Count Output 11]"
-          TopLeft="503.5,83">
+          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[OLE DB Command Output]"
+          TopLeft="979.5,311">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="14.5,71"
+              EndConnector="0,86"
               Start="0,0"
-              End="14.5,63.5">
+              End="0,78.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.5"
-                    Point2="0,35.5"
-                    Point3="4,35.5" />
-                  <mssgle:LineSegment
-                    End="10.5,35.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10.5,35.5"
-                    Point2="14.5,35.5"
-                    Point3="14.5,39.5" />
-                  <mssgle:LineSegment
-                    End="14.5,63.5" />
+                    End="0,78.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2078,85 +2140,34 @@ where [refTable].[ProductDepartmentKey] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[Conditional Split Default Output]"
-          TopLeft="692.5,314">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,86"
-              Start="0,0"
-              End="0,78.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,78.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-70.61390625,33.4208984375,141.2278125,11.658203125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\OLE DB Command"
-          TopLeft="897,269" />
-        <EdgeLayout
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[change]"
-          TopLeft="771,291.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="126,0"
-              Start="0,0"
-              End="118.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="118.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="42.61904296875,5,33.2619140625,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment.Paths[OLE DB Command Output]"
-          TopLeft="979.5,311">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,86"
-              Start="0,0"
-              End="0,78.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,78.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Read Staging ProductDepartment">
+    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[ERP].[DimProductDepartment]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Insert in DimProductDepartment">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2169,7 +2180,7 @@ where [refTable].[ProductDepartmentKey] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Insert in DimProductDepartment">
+    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Read Staging ProductDepartment">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2609,28 +2620,5 @@ where [refTable].[ProductDepartmentKey] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (ProductDepartment)\Load DimProductDepartment\Lookup 1">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimProductDepartment]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

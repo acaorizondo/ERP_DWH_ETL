@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_Location"
   DTS:PackageType="5"
-  DTS:VersionBuild="186"
-  DTS:VersionGUID="{EA4EBAF1-36E8-49CA-B195-DE87B19EC940}">
+  DTS:VersionBuild="191"
+  DTS:VersionGUID="{00594D89-702D-4359-996E-FC489779AF7D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -393,7 +393,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset"></property>
+                      name="OpenRowset">[ERP].[v_StagingLocations]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -422,7 +422,7 @@ FROM            ICS.Location LEFT OUTER JOIN
                       dataType="System.Int32"
                       description="Specifies the mode used to access the database."
                       name="AccessMode"
-                      typeConverter="AccessMode">2</property>
+                      typeConverter="AccessMode">0</property>
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
@@ -431,8 +431,8 @@ FROM            ICS.Location LEFT OUTER JOIN
                   <connections>
                     <connection
                       refId="Package\Extract from Source to Staging (Location)\Copy data from source to staging\Read Locations.Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -668,6 +668,22 @@ FROM            ICS.Location LEFT OUTER JOIN
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Location)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{fc6ab8e8-74e0-4d8b-8a93-4bc73d6a423f}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract from Source to Staging (Location)\Truncate staging table"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
@@ -702,6 +718,14 @@ FROM            ICS.Location LEFT OUTER JOIN
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Extract from Source to Staging (Location)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Location).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{81625807-6B62-4460-BDBC-212898331710}"
+          DTS:From="Package\Extract from Source to Staging (Location)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (Location)\Final Row Count" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -780,7 +804,7 @@ FROM            ICS.Location LEFT OUTER JOIN
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{3BCFE9C0-FBA1-44D1-9CF0-8BEC722412EB}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -915,6 +939,10 @@ FROM            ICS.Location LEFT OUTER JOIN
           Id="Package\Extract from Source to Staging (Location)\Count rows in staging"
           TopLeft="62,229" />
         <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (Location)\Final Row Count"
+          TopLeft="69,315" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Extract from Source to Staging (Location)\Truncate staging table"
           TopLeft="55,49" />
@@ -962,11 +990,33 @@ FROM            ICS.Location LEFT OUTER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Location).PrecedenceConstraints[Constraint 2]"
+          TopLeft="150.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="311,318"
-          Size="311,361"
+          PanelSize="311,428"
+          Size="311,471"
           Id="Package\Extract from Source to Staging (Location)"
           TopLeft="413,71" />
         <NodeLayout
@@ -1007,18 +1057,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="277,254.25">
+          TopLeft="277,257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="136,0"
+              EndConnector="136,49.5"
               Start="0,0"
-              End="128.5,0">
+              End="128.5,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="128.5,0" />
+                    End="64,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64,0"
+                    Point2="68,0"
+                    Point3="68,4" />
+                  <mssgle:LineSegment
+                    End="68,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68,45.5"
+                    Point2="68,49.5"
+                    Point3="72,49.5" />
+                  <mssgle:LineSegment
+                    End="128.5,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1029,18 +1091,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="724,255.25">
+          TopLeft="724,306.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="128,0"
+              EndConnector="128,-47.5"
               Start="0,0"
-              End="120.5,0">
+              End="120.5,-47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="120.5,0" />
+                    End="60,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60,0"
+                    Point2="64,0"
+                    Point3="64,-4" />
+                  <mssgle:LineSegment
+                    End="64,-43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64,-43.5"
+                    Point2="64,-47.5"
+                    Point3="68,-47.5" />
+                  <mssgle:LineSegment
+                    End="120.5,-47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1070,28 +1144,6 @@ FROM            ICS.Location LEFT OUTER JOIN
           Id="Package\Extract from Source to Staging (Location)\Copy data from source to staging\Row Count"
           TopLeft="146,182" />
         <EdgeLayout
-          Id="Package\Extract from Source to Staging (Location)\Copy data from source to staging.Paths[OLE DB Source Output]"
-          TopLeft="209.5,132">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50"
-              Start="0,0"
-              End="0,42.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,42.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Extract from Source to Staging (Location)\Copy data from source to staging.Paths[Row Count Output 1]"
           TopLeft="213,224">
           <EdgeLayout.Curve>
@@ -1113,6 +1165,28 @@ FROM            ICS.Location LEFT OUTER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Location)\Copy data from source to staging.Paths[OLE DB Source Output]"
+          TopLeft="209.5,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -1121,6 +1195,11 @@ FROM            ICS.Location LEFT OUTER JOIN
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

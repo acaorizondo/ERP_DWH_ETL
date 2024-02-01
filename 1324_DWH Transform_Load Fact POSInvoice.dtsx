@@ -1,0 +1,3241 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{6420A5AB-71D9-42B9-A5FA-7B038BF50E4A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Transform_Load Fact POSInvoice"
+  DTS:PackageType="5"
+  DTS:VersionBuild="681"
+  DTS:VersionGUID="{C984FA98-B452-4ADF-B575-57FF2BB1866F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{2362767A-D37F-4B20-8B55-1C2FD3A00B5F}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Error Logs\error1.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDateDateDim"
+              DTS:DTSID="{FD814A60-DC7F-4D7F-AF9C-C6D3A786700D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QuantityRequested"
+              DTS:DTSID="{8496E292-3FE5-417C-ACB0-84A1459A444B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Quantity"
+              DTS:DTSID="{BC6CF0CC-D145-400F-848B-764EB8939603}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cost"
+              DTS:DTSID="{243ABF7A-205E-4A04-BA42-0F2EC4365EAB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDateDateDim"
+              DTS:DTSID="{CD7C026E-A2F2-4E41-A0E4-6EF708FC92C5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDateDateDim"
+              DTS:DTSID="{3730C44A-6265-4448-A8AB-1290D84783E8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="11"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IsConfirmed"
+              DTS:DTSID="{1245E79D-8A1A-4682-9CD8-BDEEF18970BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferHeadKey"
+              DTS:DTSID="{D30DB89E-E9E6-4B4C-9F75-24EE5B7ABCD5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferDetailKey"
+              DTS:DTSID="{5BFE30E1-F09E-47E8-A6AC-D94705CC61FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimShip"
+              DTS:DTSID="{DED70F58-3B95-4A59-B0EA-66EBCFB2EAD0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimVoyage"
+              DTS:DTSID="{873D1AAD-DB44-4F84-81B8-2348EF3EC280}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsFrom"
+              DTS:DTSID="{5CDFB54E-7DE2-44C9-A61A-1E1FFF2D5522}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsTo"
+              DTS:DTSID="{0FCF8EDB-B956-4800-8CBB-3195C75BD737}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimProduct"
+              DTS:DTSID="{4E68108E-A023-4F7F-AF22-9B7ABF419C64}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UnitMeasureReference"
+              DTS:DTSID="{C49E9AAF-CCF2-4915-A81B-E3C689CE2043}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FactorReference"
+              DTS:DTSID="{A357D213-09E1-4747-AD98-08E6F360379B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimUnitMeasure"
+              DTS:DTSID="{F26FA365-0BB1-457E-9DDF-2C19363C7930}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransfertUnitMeasure"
+              DTS:DTSID="{BF8E4D7F-9587-4A48-97EE-8E9D2CA6812E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TransferFactor"
+              DTS:DTSID="{59598A0E-6CB8-4078-A51C-291701954DDA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationEventKey"
+              DTS:DTSID="{86EEE9FD-5F6A-4944-B4C7-C7E908413628}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{4F588818-FDD3-48AF-99E1-05FA7C762F10}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{93B07FB6-2025-4CEF-B7A4-9D69933349C6}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{A2ACD28A-C321-4946-9A10-30FC1B984379}"
+      DTS:ObjectName="Flat File Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Error Logs\error.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CompanyGroupShipKey"
+              DTS:DTSID="{97F17C5D-A976-4330-B477-48CAF89F32E5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="VoyageCompanyGroupShipKey"
+              DTS:DTSID="{490E6F30-6D2C-43EE-8CD1-0D296728B9C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FromLocationKey"
+              DTS:DTSID="{6E47B08F-0BD5-4E54-8239-6F161A900CB7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ToLocationKey"
+              DTS:DTSID="{D9E10AA2-B33D-4913-941A-086B9C01544D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ToLocationEventKey"
+              DTS:DTSID="{B4BF2C97-8332-4D9D-8F6F-25690FE7E84F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDate"
+              DTS:DTSID="{18C9C3A2-076C-4100-AD50-ED7CB9095D6C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="11"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductKey"
+              DTS:DTSID="{70577BC5-7D1B-45EA-B617-B948EDE91F57}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductUnitMeasureKey"
+              DTS:DTSID="{43105F48-3DB5-448C-932B-58B0FBC7AFDE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="72"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RequestDateDateDim"
+              DTS:DTSID="{D6810CD7-D11C-4280-B381-45FD2A843699}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QuantityRequested"
+              DTS:DTSID="{839AB051-EA1A-4C2B-BE4C-42B1736CFBEB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Quantity"
+              DTS:DTSID="{F12D8739-F791-4EB2-BDD7-46D17B3243DE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Cost"
+              DTS:DTSID="{9FE3344B-5F3E-424B-8AF2-103EDDCE2F1B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDate"
+              DTS:DTSID="{E9DB129C-CEF3-4691-BFD2-74316CED6EAB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ConfirmedDateDateDim"
+              DTS:DTSID="{1EE5793A-4458-401C-A7F7-FAFF33A849C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDate"
+              DTS:DTSID="{5FFB85A4-8CDC-4CCB-A19C-F3A62A94BD36}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DocumentDateDateDim"
+              DTS:DTSID="{F7AAF54E-56E1-4FC1-830A-F9C0AFEC90EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimDate"
+              DTS:DTSID="{E5BBD745-7D0D-4503-861D-A9A3391A4038}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimShip"
+              DTS:DTSID="{CBF0D365-5AAD-463A-B3EA-1157F776F0AD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimVoyage"
+              DTS:DTSID="{909FEC9B-0AB1-4490-B4BC-11EA85903C7D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsFrom"
+              DTS:DTSID="{6F5C116D-12C5-443D-B27F-699617B1DAC6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimLocationsTo"
+              DTS:DTSID="{7FA873CA-E39B-4914-A17A-327BB13EF713}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="IdDimProduct"
+              DTS:DTSID="{9B51F327-0810-4EDF-A1EF-D9DE5219C0E0}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BF7E3F85-CEDA-401E-947A-956043D27B30}"
+      DTS:ObjectName="localhost.Staging">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::StagingConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Staging;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{FD6C36E4-B51E-4F85-83CB-1C790B0F1F5D}localhost.Staging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{975E5AEA-564A-4A8A-876C-875A689C7E0C}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D48F6002-5F1D-4836-8C07-A8AB824FA740}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{47D241E0-30B9-4107-A29A-01A554754395}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">DWH_Test</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1A8B7753-D854-4A30-9C6A-60D18A45EA43}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C499FF9-72D9-451A-A7A9-84F1B95B9CA5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Incremental">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BF5862B7-47DF-4FB4-B358-3077C54A3CA2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E0418F5A-4505-45FC-9A37-35E67ED497E1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{285E9C88-7BC5-4294-AEFD-7CF8432FEEE9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E513B791-2989-40B5-B6EF-820D76203F33}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8F3F94AC-46A8-424B-8DA6-096C3C46D0E2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{86325D8D-EADF-412B-A656-C06874CB9E6A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountNew">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E866A819-4793-453C-A405-82AB45ECCD8D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6A1C512C-00A8-44D2-B238-76308A4EB183}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{330DA118-0FFE-497C-A974-650BE3F15662}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1845A594-91F1-42B3-874A-1874D8196633}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4F06EC79-B85B-47C0-ADE9-743CD88A2376}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5FA1E8A1-C588-420B-A05A-9ADAD9D39B79}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">FactPOSInvoice</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{052DB7FB-11EF-4C0F-9474-81B041C9EFF7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Fact POSInvoice"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{828E870F-E5A2-4A3B-95DE-A93DDB47004E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Fact POSInvoice">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Calculate Inserted Rows 1"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{BE373BC5-99A7-4EA1-8B17-2CFD84E38439}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Calculate Inserted Rows 1"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountInserts]= @[User::RowCountFinal]- @[User::RowCountInitial]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Calculate Inserted Rows 2"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{192DE95D-D765-4ECA-ADC4-210DC8BDA418}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Calculate Inserted Rows 2"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountInserts]= @[User::RowCountFinal]- @[User::RowCountInitial]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BCBBE1F9-76E4-4FAF-8936-332A9DF67E82}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count Final Rows in Fact POSInvoice"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].[FactPOSInvoice]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="RowCountFinal"
+                SQLTask:DtsVariableName="User::RowCountFinal" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice 1"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2CDBB232-1BE0-49B5-9E22-73F06FAA07CC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count Final Rows in Fact POSInvoice 1"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].[FactPOSInvoice]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="RowCountFinal"
+                SQLTask:DtsVariableName="User::RowCountFinal" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\FirstTime"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{4EC78E81-E2CE-4C77-A61D-3B64FDC2DD63}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FirstTime">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Count extract"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{0A9E2906-CDA1-463B-9773-0E68376957F5}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Count extract"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{BF7E3F85-CEDA-401E-947A-956043D27B30}"
+                  SQLTask:SqlStatementSource="SELECT count(*) &#xA;FROM  [ERP].[ICS_POSInvoice]"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::RowCountExtracts" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Count Filtered Rows 1"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{F3E2933C-EDA0-4128-A6FF-1949D2372A94}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Count Filtered Rows 1"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::FilteredRowCount]= @[User::RowCountExtracts]- @[User::RowCountNew]- @[User::RowCountUpdates]" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Create Index"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{D290020E-02CA-4804-8925-BE4FD3E8BEB2}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Create Index"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+                  SQLTask:SqlStatementSource="CREATE UNIQUE CLUSTERED INDEX [ClusteredIndex-IdFactPOSInvoice] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[IdFactPOSInvoice] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED COLUMNSTORE INDEX [NonClusteredColumnStoreIndex-FactPOSInvoice] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[IdDimShip],&#xA;&#x9;[IdDimVoyage],&#xA;&#x9;[IdDimLocations],&#xA;&#x9;[IdDimPOSEmployee],&#xA;&#x9;[IdDimPOSCustomer]&#xA;)WITH (DROP_EXISTING = OFF, COMPRESSION_DELAY = 0, DATA_COMPRESSION = COLUMNSTORE) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-RowVersionHeader] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[RowVersionHeader] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-RowVersionDetail] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[RowVersionDetail] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-POSInvoiceheadKey] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[POSInvoiceHeadKey] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE UNIQUE NONCLUSTERED INDEX [NonClusteredIndex-POSInvoiceDetailKey] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[POSInvoiceDetailKey] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-DocumentDate] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[DocumentDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-POSInvoiceDate] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[POSInvoiceDate] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-POSCheckNumber] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[POSCheckNumber] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;&#xA;&#xA;CREATE NONCLUSTERED INDEX [NonClusteredIndex-POSAccountNumber] ON [ERP].[FactPOSInvoice]&#xA;(&#xA;&#x9;[POSAccountNumber] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::TableName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Delete Index"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{A961CE96-C2D0-4ECB-ABB2-48C5AD6E5070}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete Index"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+                  SQLTask:SqlStatementSource="Declare @TableName NVARCHAR(255);&#xA;Set @TableName = ?;&#xA;&#xA;EXEC DropIndexes @TableName = @TableName, @SchemaName = 'ERP';&#xA;&#xA;EXEC spDeleteColumnStoreIndex @ShemaName = 'ERP', @TableName = @TableName;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::TableName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Full Load"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{40450BDC-ACDE-4664-8E36-8EE5F0961CB7}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Full Load"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  defaultBufferMaxRows="100000"
+                  defaultBufferSize="104857600"
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice"
+                      componentClassID="Microsoft.OLEDBSource"
+                      contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                      description="OLE DB Source"
+                      name="Read Staging POSInvoice"
+                      usesDispositions="true"
+                      version="7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[ERP].[v_FactPOSInvoice]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.String"
+                          description="The variable that contains the SQL command to be executed."
+                          name="SqlCommandVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">0</property>
+                        <property
+                          dataType="System.String"
+                          description="The mappings between the parameters in the SQL command and variables."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[localhost.DWH_Test]"
+                          connectionManagerRefId="Package.ConnectionManagers[localhost.DWH_Test]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output]"
+                          name="OLE DB Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceHeadKey]"
+                              dataType="guid"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceHeadKey]"
+                              name="POSInvoiceHeadKey"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDetailKey]"
+                              dataType="guid"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceDetailKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDetailKey]"
+                              name="POSInvoiceDetailKey"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimShip]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimShip]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimShip]"
+                              name="IdDimShip"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimVoyage]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimVoyage]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimVoyage]"
+                              name="IdDimVoyage"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimLocations]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimLocations]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimLocations]"
+                              name="IdDimLocations"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSEmployee]"
+                              dataType="i8"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimPOSEmployee]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSEmployee]"
+                              name="IdDimPOSEmployee"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSCustomer]"
+                              dataType="i8"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimPOSCustomer]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSCustomer]"
+                              name="IdDimPOSCustomer"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                              dataType="i8"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentNo]"
+                              name="DocumentNo"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                              dataType="dbDate"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentDate]"
+                              name="DocumentDate"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDate]"
+                              dataType="dbDate"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceDate]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDate]"
+                              name="POSInvoiceDate"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceTime]"
+                              dataType="dbTime2"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceTime]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceTime]"
+                              name="POSInvoiceTime"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Amount]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Amount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Amount]"
+                              name="Amount"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Gratuity]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Gratuity]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Gratuity]"
+                              name="Gratuity"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Tip]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Tip]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Tip]"
+                              name="Tip"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Discount]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Discount]"
+                              name="Discount"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[AdditionalDiscount]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[AdditionalDiscount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[AdditionalDiscount]"
+                              name="AdditionalDiscount"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusive]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountAllInclusive]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusive]"
+                              name="DiscountAllInclusive"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSCheckNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSCheckNumber]"
+                              length="32"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSCheckNumber]"
+                              name="POSCheckNumber"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSAccountNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSAccountNumber]"
+                              length="18"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSAccountNumber]"
+                              name="POSAccountNumber"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IsImported]"
+                              dataType="bool"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IsImported]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IsImported]"
+                              name="IsImported"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[InvoiceHeadKey]"
+                              dataType="guid"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[InvoiceHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[InvoiceHeadKey]"
+                              name="InvoiceHeadKey"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSRecipeHeadKey]"
+                              dataType="guid"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSRecipeHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSRecipeHeadKey]"
+                              name="POSRecipeHeadKey"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Quantity]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Quantity]"
+                              name="Quantity"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Price]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Price]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Price]"
+                              name="Price"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusiveDetail]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountAllInclusiveDetail]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusiveDetail]"
+                              name="DiscountAllInclusiveDetail"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountDetail]"
+                              dataType="numeric"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountDetail]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountDetail]"
+                              name="DiscountDetail"
+                              precision="9"
+                              scale="3"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                              dataType="bytes"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                              length="8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionHeader]"
+                              name="RowVersionHeader"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                              dataType="bytes"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                              length="8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionDetail]"
+                              name="RowVersionDetail"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Reference]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Reference]"
+                              length="50"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Reference]"
+                              name="Reference"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceHeadKey]"
+                              dataType="guid"
+                              name="POSInvoiceHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceDetailKey]"
+                              dataType="guid"
+                              name="POSInvoiceDetailKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimShip]"
+                              dataType="i4"
+                              name="IdDimShip" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimVoyage]"
+                              dataType="i4"
+                              name="IdDimVoyage" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimLocations]"
+                              dataType="i4"
+                              name="IdDimLocations" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimPOSEmployee]"
+                              dataType="i8"
+                              name="IdDimPOSEmployee" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IdDimPOSCustomer]"
+                              dataType="i8"
+                              name="IdDimPOSCustomer" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DocumentNo]"
+                              dataType="i8"
+                              name="DocumentNo" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DocumentDate]"
+                              dataType="dbDate"
+                              name="DocumentDate" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceDate]"
+                              dataType="dbDate"
+                              name="POSInvoiceDate" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSInvoiceTime]"
+                              dataType="dbTime2"
+                              name="POSInvoiceTime" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Amount]"
+                              dataType="numeric"
+                              name="Amount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Gratuity]"
+                              dataType="numeric"
+                              name="Gratuity"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Tip]"
+                              dataType="numeric"
+                              name="Tip"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
+                              dataType="numeric"
+                              name="Discount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[AdditionalDiscount]"
+                              dataType="numeric"
+                              name="AdditionalDiscount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountAllInclusive]"
+                              dataType="numeric"
+                              name="DiscountAllInclusive"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSCheckNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="32"
+                              name="POSCheckNumber" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSAccountNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="18"
+                              name="POSAccountNumber" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[IsImported]"
+                              dataType="bool"
+                              name="IsImported" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[InvoiceHeadKey]"
+                              dataType="guid"
+                              name="InvoiceHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[POSRecipeHeadKey]"
+                              dataType="guid"
+                              name="POSRecipeHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                              dataType="numeric"
+                              name="Quantity"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Price]"
+                              dataType="numeric"
+                              name="Price"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountAllInclusiveDetail]"
+                              dataType="numeric"
+                              name="DiscountAllInclusiveDetail"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[DiscountDetail]"
+                              dataType="numeric"
+                              name="DiscountDetail"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[RowVersionHeader]"
+                              dataType="bytes"
+                              length="8"
+                              name="RowVersionHeader" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[RowVersionDetail]"
+                              dataType="bytes"
+                              length="8"
+                              name="RowVersionDetail" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].ExternalColumns[Reference]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="Reference" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output]"
+                          isErrorOut="true"
+                          name="OLE DB Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceHeadKey]"
+                              dataType="guid"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceHeadKey]"
+                              name="POSInvoiceHeadKey" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceDetailKey]"
+                              dataType="guid"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceDetailKey]"
+                              name="POSInvoiceDetailKey" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimShip]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimShip]"
+                              name="IdDimShip" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimVoyage]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimVoyage]"
+                              name="IdDimVoyage" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimLocations]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimLocations]"
+                              name="IdDimLocations" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimPOSEmployee]"
+                              dataType="i8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimPOSEmployee]"
+                              name="IdDimPOSEmployee" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimPOSCustomer]"
+                              dataType="i8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IdDimPOSCustomer]"
+                              name="IdDimPOSCustomer" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                              dataType="i8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DocumentNo]"
+                              name="DocumentNo" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                              dataType="dbDate"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DocumentDate]"
+                              name="DocumentDate" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceDate]"
+                              dataType="dbDate"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceDate]"
+                              name="POSInvoiceDate" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceTime]"
+                              dataType="dbTime2"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSInvoiceTime]"
+                              name="POSInvoiceTime" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Reference]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Reference]"
+                              name="Reference" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Amount]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Amount]"
+                              name="Amount"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Gratuity]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Gratuity]"
+                              name="Gratuity"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Tip]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Tip]"
+                              name="Tip"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Discount]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Discount]"
+                              name="Discount"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[AdditionalDiscount]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[AdditionalDiscount]"
+                              name="AdditionalDiscount"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountAllInclusive]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountAllInclusive]"
+                              name="DiscountAllInclusive"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSCheckNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="32"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSCheckNumber]"
+                              name="POSCheckNumber" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSAccountNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="18"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSAccountNumber]"
+                              name="POSAccountNumber" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IsImported]"
+                              dataType="bool"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[IsImported]"
+                              name="IsImported" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[InvoiceHeadKey]"
+                              dataType="guid"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[InvoiceHeadKey]"
+                              name="InvoiceHeadKey" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSRecipeHeadKey]"
+                              dataType="guid"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[POSRecipeHeadKey]"
+                              name="POSRecipeHeadKey" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                              name="Quantity"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Price]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[Price]"
+                              name="Price"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountAllInclusiveDetail]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountAllInclusiveDetail]"
+                              name="DiscountAllInclusiveDetail"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountDetail]"
+                              dataType="numeric"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[DiscountDetail]"
+                              name="DiscountDetail"
+                              precision="9"
+                              scale="3" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                              dataType="bytes"
+                              length="8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[RowVersionHeader]"
+                              name="RowVersionHeader" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                              dataType="bytes"
+                              length="8"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[RowVersionDetail]"
+                              name="RowVersionDetail" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count"
+                      componentClassID="Microsoft.RowCount"
+                      contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                      name="Row Count">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable to hold the row count."
+                          name="VariableName">User::RowCountNew</property>
+                      </properties>
+                      <inputs>
+                        <input
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count.Inputs[Row Count Input 1]"
+                          hasSideEffects="true"
+                          name="Row Count Input 1">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count.Outputs[Row Count Output 1]"
+                          name="Row Count Output 1"
+                          synchronousInputId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count.Inputs[Row Count Input 1]">
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="Write FactPOSInvoice"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[ERP].[FactPOSInvoice]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[localhost.DWH_Test]"
+                          connectionManagerRefId="Package.ConnectionManagers[localhost.DWH_Test]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSInvoiceHeadKey]"
+                              cachedDataType="guid"
+                              cachedName="POSInvoiceHeadKey"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceHeadKey]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSInvoiceDetailKey]"
+                              cachedDataType="guid"
+                              cachedName="POSInvoiceDetailKey"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceDetailKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDetailKey]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IdDimShip]"
+                              cachedDataType="i4"
+                              cachedName="IdDimShip"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimShip]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimShip]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IdDimVoyage]"
+                              cachedDataType="i4"
+                              cachedName="IdDimVoyage"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimVoyage]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimVoyage]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IdDimLocations]"
+                              cachedDataType="i4"
+                              cachedName="IdDimLocations"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimLocations]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimLocations]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IdDimPOSEmployee]"
+                              cachedDataType="i8"
+                              cachedName="IdDimPOSEmployee"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimPOSEmployee]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSEmployee]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IdDimPOSCustomer]"
+                              cachedDataType="i8"
+                              cachedName="IdDimPOSCustomer"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimPOSCustomer]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IdDimPOSCustomer]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[DocumentNo]"
+                              cachedDataType="i8"
+                              cachedName="DocumentNo"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentNo]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[DocumentDate]"
+                              cachedDataType="dbDate"
+                              cachedName="DocumentDate"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DocumentDate]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSInvoiceDate]"
+                              cachedDataType="dbDate"
+                              cachedName="POSInvoiceDate"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceDate]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceDate]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSInvoiceTime]"
+                              cachedDataType="dbTime2"
+                              cachedName="POSInvoiceTime"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceTime]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSInvoiceTime]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Amount]"
+                              cachedDataType="numeric"
+                              cachedName="Amount"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Amount]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Gratuity]"
+                              cachedDataType="numeric"
+                              cachedName="Gratuity"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Gratuity]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Gratuity]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Tip]"
+                              cachedDataType="numeric"
+                              cachedName="Tip"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Tip]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Tip]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Discount]"
+                              cachedDataType="numeric"
+                              cachedName="Discount"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Discount]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[AdditionalDiscount]"
+                              cachedDataType="numeric"
+                              cachedName="AdditionalDiscount"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[AdditionalDiscount]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[AdditionalDiscount]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[DiscountAllInclusive]"
+                              cachedDataType="numeric"
+                              cachedName="DiscountAllInclusive"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAllInclusive]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusive]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSCheckNumber]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="32"
+                              cachedName="POSCheckNumber"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSCheckNumber]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSCheckNumber]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSAccountNumber]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="18"
+                              cachedName="POSAccountNumber"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSAccountNumber]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSAccountNumber]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[IsImported]"
+                              cachedDataType="bool"
+                              cachedName="IsImported"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IsImported]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[IsImported]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[InvoiceHeadKey]"
+                              cachedDataType="guid"
+                              cachedName="InvoiceHeadKey"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[InvoiceHeadKey]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[POSRecipeHeadKey]"
+                              cachedDataType="guid"
+                              cachedName="POSRecipeHeadKey"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSRecipeHeadKey]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[POSRecipeHeadKey]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                              cachedDataType="numeric"
+                              cachedName="Quantity"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Price]"
+                              cachedDataType="numeric"
+                              cachedName="Price"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Price]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[DiscountAllInclusiveDetail]"
+                              cachedDataType="numeric"
+                              cachedName="DiscountAllInclusiveDetail"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAllInclusiveDetail]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountAllInclusiveDetail]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[DiscountDetail]"
+                              cachedDataType="numeric"
+                              cachedName="DiscountDetail"
+                              cachedPrecision="9"
+                              cachedScale="3"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountDetail]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[DiscountDetail]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[RowVersionHeader]"
+                              cachedDataType="bytes"
+                              cachedLength="8"
+                              cachedName="RowVersionHeader"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionHeader]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[RowVersionDetail]"
+                              cachedDataType="bytes"
+                              cachedLength="8"
+                              cachedName="RowVersionDetail"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[RowVersionDetail]" />
+                            <inputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].Columns[Reference]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="Reference"
+                              externalMetadataColumnId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Reference]"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output].Columns[Reference]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdFactPOSInvoice]"
+                              dataType="i8"
+                              name="IdFactPOSInvoice" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceHeadKey]"
+                              dataType="guid"
+                              name="POSInvoiceHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceDetailKey]"
+                              dataType="guid"
+                              name="POSInvoiceDetailKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimShip]"
+                              dataType="i4"
+                              name="IdDimShip" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimVoyage]"
+                              dataType="i4"
+                              name="IdDimVoyage" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimLocations]"
+                              dataType="i4"
+                              name="IdDimLocations" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimPOSEmployee]"
+                              dataType="i8"
+                              name="IdDimPOSEmployee" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IdDimPOSCustomer]"
+                              dataType="i8"
+                              name="IdDimPOSCustomer" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DocumentNo]"
+                              dataType="i8"
+                              name="DocumentNo" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DocumentDate]"
+                              dataType="dbDate"
+                              name="DocumentDate" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceDate]"
+                              dataType="dbDate"
+                              name="POSInvoiceDate" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSInvoiceTime]"
+                              dataType="dbTime2"
+                              name="POSInvoiceTime" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Amount]"
+                              dataType="numeric"
+                              name="Amount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Gratuity]"
+                              dataType="numeric"
+                              name="Gratuity"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Tip]"
+                              dataType="numeric"
+                              name="Tip"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                              dataType="numeric"
+                              name="Discount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[AdditionalDiscount]"
+                              dataType="numeric"
+                              name="AdditionalDiscount"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAllInclusive]"
+                              dataType="numeric"
+                              name="DiscountAllInclusive"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSCheckNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="32"
+                              name="POSCheckNumber" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSAccountNumber]"
+                              codePage="1252"
+                              dataType="str"
+                              length="18"
+                              name="POSAccountNumber" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[IsImported]"
+                              dataType="bool"
+                              name="IsImported" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceHeadKey]"
+                              dataType="guid"
+                              name="InvoiceHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[POSRecipeHeadKey]"
+                              dataType="guid"
+                              name="POSRecipeHeadKey" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                              dataType="numeric"
+                              name="Quantity"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Price]"
+                              dataType="numeric"
+                              name="Price"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAllInclusiveDetail]"
+                              dataType="numeric"
+                              name="DiscountAllInclusiveDetail"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[DiscountDetail]"
+                              dataType="numeric"
+                              name="DiscountDetail"
+                              precision="9"
+                              scale="3" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionHeader]"
+                              dataType="bytes"
+                              length="8"
+                              name="RowVersionHeader" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionDetail]"
+                              dataType="bytes"
+                              length="8"
+                              name="RowVersionDetail" />
+                            <externalMetadataColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input].ExternalColumns[Reference]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="Reference" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Load Fact POSInvoice\FirstTime\Full Load.Paths[OLE DB Source Output]"
+                      endId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count.Inputs[Row Count Input 1]"
+                      name="OLE DB Source Output"
+                      startId="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice.Outputs[OLE DB Source Output]" />
+                    <path
+                      refId="Package\Load Fact POSInvoice\FirstTime\Full Load.Paths[Row Count Output 1]"
+                      endId="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice.Inputs[OLE DB Destination Input]"
+                      name="Row Count Output 1"
+                      startId="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count.Outputs[Row Count Output 1]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime\Truncate Fact POSInvoice"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{85E7F751-C19A-4C4A-943B-B8AE5582D2A2}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Truncate Fact POSInvoice"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+                  SQLTask:SqlStatementSource="Truncate table [ERP].FactPOSInvoice;&#xA;&#xA;&#xA;DBCC CHECKIDENT('[ERP].FactPOSInvoice', RESEED, 1);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{6B280896-3509-4954-9D18-3A1586673B1C}"
+              DTS:From="Package\Load Fact POSInvoice\FirstTime\Count extract"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Load Fact POSInvoice\FirstTime\Truncate Fact POSInvoice" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{82C0CA16-4037-42D0-BF86-D1A977D4917A}"
+              DTS:From="Package\Load Fact POSInvoice\FirstTime\Truncate Fact POSInvoice"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Load Fact POSInvoice\FirstTime\Delete Index" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{6535FB4B-88FA-41D7-BB7B-D14EAC6FE1E4}"
+              DTS:From="Package\Load Fact POSInvoice\FirstTime\Full Load"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Load Fact POSInvoice\FirstTime\Count Filtered Rows 1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{9C40A200-246B-4F84-9BAB-11FF6C938A4C}"
+              DTS:From="Package\Load Fact POSInvoice\FirstTime\Delete Index"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\Load Fact POSInvoice\FirstTime\Full Load" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 4]"
+              DTS:CreationName=""
+              DTS:DTSID="{72856D67-8734-4257-9809-F30AE9BC4589}"
+              DTS:From="Package\Load Fact POSInvoice\FirstTime\Count Filtered Rows 1"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 4"
+              DTS:To="Package\Load Fact POSInvoice\FirstTime\Create Index" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{16036C96-62FB-4501-920C-BA13283B40FA}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Full Load from Staging">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging\Count extract 1"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{38BF2934-D172-45CB-8163-F49A4138586D}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Count extract 1"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{BF7E3F85-CEDA-401E-947A-956043D27B30}"
+                  SQLTask:SqlStatementSource="SELECT count(*) &#xA;FROM&#xA;    [Staging].[ERP].[ICS_POSInvoice]"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::RowCountExtracts" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging\Count Filtered Rows"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{6888A0E7-9454-4688-B28C-B5AB5AB3168B}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Count Filtered Rows"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::FilteredRowCount]= @[User::RowCountExtracts]- @[User::RowCountNew]- @[User::RowCountUpdates]" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging\Count initial Rows in Fact POSInvoice"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{697B72C7-505A-4608-B2D1-1E6016326CE0}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Count initial Rows in Fact POSInvoice"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+                  SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].[FactPOSInvoice]"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="RowCountInitial"
+                    SQLTask:DtsVariableName="User::RowCountInitial" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging\Load new POSInvoice from Staging"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{BADF7E0A-30D7-4231-8C74-FE4FCEEC19FC}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Load new POSInvoice from Staging"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+                  SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;&#xA;EXEC  spFactPOSInvoiceLoad @incremental=?, @RowCountNew=@Result1 OUTPUT, @RowCountUpd=@Result2 OUTPUT;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::Incremental"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="11"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::RowCountNew"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowCountUpdates"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{9DB8F791-0F9D-49AB-AB29-574456E34626}"
+              DTS:From="Package\Load Fact POSInvoice\Full Load from Staging\Count initial Rows in Fact POSInvoice"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Load Fact POSInvoice\Full Load from Staging\Count extract 1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{E909CB79-405F-45CF-96A9-B6137A49E4E7}"
+              DTS:From="Package\Load Fact POSInvoice\Full Load from Staging\Count extract 1"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Load Fact POSInvoice\Full Load from Staging\Load new POSInvoice from Staging" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{D8F54E4D-1834-47AA-BD47-DFB1EC338A8D}"
+              DTS:From="Package\Load Fact POSInvoice\Full Load from Staging\Load new POSInvoice from Staging"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\Load Fact POSInvoice\Full Load from Staging\Count Filtered Rows" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Get Incremental?"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2B099505-D651-4D72-AA1F-C0271F35AB5A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Incremental?"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Incremental" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Incremental?"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{F8036AAA-11D0-45F8-A004-E6CA4CD51FCE}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental?"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::Incremental]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Fact POSInvoice\Set Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C8F3C9D7-7DE6-416A-BB3D-6B33E62E14C0}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+              SQLTask:SqlStatementSource="UPDATE [audit].RunPackages &#xA;SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:Description="Incremental Daily Load"
+          DTS:DTSID="{BC3BC387-7199-4D41-91F6-29E9CBD820C0}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental] == True"
+          DTS:From="Package\Load Fact POSInvoice\Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Fact POSInvoice\Full Load from Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:Description="First Time"
+          DTS:DTSID="{E219B56A-C26E-4F97-9AED-910F916E617D}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental] == False"
+          DTS:From="Package\Load Fact POSInvoice\Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Load Fact POSInvoice\FirstTime" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{40FE5E11-7728-44BF-83EB-CB31F5369375}"
+          DTS:From="Package\Load Fact POSInvoice\Get Incremental?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Load Fact POSInvoice\Incremental?" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{5767B0BB-1B78-400C-851B-E902233D4584}"
+          DTS:From="Package\Load Fact POSInvoice\Calculate Inserted Rows 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Load Fact POSInvoice\Set Incremental" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{5346CFAB-16C5-4B72-88B8-1CFD81927805}"
+          DTS:From="Package\Load Fact POSInvoice\FirstTime"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{64E523F9-7309-4606-80D8-EFA415C3CB1F}"
+          DTS:From="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Load Fact POSInvoice\Calculate Inserted Rows 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{E5A5118E-7ED7-4E28-9E85-54AD3C4AED95}"
+          DTS:From="Package\Load Fact POSInvoice\Full Load from Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{1F8D74C5-4036-496B-B169-5C63F2D5EE8E}"
+          DTS:From="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\Load Fact POSInvoice\Calculate Inserted Rows 2" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{10E14CEC-9C71-4BA4-BF6D-21BC82533095}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1855832F-134E-4C86-9044-81FA631B5A75}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C792891A-D3D0-4519-BD5D-1E41EBDB1831}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{79E755B4-1372-403B-8A4F-26046D1EEF04}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{851233A7-BEE6-4C08-BA41-E02F00AF740F}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Fact POSInvoice" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{1708D699-4D70-4E5B-B6F7-9369CFD898F4}"
+      DTS:From="Package\Load Fact POSInvoice"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="53,466" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Load Fact POSInvoice\Calculate Inserted Rows 1"
+          TopLeft="432,650" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Load Fact POSInvoice\Calculate Inserted Rows 2"
+          TopLeft="103,654" />
+        <NodeLayout
+          Size="252,42"
+          Id="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice"
+          TopLeft="73,585" />
+        <NodeLayout
+          Size="261,42"
+          Id="Package\Load Fact POSInvoice\Count Final Rows in Fact POSInvoice 1"
+          TopLeft="415,581" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Count extract"
+          TopLeft="63,9" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Count Filtered Rows 1"
+          TopLeft="45,276" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Create Index"
+          TopLeft="61,346" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Delete Index"
+          TopLeft="68.5,142" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load"
+          TopLeft="78,211" />
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Truncate Fact POSInvoice"
+          TopLeft="35,74" />
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint]"
+          TopLeft="134.5,51">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 1]"
+          TopLeft="136.5,116">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 2]"
+          TopLeft="137.5,253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23"
+              Start="0,0"
+              End="0,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 3]"
+          TopLeft="138.25,184">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime.PrecedenceConstraints[Constraint 4]"
+          TopLeft="134.25,318">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="276,399"
+          Size="276,442"
+          Id="Package\Load Fact POSInvoice\FirstTime"
+          TopLeft="405.5,111" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Load Fact POSInvoice\Full Load from Staging\Count extract 1"
+          TopLeft="63,82" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load Fact POSInvoice\Full Load from Staging\Count Filtered Rows"
+          TopLeft="55,235" />
+        <NodeLayout
+          Size="255,42"
+          Id="Package\Load Fact POSInvoice\Full Load from Staging\Count initial Rows in Fact POSInvoice"
+          TopLeft="19,14" />
+        <NodeLayout
+          Size="245,42"
+          Id="Package\Load Fact POSInvoice\Full Load from Staging\Load new POSInvoice from Staging"
+          TopLeft="20,148" />
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint]"
+          TopLeft="142.75,56">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint 1]"
+          TopLeft="140.75,124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\Full Load from Staging.PrecedenceConstraints[Constraint 2]"
+          TopLeft="142,190">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="306,397"
+          Size="306,440"
+          Id="Package\Load Fact POSInvoice\Full Load from Staging"
+          TopLeft="42,109" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Load Fact POSInvoice\Get Incremental?"
+          TopLeft="22,15" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Load Fact POSInvoice\Incremental?"
+          TopLeft="275,9" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load Fact POSInvoice\Set Incremental"
+          TopLeft="462,722" />
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint]"
+          TopLeft="323,51">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-128,58"
+              Start="0,0"
+              End="-128,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5932203389831"
+                    Point2="0,23.5932203389831"
+                    Point3="-4,23.5932203389831" />
+                  <mssgle:LineSegment
+                    End="-124,23.5932203389831" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-124,23.5932203389831"
+                    Point2="-128,23.5932203389831"
+                    Point3="-128,27.5932203389831" />
+                  <mssgle:LineSegment
+                    End="-128,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-124.136640625,28.5932203389831,120.27328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 1]"
+          TopLeft="367,51">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="176.5,60"
+              Start="0,0"
+              End="176.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.406779661017" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.406779661017"
+                    Point2="0,24.406779661017"
+                    Point3="4,24.406779661017" />
+                  <mssgle:LineSegment
+                    End="172.5,24.406779661017" />
+                  <mssgle:CubicBezierSegment
+                    Point1="172.5,24.406779661017"
+                    Point2="176.5,24.406779661017"
+                    Point3="176.5,28.406779661017" />
+                  <mssgle:LineSegment
+                    End="176.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="56.97,29.406779661017,62.56,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 2]"
+          TopLeft="182,33">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93,0"
+              Start="0,0"
+              End="85.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 3]"
+          TopLeft="539.75,692">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 4]"
+          TopLeft="544.5,553">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 6]"
+          TopLeft="543,623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 8]"
+          TopLeft="197,549">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 9]"
+          TopLeft="201.5,627">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="709,823"
+          Size="709,866"
+          Id="Package\Load Fact POSInvoice"
+          TopLeft="303,29" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="84,347" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="1037,469" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="156.5,389">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77"
+              Start="0,0"
+              End="0,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,26.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="255,487">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48,-25"
+              Start="0,0"
+              End="40.5,-25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20,0"
+                    Point2="24,0"
+                    Point3="24,-4" />
+                  <mssgle:LineSegment
+                    End="24,-21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24,-21"
+                    Point2="24,-25"
+                    Point3="28,-25" />
+                  <mssgle:LineSegment
+                    End="40.5,-25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="1012,462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="25,28"
+              Start="0,0"
+              End="17.5,28">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="8.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,0"
+                    Point2="12.5,0"
+                    Point3="12.5,4" />
+                  <mssgle:LineSegment
+                    End="12.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.5,24"
+                    Point2="12.5,28"
+                    Point3="16.5,28" />
+                  <mssgle:LineSegment
+                    End="17.5,28" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Fact POSInvoice\FirstTime\Full Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load\Row Count"
+          TopLeft="516,221" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice"
+          TopLeft="495,360" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice"
+          TopLeft="488,79" />
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load.Paths[Row Count Output 1]"
+          TopLeft="583,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,97"
+              Start="0,0"
+              End="0,89.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,89.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Fact POSInvoice\FirstTime\Full Load.Paths[OLE DB Source Output]"
+          TopLeft="584,121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,100"
+              Start="0,0"
+              End="0,92.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Fact POSInvoice\FirstTime\Full Load\Write FactPOSInvoice">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Fact POSInvoice\FirstTime\Full Load\Read Staging POSInvoice">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Fact POSInvoice.PrecedenceConstraints[Constraint 1]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load DimShip"
   DTS:PackageType="5"
-  DTS:VersionBuild="147"
-  DTS:VersionGUID="{8C0EB575-4479-41A5-869D-DA28444E813D}">
+  DTS:VersionBuild="156"
+  DTS:VersionGUID="{611BE0E9-5B8F-44B9-9D51-C8D65BCC6EB4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -284,7 +284,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{764CA2A8-5F29-433B-85D2-BCBACBE5E6EE}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimShip"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimShip"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -306,7 +306,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{764CA2A8-5F29-433B-85D2-BCBACBE5E6EE}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimShip"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimShip"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -328,7 +328,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{764CA2A8-5F29-433B-85D2-BCBACBE5E6EE}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from DimShip"
+              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].DimShip"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountInitial"
@@ -502,7 +502,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[DimShip]</property>
+                      name="OpenRowset">[ERP].[DimShip]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -773,13 +773,13 @@
                       description="Specifies the SQL statement that generates the lookup table."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimShip]</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [ERP].[DimShip]</property>
                     <property
                       dataType="System.String"
                       description="Specifies a SQL statement that uses parameters to generate the lookup table."
                       expressionType="Notify"
                       name="SqlCommandParam"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimShip]) [refTable]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [ERP].[DimShip]) [refTable]
 where [refTable].[CompanyGroupShipKey] = ?</property>
                     <property
                       dataType="System.Int32"
@@ -1377,35 +1377,6 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Load Dimension (Ship)\Load DimShip\Row Count"
-                  componentClassID="Microsoft.RowCount"
-                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-                  name="Row Count">
-                  <properties>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the variable to hold the row count."
-                      name="VariableName">User::RowCountInserts</property>
-                  </properties>
-                  <inputs>
-                    <input
-                      refId="Package\Load Dimension (Ship)\Load DimShip\Row Count.Inputs[Row Count Input 1]"
-                      hasSideEffects="true"
-                      name="Row Count Input 1">
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Load Dimension (Ship)\Load DimShip\Row Count.Outputs[Row Count Output 1]"
-                      name="Row Count Output 1"
-                      synchronousInputId="Package\Load Dimension (Ship)\Load DimShip\Row Count.Inputs[Row Count Input 1]">
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
                   refId="Package\Load Dimension (Ship)\Load DimShip\Row Count Extracted"
                   componentClassID="Microsoft.RowCount"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -1430,6 +1401,35 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                       refId="Package\Load Dimension (Ship)\Load DimShip\Row Count Extracted.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
                       synchronousInputId="Package\Load Dimension (Ship)\Load DimShip\Row Count Extracted.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Insert">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountInserts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -1464,6 +1464,35 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row CountFiltered">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::FilteredRowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Load Dimension (Ship)\Load DimShip\Update ShipName in DimShip"
                   componentClassID="Microsoft.OLEDBCommand"
                   contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
@@ -1481,7 +1510,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                       description="The SQL command to be executed."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimShip]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [ERP].[DimShip]
    SET [CompanyGroupCode] = ?
       ,[CompanyGroupName] = ?
       ,[ConcessionCompanyCode] = ?
@@ -1819,13 +1848,18 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                   name="change_ship_name"
                   startId="Package\Load Dimension (Ship)\Load DimShip\Any change?.Outputs[change]" />
                 <path
+                  refId="Package\Load Dimension (Ship)\Load DimShip.Paths[Conditional Split Default Output]"
+                  endId="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered.Inputs[Row Count Input 1]"
+                  name="Conditional Split Default Output"
+                  startId="Package\Load Dimension (Ship)\Load DimShip\Any change?.Outputs[Conditional Split Default Output]" />
+                <path
                   refId="Package\Load Dimension (Ship)\Load DimShip.Paths[Lookup Match Output]"
                   endId="Package\Load Dimension (Ship)\Load DimShip\Any change?.Inputs[Conditional Split Input]"
                   name="Lookup Match Output"
                   startId="Package\Load Dimension (Ship)\Load DimShip\Lookup.Outputs[Lookup Match Output]" />
                 <path
                   refId="Package\Load Dimension (Ship)\Load DimShip.Paths[Lookup No Match Output]"
-                  endId="Package\Load Dimension (Ship)\Load DimShip\Row Count.Inputs[Row Count Input 1]"
+                  endId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert.Inputs[Row Count Input 1]"
                   name="Lookup No Match Output"
                   startId="Package\Load Dimension (Ship)\Load DimShip\Lookup.Outputs[Lookup No Match Output]" />
                 <path
@@ -1847,7 +1881,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                   refId="Package\Load Dimension (Ship)\Load DimShip.Paths[Row Count Output 11]"
                   endId="Package\Load Dimension (Ship)\Load DimShip\Insert in DimShip.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
-                  startId="Package\Load Dimension (Ship)\Load DimShip\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1896,6 +1930,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Load Dimension (Ship).PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
+          DTS:Description="Type 1"
           DTS:DTSID="{81F6B330-549E-4C4E-B614-5B4251C9B7A1}"
           DTS:EvalOp="1"
           DTS:Expression="@[User::UpdateDimensionType]==1"
@@ -1906,6 +1941,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Load Dimension (Ship).PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
+          DTS:Description="Type 2"
           DTS:DTSID="{9D41A3C8-AC80-47CA-BAE0-1197E21563A6}"
           DTS:EvalOp="1"
           DTS:Expression="@[User::UpdateDimensionType]==2"
@@ -1944,7 +1980,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{764CA2A8-5F29-433B-85D2-BCBACBE5E6EE}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -2152,7 +2188,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-47.5,25.635838150289,16,16"
+              BoundingBox="-63.69421875,25.635838150289,48.3884375,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2188,7 +2224,7 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="22.5,26.0404624277457,16,16"
+              BoundingBox="6.120234375,26.0404624277457,48.75953125,16"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2326,23 +2362,15 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
     design-time-name="Package\Load Dimension (Ship)\Load DimShip">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="171,42"
-          Id="Package\Load Dimension (Ship)\Load DimShip\Read Staging Ship"
-          TopLeft="44,42" />
+          Size="178,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count Updated"
+          TopLeft="769,382" />
         <NodeLayout
-          Size="163,42"
-          Id="Package\Load Dimension (Ship)\Load DimShip\Insert in DimShip"
-          TopLeft="125,364" />
-        <NodeLayout
-          Size="183,42"
-          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count Extracted"
-          TopLeft="276,41" />
-        <NodeLayout
-          Size="133,42"
-          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count"
-          TopLeft="139,286" />
+          Size="165,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Row CountFiltered"
+          TopLeft="441,374" />
         <NodeLayout
           Size="115,42"
           Id="Package\Load Dimension (Ship)\Load DimShip\Lookup"
@@ -2352,27 +2380,39 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
           Id="Package\Load Dimension (Ship)\Load DimShip\Update ShipName in DimShip"
           TopLeft="746,281" />
         <NodeLayout
+          Size="171,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Read Staging Ship"
+          TopLeft="44,42" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count Insert"
+          TopLeft="139,286" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Insert in DimShip"
+          TopLeft="133,361" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count Extracted"
+          TopLeft="276,41" />
+        <NodeLayout
           Size="143,42"
           Id="Package\Load Dimension (Ship)\Load DimShip\Any change?"
           TopLeft="459,277" />
-        <NodeLayout
-          Size="178,42"
-          Id="Package\Load Dimension (Ship)\Load DimShip\Row Count Updated"
-          TopLeft="769,382" />
         <EdgeLayout
           Id="Package\Load Dimension (Ship)\Load DimShip.Paths[Row Count Output 11]"
-          TopLeft="206,328">
+          TopLeft="217,328">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36"
+              EndConnector="0,33"
               Start="0,0"
-              End="0,28.5">
+              End="0,25.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.5" />
+                    End="0,25.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2453,9 +2493,9 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-143.166666666667,103"
+              EndConnector="-129.166666666667,103"
               Start="0,0"
-              End="-143.166666666667,95.5">
+              End="-129.166666666667,95.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -2466,20 +2506,20 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
                     Point2="0,42.0480274442539"
                     Point3="-4,42.0480274442539" />
                   <mssgle:LineSegment
-                    End="-139.166666666667,42.0480274442539" />
+                    End="-125.166666666667,42.0480274442539" />
                   <mssgle:CubicBezierSegment
-                    Point1="-139.166666666667,42.0480274442539"
-                    Point2="-143.166666666667,42.0480274442539"
-                    Point3="-143.166666666667,46.0480274442539" />
+                    Point1="-125.166666666667,42.0480274442539"
+                    Point2="-129.166666666667,42.0480274442539"
+                    Point3="-129.166666666667,46.0480274442539" />
                   <mssgle:LineSegment
-                    End="-143.166666666667,95.5" />
+                    End="-129.166666666667,95.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-127.389720052083,47.0480274442539,111.6127734375,11.609375"
+              BoundingBox="-120.389720052083,47.0480274442539,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2520,6 +2560,30 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\Load Dimension (Ship)\Load DimShip.Paths[Conditional Split Default Output]"
+          TopLeft="527,319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,17.9208984375,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Load Dimension (Ship)\Load DimShip.Paths[change_ship_name]"
           TopLeft="602,300">
           <EdgeLayout.Curve>
@@ -2547,6 +2611,29 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (Ship)\Load DimShip\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[ERP].[DimShip]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Load Dimension (Ship)\Load DimShip\Read Staging Ship">
     <Properties>
       <Property>
@@ -2569,29 +2656,6 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (Ship)\Load DimShip\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimShip]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -3023,5 +3087,13 @@ where [refTable].[CompanyGroupShipKey] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Dimension (Ship).PrecedenceConstraints[Constraint 1]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Load Dimension (Ship).PrecedenceConstraints[Constraint 2]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_ProductUnitMeasures"
   DTS:PackageType="5"
-  DTS:VersionBuild="199"
-  DTS:VersionGUID="{9B9022BF-1BF0-4D03-BD14-B47331E31E2C}">
+  DTS:VersionBuild="206"
+  DTS:VersionGUID="{64FFBF98-BA2D-4A9B-A7EB-650573FD8683}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -214,7 +214,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[ICS].[ProductUnitMeasure]</property>
+                      name="OpenRowset">[ERP].[v_StagingProductUM]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -252,8 +252,8 @@ FROM            ICS.Location LEFT OUTER JOIN
                   <connections>
                     <connection
                       refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -293,6 +293,15 @@ FROM            ICS.Location LEFT OUTER JOIN
                           lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
                           name="ProductUnitMeasureKey"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -303,62 +312,9 @@ FROM            ICS.Location LEFT OUTER JOIN
                           length="10"
                           name="Code" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
-                          dataType="bool"
-                          name="IsActive" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
-                          dataType="bool"
-                          name="IsDeleted" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[CreationUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CreationUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[CreationDate]"
-                          dataType="dbTimeStamp"
-                          name="CreationDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="LastModifiedUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="LastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                          dataType="bytes"
-                          length="8"
-                          name="RowVersion" />
-                        <externalMetadataColumn
                           refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
                           dataType="guid"
                           name="ProductUnitMeasureKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[SiteId]"
-                          dataType="i2"
-                          name="SiteId" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
-                          dataType="guid"
-                          name="ProductKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[UnitMeasureKey]"
-                          dataType="guid"
-                          name="UnitMeasureKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[UnitMeasureProfileKey]"
-                          dataType="guid"
-                          name="UnitMeasureProfileKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[UnitMeasureTypeKey]"
-                          dataType="guid"
-                          name="UnitMeasureTypeKey" />
                         <externalMetadataColumn
                           refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[Factor]"
                           dataType="numeric"
@@ -366,19 +322,9 @@ FROM            ICS.Location LEFT OUTER JOIN
                           precision="18"
                           scale="5" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[IsCustomized]"
-                          dataType="bool"
-                          name="IsCustomized" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[SourceLastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="SourceLastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[SourceId]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="SourceId" />
+                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -405,6 +351,11 @@ FROM            ICS.Location LEFT OUTER JOIN
                           length="10"
                           lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Error Output].Columns[Code]"
                           name="Code" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
                         <outputColumn
                           refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Error Output].Columns[Factor]"
                           dataType="numeric"
@@ -545,6 +496,12 @@ FROM            ICS.Location LEFT OUTER JOIN
                           cachedName="Code"
                           externalMetadataColumnId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureCode]"
                           lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].Columns[Code]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures.Outputs[OLE DB Source Output].Columns[ProductKey]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -564,6 +521,10 @@ FROM            ICS.Location LEFT OUTER JOIN
                           name="Factor"
                           precision="18"
                           scale="5" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -631,6 +592,22 @@ FROM            ICS.Location LEFT OUTER JOIN
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{6a766bcb-36be-4b1a-8727-fe47ca641d99}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Extract from Source to Staging (ProductUnitMeasures)\Truncate staging table"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
@@ -665,6 +642,14 @@ FROM            ICS.Location LEFT OUTER JOIN
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Extract from Source to Staging (ProductUnitMeasures)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (ProductUnitMeasures).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{4704732D-C0B1-4A20-96DA-3FBED5776A43}"
+          DTS:From="Package\Extract from Source to Staging (ProductUnitMeasures)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (ProductUnitMeasures)\Final Row Count" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -743,7 +728,7 @@ FROM            ICS.Location LEFT OUTER JOIN
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{49D94132-9650-458B-A844-DCB2BC9F2EB5}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -878,6 +863,10 @@ FROM            ICS.Location LEFT OUTER JOIN
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Count rows in staging"
           TopLeft="62,229" />
         <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Final Row Count"
+          TopLeft="75,317" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Truncate staging table"
           TopLeft="55,49" />
@@ -925,11 +914,33 @@ FROM            ICS.Location LEFT OUTER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (ProductUnitMeasures).PrecedenceConstraints[Constraint 2]"
+          TopLeft="153.5,271">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="367,318"
-          Size="367,361"
+          PanelSize="367,428"
+          Size="367,471"
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)"
           TopLeft="413,71" />
         <NodeLayout
@@ -970,18 +981,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="277,254.25">
+          TopLeft="277,257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="136,0"
+              EndConnector="136,49.5"
               Start="0,0"
-              End="128.5,0">
+              End="128.5,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="128.5,0" />
+                    End="64,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64,0"
+                    Point2="68,0"
+                    Point3="68,4" />
+                  <mssgle:LineSegment
+                    End="68,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68,45.5"
+                    Point2="68,49.5"
+                    Point3="72,49.5" />
+                  <mssgle:LineSegment
+                    End="128.5,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -992,18 +1015,30 @@ FROM            ICS.Location LEFT OUTER JOIN
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="780,255.25">
+          TopLeft="780,306.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="72,0"
+              EndConnector="72,-47.5"
               Start="0,0"
-              End="64.5,0">
+              End="64.5,-47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="64.5,0" />
+                    End="32,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32,0"
+                    Point2="36,0"
+                    Point3="36,-4" />
+                  <mssgle:LineSegment
+                    End="36,-43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36,-43.5"
+                    Point2="36,-47.5"
+                    Point3="40,-47.5" />
+                  <mssgle:LineSegment
+                    End="64.5,-47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1021,39 +1056,17 @@ FROM            ICS.Location LEFT OUTER JOIN
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="214,42"
-          Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures"
-          TopLeft="111,84" />
-        <NodeLayout
           Size="133,42"
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Row Count"
           TopLeft="146,182" />
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging.Paths[OLE DB Source Output]"
-          TopLeft="215.25,126">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56"
-              Start="0,0"
-              End="0,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="210,42"
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure"
           TopLeft="109,285" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures"
+          TopLeft="111,84" />
         <EdgeLayout
           Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging.Paths[Row Count Output 1]"
           TopLeft="213.25,224">
@@ -1076,11 +1089,33 @@ FROM            ICS.Location LEFT OUTER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging.Paths[OLE DB Source Output]"
+          TopLeft="215.25,126">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures">
+    design-time-name="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1093,7 +1128,7 @@ FROM            ICS.Location LEFT OUTER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Write Staging UnitMeasure">
+    design-time-name="Package\Extract from Source to Staging (ProductUnitMeasures)\Copy data from source to staging\Read ProductUnitMeasures">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1101,7 +1136,7 @@ FROM            ICS.Location LEFT OUTER JOIN
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

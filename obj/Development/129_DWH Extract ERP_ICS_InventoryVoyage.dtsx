@@ -1,0 +1,1696 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/25/2023 11:39:31 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="NB085"
+  DTS:CreatorName="APOLLOSHIPS\aorizondo"
+  DTS:DTSID="{0992ACB4-718B-4663-B245-4F58A9781C68}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5314.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DWH Extract ERP_ICS_InventoryVoyage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="205"
+  DTS:VersionGUID="{22B1D8EA-AA3A-4D23-8B59-F9514980460E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWH_Test]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{590BC776-4516-445A-9C16-2376C4E11689}"
+      DTS:ObjectName="localhost.DWH_Test">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DWHConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_Test;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-DWH_Test-{2211D4FD-2A8E-45B0-9358-112A3FF06347}localhost.DWH_Test;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:Description="Audit key passed from calling package"
+      DTS:DTSID="{03EF6481-7948-4B18-9A9F-E9F5D3F45525}"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{99738508-095F-4A4A-B4CF-B9C9204FCF43}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85387ED0-8E81-4041-AE54-4F140FA7D183}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DatabaseName">
+      <DTS:VariableValue
+        DTS:DataType="8">Staging</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3904F96E-2EDB-48B6-99BF-1E7A0C71EE06}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FilteredRowCount">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BCC400FA-C43F-4F61-AFE0-6459CC16D7E2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Incremental">
+      <DTS:VariableValue
+        DTS:DataType="11">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5B76C2B8-D0F5-4610-B8B6-229381217622}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountErrors">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3EFF8FA3-FA93-4E99-96B1-99401EE39579}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountExtracts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5AD6C6A0-23B8-4BDA-896C-52CDA89D6ABB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountFinal">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{418AE71E-F89B-4669-BBB5-DE21307D575E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInitial">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{562A824C-0D7C-4993-941F-94693B76D480}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B9AB8746-FE12-4B29-A6DA-7F62AE4807BE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUpdates">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C2DC1025-2B0F-4F34-A390-B1CCC84B47AD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunPackage">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{46F34A74-F825-4BF8-B784-7AE80ADD457D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQuery">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2483994B-F775-4306-8DCA-CF7BDC0793A0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceQueryWhere">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{42304E78-52B3-4937-9F25-B5F3C5049FF6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableMaxDateTime">
+      <DTS:VariableValue
+        DTS:DataType="7">12:00:00 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F86857EA-B1C8-48B1-8AAD-814565B6CEC9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TableName">
+      <DTS:VariableValue
+        DTS:DataType="8">ERP_ICS_InventoryVoyage</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{9AF136B9-2571-45FB-8BA0-FB4E05973C0A}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Extract from Source to Staging (Inventory Voyage)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Count rows in staging"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{70D6E9FF-A490-4667-9BDB-1FAAAC0DA088}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count rows in staging"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_InventoryVoyage]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{ECDE0693-CFC5-4E2C-859B-13DB130B7844}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count 1"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{9FDBBBC5-4055-4D3E-8363-A5B6236CA827}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count 1"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{E1EBD53B-DBDF-4671-90DB-05C03C0903AC}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Full Load Inventory Voyage"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read ERP Inventory Voyage"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[v_StagingInventoryVoyage]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [InventorySnapshotKey]
+		,[SnapshotDate]
+		,[InventoryKey]
+		,[CompanyGroupShipKey]
+		,[LocationKey]
+		,[SiteId]
+		,[ProductKey]
+		,[ProductUnitMeasureKey]
+		,[QuantityOnHand]
+		,[Cost]
+		,[LastModifiedDate]
+		,[RowVersion]
+	FROM [ApolloERP].[ICS].[InventorySnapshot]
+	WHERE IsDeleted = 0</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[LocationKey]"
+                          name="LocationKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[QuantityOnHand]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[QuantityOnHand]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[QuantityOnHand]"
+                          name="QuantityOnHand"
+                          precision="18"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[Cost]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[RowVersion]"
+                          name="RowVersion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[InventoryVoyageKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[InventoryVoyageKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[InventoryVoyageKey]"
+                          name="InventoryVoyageKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[QuantityOnHand]"
+                          dataType="numeric"
+                          name="QuantityOnHand"
+                          precision="18"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersion" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[InventoryVoyageKey]"
+                          dataType="guid"
+                          name="InventoryVoyageKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[InventoryVoyageKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[InventoryVoyageKey]"
+                          name="InventoryVoyageKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[VoyageCompanyGroupShipKey]"
+                          name="VoyageCompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[CompanyGroupShipKey]"
+                          name="CompanyGroupShipKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                          name="LocationKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[QuantityOnHand]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[QuantityOnHand]"
+                          name="QuantityOnHand"
+                          precision="18"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          dataType="numeric"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[Cost]"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ProductUnitMeasureKey]"
+                          name="ProductUnitMeasureKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[RowVersion]"
+                          name="RowVersion" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Extract">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountExtracts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Write Staging InventoryVoyage"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[ICS_InventoryVoyage]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[CompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="CompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[CompanyGroupShipKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[ProductUnitMeasureKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductUnitMeasureKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                          cachedDataType="guid"
+                          cachedName="LocationKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[LocationKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[QuantityOnHand]"
+                          cachedDataType="numeric"
+                          cachedName="QuantityOnHand"
+                          cachedPrecision="18"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[QuantityOnHand]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[QuantityOnHand]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[Cost]"
+                          cachedDataType="numeric"
+                          cachedName="Cost"
+                          cachedPrecision="9"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[Cost]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[RowVersion]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowVersion"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[RowVersion]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[RowVersion]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[InventoryVoyageKey]"
+                          cachedDataType="guid"
+                          cachedName="InventoryVoyageKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[InventoryVoyageKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[InventoryVoyageKey]" />
+                        <inputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].Columns[VoyageCompanyGroupShipKey]"
+                          cachedDataType="guid"
+                          cachedName="VoyageCompanyGroupShipKey"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output].Columns[VoyageCompanyGroupShipKey]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupShipKey]"
+                          dataType="guid"
+                          name="CompanyGroupShipKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[ProductUnitMeasureKey]"
+                          dataType="guid"
+                          name="ProductUnitMeasureKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                          dataType="guid"
+                          name="LocationKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[QuantityOnHand]"
+                          dataType="numeric"
+                          name="QuantityOnHand"
+                          precision="18"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[Cost]"
+                          dataType="numeric"
+                          name="Cost"
+                          precision="9"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[RowVersion]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersion" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[InventoryVoyageKey]"
+                          dataType="guid"
+                          name="InventoryVoyageKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input].ExternalColumns[VoyageCompanyGroupShipKey]"
+                          dataType="guid"
+                          name="VoyageCompanyGroupShipKey" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage.Paths[OLE DB Source Output]"
+                  endId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract.Inputs[Row Count Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage.Paths[Row Count Output 1]"
+                  endId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Get Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D69D3012-8AB0-4BE9-9600-E2208A3A7E8A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+              SQLTask:SqlStatementSource="SELECT Incremental FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::Incremental" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Incremental Load Inventory Voyage"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AADDE5A2-DF07-45E3-9A43-64742F95D440}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental Load Inventory Voyage"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+              SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spStagingInventoryVoyageIncrementalLoad  @RowCountExt = @Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::RowCountExtracts"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Incremental load?"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{54F02968-AECD-4F0F-A894-496E6E2AA0BB}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Incremental load?"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::Incremental]" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Row Count Inserts"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D0681D6C-5F85-470B-BC87-05C9528AB7B1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Row Count Inserts"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="select count(*) from [ERP].[ICS_InventoryVoyage]"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCountInserts" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Set Incremental"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E7596117-DC31-4E31-B185-1ADEBD2E1845}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Incremental"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+              SQLTask:SqlStatementSource="UPDATE [audit].RunPackages&#xA; SET Incremental = 1&#xA;WHERE Incremental = 0&#xA;  AND TableName = ?&#xA;  AND DatabaseName = ?;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::TableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::DatabaseName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage)\Truncate staging table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4E778E61-33C7-442B-9A8B-0F6692BEF328}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate staging table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}"
+              SQLTask:SqlStatementSource="Truncate table [ERP].[ICS_InventoryVoyage]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D8C81D19-5ACB-4876-B6E4-D10C5C966CC3}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Truncate staging table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Incremental load?" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{82B54A7E-AA78-4327-B418-16E973B24AA3}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Incremental Load Inventory Voyage"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{38EE1E77-04D6-4591-B592-1E00CFB7EDED}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:Description="Incremental"
+          DTS:DTSID="{08A7D82B-C3F9-4720-829D-94D4243D7FBD}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==True"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Incremental Load Inventory Voyage" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:Description="Full load"
+          DTS:DTSID="{4C459934-7779-4464-B6EE-B08714D11C60}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::Incremental]==False"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Incremental load?"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{EFCC9B74-0AEE-414B-BDF4-443BEBE9ED63}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Row Count Inserts" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{42EFCA4F-A663-48B4-8FD8-901EFAE3056E}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Row Count Inserts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{F8BAEA2A-8935-4FE0-A764-53BEC46EBF94}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Get Incremental"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Truncate staging table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{8EEF7F3D-FCB8-4BC7-BECB-6A2B7DA27FAA}"
+          DTS:From="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count 1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\Extract from Source to Staging (Inventory Voyage)\Set Incremental" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5644BD1A-AC1F-4F78-A910-B3B0FB318137}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+          SQLTask:SqlStatementSource="spAuditBegin  ?,?,?,?,?,?,?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="AuditKey"
+            SQLTask:DtsVariableName="User::AuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::VersionGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="$Package::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run package?"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2E7F1719-DAEE-4BF0-AC21-43DA9F848969}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run package?"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunPackage" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::TableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::DatabaseName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update row into audit table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B4532F7F-446D-4869-99DE-7C66606A90A3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update row into audit table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{590BC776-4516-445A-9C16-2376C4E11689}"
+          SQLTask:SqlStatementSource="spAuditEnd ?,?,?,?,?,?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RowCountInitial"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RowCountExtracts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::RowCountInserts"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::RowCountUpdates"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::RowCountFinal"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::RowCountErrors"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::AuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::FilteredRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C699C06C-2E01-4F10-A3D9-0DD99219DB4B}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RunPackage]"
+      DTS:From="Package\Run package?"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert row into audit table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{08419F49-B463-42F8-972A-6C1933513B71}"
+      DTS:From="Package\Insert row into audit table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Extract from Source to Staging (Inventory Voyage)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{20E624D1-EF19-46B3-BD4A-09A4E9A0CDF8}"
+      DTS:From="Package\Extract from Source to Staging (Inventory Voyage)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update row into audit table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Count rows in staging"
+          TopLeft="39,307" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count"
+          TopLeft="48,380" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Final Row Count 1"
+          TopLeft="303,379" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage"
+          TopLeft="283,241" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Get Incremental"
+          TopLeft="173,17" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Incremental Load Inventory Voyage"
+          TopLeft="10,241" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Incremental load?"
+          TopLeft="162,156" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Row Count Inserts"
+          TopLeft="304,310" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Set Incremental"
+          TopLeft="307,449" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Truncate staging table"
+          TopLeft="155,89" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint]"
+          TopLeft="245.75,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 1]"
+          TopLeft="132.5,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 2]"
+          TopLeft="128.5,349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 3]"
+          TopLeft="218,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-84,43"
+              Start="0,0"
+              End="-84,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="-4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-80,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-80,17.4492753623188"
+                    Point2="-84,17.4492753623188"
+                    Point3="-84,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="-84,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.60578125,22.4492753623188,71.2115625,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 4]"
+          TopLeft="270,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117,43"
+              Start="0,0"
+              End="117,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.4492753623188"
+                    Point2="0,17.4492753623188"
+                    Point3="4,17.4492753623188" />
+                  <mssgle:LineSegment
+                    End="113,17.4492753623188" />
+                  <mssgle:CubicBezierSegment
+                    Point1="113,17.4492753623188"
+                    Point2="117,17.4492753623188"
+                    Point3="117,21.4492753623188" />
+                  <mssgle:LineSegment
+                    End="117,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.833359375,22.4492753623188,55.33328125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 5]"
+          TopLeft="387,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 6]"
+          TopLeft="386.25,352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 7]"
+          TopLeft="249,59">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 8]"
+          TopLeft="384.75,421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="497,545"
+          Size="497,588"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)"
+          TopLeft="413,36" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Insert row into audit table"
+          TopLeft="76,288" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Run package?"
+          TopLeft="109,83" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Update row into audit table"
+          TopLeft="998,290" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="180.5,125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,163"
+              Start="0,0"
+              End="0,155.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,155.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,69.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="278,309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="135,21"
+              Start="0,0"
+              End="127.5,21">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="63.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.5,0"
+                    Point2="67.5,0"
+                    Point3="67.5,4" />
+                  <mssgle:LineSegment
+                    End="67.5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.5,17"
+                    Point2="67.5,21"
+                    Point3="71.5,21" />
+                  <mssgle:LineSegment
+                    End="127.5,21" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="910,330">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88,-19"
+              Start="0,0"
+              End="80.5,-19">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40,0"
+                    Point2="44,0"
+                    Point3="44,-4" />
+                  <mssgle:LineSegment
+                    End="44,-15" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44,-15"
+                    Point2="44,-19"
+                    Point3="48,-19" />
+                  <mssgle:LineSegment
+                    End="80.5,-19" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage"
+          TopLeft="91,276" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Row Count Extract"
+          TopLeft="119,174" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage"
+          TopLeft="90,87" />
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage.Paths[OLE DB Source Output]"
+          TopLeft="198.75,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage.Paths[Row Count Output 1]"
+          TopLeft="203,216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Write Staging InventoryVoyage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract from Source to Staging (Inventory Voyage)\Full Load Inventory Voyage\Read ERP Inventory Voyage">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 3]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+  <PrecedenceConstraint
+    design-time-name="Package\Extract from Source to Staging (Inventory Voyage).PrecedenceConstraints[Constraint 4]">
+    <ShowAnnotation>ConstraintDescription</ShowAnnotation>
+  </PrecedenceConstraint>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load DimShip"
   DTS:PackageType="5"
-  DTS:VersionBuild="163"
-  DTS:VersionGUID="{23039F5C-ED82-44DF-8C6C-23BF0B722A41}">
+  DTS:VersionBuild="165"
+  DTS:VersionGUID="{3C09988F-AE10-4A11-95A5-F83FB7D9C961}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -307,7 +307,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{6E21366E-F289-4DD6-9A79-2905BE97339B}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimVendor"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimVendor"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -329,7 +329,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{6E21366E-F289-4DD6-9A79-2905BE97339B}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from DimVendor"
+              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].DimVendor"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountInitial"
@@ -507,7 +507,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[DimVendor]</property>
+                      name="OpenRowset">[ERP].[DimVendor]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -678,13 +678,13 @@
                       description="Specifies the SQL statement that generates the lookup table."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimVendor]</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [ERP].[DimVendor]</property>
                     <property
                       dataType="System.String"
                       description="Specifies a SQL statement that uses parameters to generate the lookup table."
                       expressionType="Notify"
                       name="SqlCommandParam"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimVendor]) [refTable]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [ERP].[DimVendor]) [refTable]
 where [refTable].[VendorKey] = ?</property>
                     <property
                       dataType="System.Int32"
@@ -1207,7 +1207,7 @@ where [refTable].[VendorKey] = ?</property>
                       description="The SQL command to be executed."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[DimVendor]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [ERP].[DimVendor]
    SET [VendorCode] = ?
           ,[VendorName] = ?
           ,[CompanyGroupCode] = ?
@@ -1512,7 +1512,7 @@ where [refTable].[VendorKey] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{6E21366E-F289-4DD6-9A79-2905BE97339B}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1900,9 +1900,21 @@ where [refTable].[VendorKey] = ?</property>
           Id="Package\Load Dimension (Vendor)\Load DimVendor\Row Count Updated"
           TopLeft="727,383" />
         <NodeLayout
+          Size="113,42"
+          Id="Package\Load Dimension (Vendor)\Load DimVendor\Lookup"
+          TopLeft="309,139" />
+        <NodeLayout
           Size="178,42"
           Id="Package\Load Dimension (Vendor)\Load DimVendor\Read Staging Vendor"
           TopLeft="44,42" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Load Dimension (Vendor)\Load DimVendor\Row Count"
+          TopLeft="139,286" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Load Dimension (Vendor)\Load DimVendor\Update Vendor"
+          TopLeft="737,284" />
         <NodeLayout
           Size="183,42"
           Id="Package\Load Dimension (Vendor)\Load DimVendor\Row Count Extracted"
@@ -1912,9 +1924,83 @@ where [refTable].[VendorKey] = ?</property>
           Id="Package\Load Dimension (Vendor)\Load DimVendor\Insert in DimVendor"
           TopLeft="125,364" />
         <NodeLayout
-          Size="133,42"
-          Id="Package\Load Dimension (Vendor)\Load DimVendor\Row Count"
-          TopLeft="139,286" />
+          Size="165,42"
+          Id="Package\Load Dimension (Vendor)\Load DimVendor\Row CountFiltered"
+          TopLeft="434,396" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Load Dimension (Vendor)\Load DimVendor\Any change?"
+          TopLeft="442,289" />
+        <EdgeLayout
+          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Conditional Split Default Output]"
+          TopLeft="514,331">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65"
+              Start="0,0"
+              End="0,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,22.9208984375,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[change]"
+          TopLeft="581,307.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="156,0"
+              Start="0,0"
+              End="148.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="148.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="57.61904296875,5,33.2619140625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Row Count Output 11]"
+          TopLeft="366.5,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Row Count Output 1]"
           TopLeft="208.75,328">
@@ -1959,24 +2045,20 @@ where [refTable].[VendorKey] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="113,42"
-          Id="Package\Load Dimension (Vendor)\Load DimVendor\Lookup"
-          TopLeft="309,139" />
         <EdgeLayout
-          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Row Count Output 11]"
-          TopLeft="366.5,83">
+          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[OLE DB Command Output]"
+          TopLeft="813.75,326">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56"
+              EndConnector="0,57"
               Start="0,0"
-              End="0,48.5">
+              End="0,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.5" />
+                    End="0,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2021,10 +2103,6 @@ where [refTable].[VendorKey] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="139,42"
-          Id="Package\Load Dimension (Vendor)\Load DimVendor\Any change?"
-          TopLeft="442,289" />
         <EdgeLayout
           Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Lookup Match Output]"
           TopLeft="383,181">
@@ -2061,87 +2139,32 @@ where [refTable].[VendorKey] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="149,42"
-          Id="Package\Load Dimension (Vendor)\Load DimVendor\Update Vendor"
-          TopLeft="737,284" />
-        <EdgeLayout
-          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[change]"
-          TopLeft="581,307.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="156,0"
-              Start="0,0"
-              End="148.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="148.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="57.61904296875,5,33.2619140625,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[OLE DB Command Output]"
-          TopLeft="813.75,326">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,57"
-              Start="0,0"
-              End="0,49.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,49.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="165,42"
-          Id="Package\Load Dimension (Vendor)\Load DimVendor\Row CountFiltered"
-          TopLeft="434,396" />
-        <EdgeLayout
-          Id="Package\Load Dimension (Vendor)\Load DimVendor.Paths[Conditional Split Default Output]"
-          TopLeft="514,331">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,65"
-              Start="0,0"
-              End="0,57.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,57.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-70.61390625,22.9208984375,141.2278125,11.658203125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (Vendor)\Load DimVendor\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[ERP].[DimVendor]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load Dimension (Vendor)\Load DimVendor\Read Staging Vendor">
     <Properties>
@@ -2596,28 +2619,5 @@ where [refTable].[VendorKey] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (Vendor)\Load DimVendor\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimVendor]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

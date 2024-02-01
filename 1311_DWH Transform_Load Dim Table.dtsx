@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="NB085"
   DTS:CreatorName="APOLLOSHIPS\aorizondo"
-  DTS:DTSID="{A86A479C-31F4-43B1-B5AF-9F48BCEE6622}"
+  DTS:DTSID="{F10DB923-3C00-45E1-874C-59C0FA68AF21}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5314.0"
   DTS:LocaleID="1033"
-  DTS:ObjectName="DWH Template Package Transform_Load"
+  DTS:ObjectName="DWH Transform_Load Dim Table"
   DTS:PackageType="5"
-  DTS:VersionBuild="120"
-  DTS:VersionGUID="{04D66AF9-5B05-4711-8AAA-DDD06E7EEAB3}">
+  DTS:VersionBuild="136"
+  DTS:VersionGUID="{13CC3C74-3A76-451A-A96A-423C046A511C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -141,6 +141,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowCountInserts">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{08090F4E-54DB-46C5-9AEA-73B92B9ED4A9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCountUnchanged">
       <DTS:VariableValue
         DTS:DataType="20">0</DTS:VariableValue>
     </DTS:Variable>
@@ -682,7 +691,7 @@ where [refTable].[database_name] = ? and [refTable].[id_table] = ?</property>
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                      name="ParameterMap">#{Package\Load Dimension (Table Growth)\Load Dim Table\2058:invalid};#{Package\Load Dimension (Table Growth)\Load Dim Table\2059:invalid};</property>
+                      name="ParameterMap">#{Package\Load Dimension (Table Growth)\Load Dim Table\325:invalid};#{Package\Load Dimension (Table Growth)\Load Dim Table\326:invalid};</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1367,35 +1376,6 @@ WHERE id_table=? and database_name =?</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count"
-                  componentClassID="Microsoft.RowCount"
-                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-                  name="Filtered Row Count">
-                  <properties>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the variable to hold the row count."
-                      name="VariableName">User::FilteredRowCount</property>
-                  </properties>
-                  <inputs>
-                    <input
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count.Inputs[Row Count Input 1]"
-                      hasSideEffects="true"
-                      name="Row Count Input 1">
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count.Outputs[Row Count Output 1]"
-                      name="Row Count Output 1"
-                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count.Inputs[Row Count Input 1]">
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Insert Destination Dim Table"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -1579,102 +1559,11 @@ WHERE id_table=? and database_name =?</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter"
-                  componentClassID="Microsoft.ConditionalSplit"
-                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-                  name="not null pk filter"
-                  usesDispositions="true">
-                  <inputs>
-                    <input
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input]"
-                      description="Input to the Conditional Split Transformation"
-                      name="Conditional Split Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input].Columns[primary_key_column]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="200"
-                          cachedName="primary_key_column"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]" />
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[pk_not_null]"
-                      description="Output 1 of the Conditional Split Transformation"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      exclusionGroup="1"
-                      name="pk_not_null"
-                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input]"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                          name="Expression">![ISNULL](#{Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]})</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Specifies the friendly version of the expression. This expression version uses column names."
-                          expressionType="Notify"
-                          name="FriendlyExpression">!ISNULL(primary_key_column)</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                          name="EvaluationOrder">0</property>
-                      </properties>
-                      <externalMetadataColumns />
-                    </output>
-                    <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Default Output]"
-                      description="Default Output of the Conditional Split Transformation"
-                      exclusionGroup="1"
-                      name="Conditional Split Default Output"
-                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input]">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          name="IsDefaultOut">true</property>
-                      </properties>
-                      <externalMetadataColumns />
-                    </output>
-                    <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Error Output]"
-                      description="Error Output of the Conditional Split Transformation"
-                      exclusionGroup="1"
-                      isErrorOut="true"
-                      name="Conditional Split Error Output"
-                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input]">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source"
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging"
                   componentClassID="Microsoft.OLEDBSource"
                   contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
                   description="OLE DB Source"
-                  name="OLE DB Source"
+                  name="Read Staging"
                   usesDispositions="true"
                   version="7">
                   <properties>
@@ -1719,7 +1608,7 @@ WHERE id_table=? and database_name =?</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Connections[OleDbConnection]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[localhost.Staging]"
                       connectionManagerRefId="Package.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
@@ -1727,145 +1616,145 @@ WHERE id_table=? and database_name =?</property>
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output]"
                       name="OLE DB Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id]"
                           dataType="i8"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id]"
                           name="id"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[database_name]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[database_name]"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]"
                           name="database_name"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_table]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[id_table]"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]"
                           name="id_table"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[table_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[table_name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[table_name]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[table_name]"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[table_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[table_name]"
                           name="table_name"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[rows]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[rows]"
                           dataType="i8"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rows]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[rows]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[rows]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[rows]"
                           name="rows"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date]"
                           dataType="dbDate"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[date]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date]"
                           name="date"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date_key]"
                           dataType="i4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date_key]"
                           name="date_key"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[primary_key_column]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[primary_key_column]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[primary_key_column]"
                           length="200"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[primary_key_column]"
                           name="primary_key_column"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[schema_name]"
+                          externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[schema_name]"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]"
                           name="schema_name"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[id]"
                           dataType="i8"
                           name="id" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[database_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[database_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
                           name="database_name" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_table]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[id_table]"
                           codePage="1252"
                           dataType="str"
                           length="100"
                           name="id_table" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[table_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[table_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
                           name="table_name" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rows]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[rows]"
                           dataType="i8"
                           name="rows" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[date]"
                           dataType="dbDate"
                           name="date" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
                           dataType="i4"
                           name="date_key" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[primary_key_column]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[primary_key_column]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="primary_key_column" />
                         <externalMetadataColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[schema_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].ExternalColumns[schema_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
@@ -1873,75 +1762,75 @@ WHERE id_table=? and database_name =?</property>
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output]"
                       isErrorOut="true"
                       name="OLE DB Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[id]"
                           dataType="i8"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[id]"
                           name="id" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[database_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[database_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[database_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[database_name]"
                           name="database_name" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_table]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[id_table]"
                           codePage="1252"
                           dataType="str"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_table]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[id_table]"
                           name="id_table" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[table_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[table_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[table_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[table_name]"
                           name="table_name" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rows]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[rows]"
                           dataType="i8"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rows]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[rows]"
                           name="rows" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[date]"
                           dataType="dbDate"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[date]"
                           name="date" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date_key]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[date_key]"
                           dataType="i4"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date_key]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[date_key]"
                           name="date_key" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[primary_key_column]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[primary_key_column]"
                           codePage="1252"
                           dataType="str"
                           length="200"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[primary_key_column]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[primary_key_column]"
                           name="primary_key_column" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[schema_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[schema_name]"
                           codePage="1252"
                           dataType="str"
                           length="100"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[schema_name]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[schema_name]"
                           name="schema_name" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1979,11 +1868,69 @@ WHERE id_table=? and database_name =?</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated"
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered"
                   componentClassID="Microsoft.RowCount"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
-                  name="Row Count Updated">
+                  name="Row Count Filtered">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::FilteredRowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Insert">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountInserts</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Updated 1">
                   <properties>
                     <property
                       dataType="System.String"
@@ -1992,7 +1939,7 @@ WHERE id_table=? and database_name =?</property>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated.Inputs[Row Count Input 1]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -2000,9 +1947,38 @@ WHERE id_table=? and database_name =?</property>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated.Outputs[Row Count Output 1]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Updated 2">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCountUpdates</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -2074,7 +2050,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="database_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input].ExternalColumns[database_name]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]">
                           <properties>
                             <property
                               dataType="System.Int32"
@@ -2089,7 +2065,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="id_table"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input].ExternalColumns[id_table]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]">
                           <properties>
                             <property
                               dataType="System.Int32"
@@ -2104,7 +2080,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="schema_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input].ExternalColumns[schema_name]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]">
                           <properties>
                             <property
                               dataType="System.Int32"
@@ -2119,7 +2095,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="table_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input].ExternalColumns[table_name]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[table_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[table_name]">
                           <properties>
                             <property
                               dataType="System.Int32"
@@ -2298,14 +2274,15 @@ WHERE id_table=? and database_name =?</property>
                   version="1">
                   <inputs>
                     <input
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1]"
-                      name="Union All Input 1">
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3]"
+                      hasSideEffects="true"
+                      name="Union All Input 3">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[id]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[id]"
                           cachedDataType="i8"
                           cachedName="id"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id]">
                           <properties>
                             <property
                               containsID="true"
@@ -2315,12 +2292,12 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[database_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[database_name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="database_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2330,12 +2307,12 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[id_table]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[id_table]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="id_table"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]">
                           <properties>
                             <property
                               containsID="true"
@@ -2345,12 +2322,12 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[table_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[table_name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="table_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[table_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[table_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2360,10 +2337,10 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[rows]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[rows]"
                           cachedDataType="i8"
                           cachedName="rows"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[rows]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[rows]">
                           <properties>
                             <property
                               containsID="true"
@@ -2373,10 +2350,10 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[date]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[date]"
                           cachedDataType="dbDate"
                           cachedName="date"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date]">
                           <properties>
                             <property
                               containsID="true"
@@ -2386,10 +2363,10 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[date_key]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[date_key]"
                           cachedDataType="i4"
                           cachedName="date_key"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date_key]">
                           <properties>
                             <property
                               containsID="true"
@@ -2399,12 +2376,12 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[primary_key_column]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[primary_key_column]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="primary_key_column"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[primary_key_column]">
                           <properties>
                             <property
                               containsID="true"
@@ -2414,12 +2391,12 @@ WHERE id_table=? and database_name =?</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1].Columns[schema_name]"
+                          refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3].Columns[schema_name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="schema_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2440,7 +2417,7 @@ WHERE id_table=? and database_name =?</property>
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2].Columns[id]"
                           cachedDataType="i8"
                           cachedName="id"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id]">
                           <properties>
                             <property
                               containsID="true"
@@ -2455,7 +2432,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="database_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2470,7 +2447,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="id_table"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]">
                           <properties>
                             <property
                               containsID="true"
@@ -2485,7 +2462,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="table_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[table_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[table_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2498,7 +2475,7 @@ WHERE id_table=? and database_name =?</property>
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2].Columns[rows]"
                           cachedDataType="i8"
                           cachedName="rows"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[rows]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[rows]">
                           <properties>
                             <property
                               containsID="true"
@@ -2511,7 +2488,7 @@ WHERE id_table=? and database_name =?</property>
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2].Columns[date]"
                           cachedDataType="dbDate"
                           cachedName="date"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date]">
                           <properties>
                             <property
                               containsID="true"
@@ -2524,7 +2501,7 @@ WHERE id_table=? and database_name =?</property>
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2].Columns[date_key]"
                           cachedDataType="i4"
                           cachedName="date_key"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[date_key]">
                           <properties>
                             <property
                               containsID="true"
@@ -2539,7 +2516,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="primary_key_column"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[primary_key_column]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[primary_key_column]">
                           <properties>
                             <property
                               containsID="true"
@@ -2554,7 +2531,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedDataType="str"
                           cachedLength="100"
                           cachedName="schema_name"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]">
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]">
                           <properties>
                             <property
                               containsID="true"
@@ -2567,10 +2544,10 @@ WHERE id_table=? and database_name =?</property>
                       <externalMetadataColumns />
                     </input>
                     <input
-                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3]"
+                      refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1]"
                       dangling="true"
                       hasSideEffects="true"
-                      name="Union All Input 3">
+                      name="Union All Input 1">
                       <externalMetadataColumns />
                     </input>
                   </inputs>
@@ -2686,7 +2663,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="database_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]" />
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]" />
                         <inputColumn
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input].Columns[id_table]"
                           cachedCodepage="1252"
@@ -2694,7 +2671,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="id_table"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]" />
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]" />
                         <inputColumn
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input].Columns[schema_name]"
                           cachedCodepage="1252"
@@ -2702,7 +2679,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="schema_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[schema_name]" />
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[schema_name]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -2827,7 +2804,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="database_name"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2).Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[database_name]" />
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[database_name]" />
                         <inputColumn
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2).Inputs[OLE DB Command Input].Columns[id_table]"
                           cachedCodepage="1252"
@@ -2835,7 +2812,7 @@ WHERE id_table=? and database_name =?</property>
                           cachedLength="100"
                           cachedName="id_table"
                           externalMetadataColumnId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2).Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_table]" />
+                          lineageId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output].Columns[id_table]" />
                         <inputColumn
                           refId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2).Inputs[OLE DB Command Input].Columns[end_date]"
                           cachedDataType="dbDate"
@@ -2921,7 +2898,7 @@ WHERE id_table=? and database_name =?</property>
               <paths>
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Changing Attribute Updates Output]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1.Inputs[Row Count Input 1]"
                   name="Changing Attribute Updates Output"
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Outputs[Changing Attribute Updates Output]" />
                 <path
@@ -2941,42 +2918,47 @@ WHERE id_table=? and database_name =?</property>
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Outputs[Historical Attribute Inserts Output]" />
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[New Output]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 1]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert.Inputs[Row Count Input 1]"
                   name="New Output"
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Outputs[New Output]" />
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[OLE DB Command Output]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2.Inputs[Row Count Input 1]"
                   name="OLE DB Command Output"
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2).Outputs[OLE DB Command Output]" />
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[OLE DB Source Output]"
                   endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Extracts.Inputs[Row Count Input 1]"
                   name="OLE DB Source Output"
-                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source.Outputs[OLE DB Source Output]" />
-                <path
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[pk_not_null]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count.Inputs[Row Count Input 1]"
-                  name="pk_not_null"
-                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Outputs[pk_not_null]" />
+                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging.Outputs[OLE DB Source Output]" />
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 1]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter.Inputs[Conditional Split Input]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1).Inputs[OLE DB Command Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 11]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 3]"
+                  name="Row Count Output 1"
+                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 12]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Inputs[Union All Input 2]"
+                  name="Row Count Output 1"
+                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 13]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input]"
                   name="Row Count Output 1"
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Extracts.Outputs[Row Count Output 1]" />
                 <path
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 11]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Inputs[Slowly Changing Dimension Input]"
-                  name="Row Count Output 1"
-                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count.Outputs[Row Count Output 1]" />
-                <path
-                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 12]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Begin date.Inputs[Derived Column Input]"
-                  name="Row Count Output 1"
-                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated.Outputs[Row Count Output 1]" />
+                  refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Unchanged Output]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered.Inputs[Row Count Input 1]"
+                  name="Unchanged Output"
+                  startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable.Outputs[Unchanged Output]" />
                 <path
                   refId="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Union All Output 1]"
-                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated.Inputs[Row Count Input 1]"
+                  endId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Begin date.Inputs[Derived Column Input]"
                   name="Union All Output 1"
                   startId="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All.Outputs[Union All Output 1]" />
               </paths>
@@ -3049,7 +3031,7 @@ WHERE id_table=? and database_name =?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{A9D5E40F-4B55-4149-960F-8F78E0BC98CC}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -3658,454 +3640,378 @@ WHERE id_table=? and database_name =?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="152,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable"
-          TopLeft="156,198.5" />
-        <NodeLayout
-          Size="215,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2)"
-          TopLeft="0.500000000000114,363.5" />
-        <NodeLayout
-          Size="178,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated"
-          TopLeft="335,432.5" />
-        <NodeLayout
-          Size="141,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Set end date"
-          TopLeft="34.0000000000001,298.5" />
-        <NodeLayout
           Size="176,42"
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Extracts"
-          TopLeft="354,55.5" />
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source"
-          TopLeft="166.5,5.5" />
-        <NodeLayout
-          Size="218,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Insert Destination Dim Table"
-          TopLeft="740.5,428.5" />
-        <NodeLayout
-          Size="198,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1)"
-          TopLeft="302,307.5" />
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Filtered Row Count"
-          TopLeft="358.5,149.5" />
-        <NodeLayout
-          Size="153,43"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\not null pk filter"
-          TopLeft="163.5,104.5" />
-        <NodeLayout
-          Size="132,42"
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Begin date"
-          TopLeft="553.5,428.5" />
+          TopLeft="387,93.5" />
         <NodeLayout
           Size="123,42"
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Union All"
-          TopLeft="158.5,429.5" />
+          TopLeft="407.5,432.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable"
+          TopLeft="393,202.5" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update tabla_name (type 2)"
+          TopLeft="116.5,357.5" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 2"
+          TopLeft="136,427" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Set end date"
+          TopLeft="155,291.5" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Updated 1"
+          TopLeft="676,326" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Insert"
+          TopLeft="390,354" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Row Count Filtered"
+          TopLeft="1026,208" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Insert Destination Dim Table"
+          TopLeft="977.5,432.5" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Update Schema (type 1)"
+          TopLeft="972,320.5" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging"
+          TopLeft="401.5,13.5" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable\Begin date"
+          TopLeft="710.5,429.5" />
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Union All Output 1]"
-          TopLeft="281.5,452">
+          TopLeft="530.5,452">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="53.5,0"
+              EndConnector="180,0"
               Start="0,0"
-              End="46,0">
+              End="172.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="46,0" />
+                    End="172.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Unchanged Output]"
+          TopLeft="545,226.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="481,0"
+              Start="0,0"
+              End="473.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="473.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="194.54966796875,5,84.4006640625,11.6630859375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 13]"
+          TopLeft="472,135.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 12]"
-          TopLeft="513,451.5">
+          TopLeft="469.75,396">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="40.5,0"
+              EndConnector="0,36.5"
               Start="0,0"
-              End="33,0">
+              End="0,29">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="33,0" />
+                    End="0,29" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 11]"
-          TopLeft="358.5,176.166666666667">
+          TopLeft="318,450.75">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-50.5,43.3333333333333"
+              EndConnector="89.5,0"
               Start="0,0"
-              End="-43,43.3333333333333">
+              End="82,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-17.3119266055046,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-17.3119266055046,0"
-                    Point2="-21.3119266055046,0"
-                    Point3="-21.3119266055046,4" />
-                  <mssgle:LineSegment
-                    End="-21.3119266055046,39.3333333333333" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-21.3119266055046,39.3333333333333"
-                    Point2="-21.3119266055046,43.3333333333333"
-                    Point3="-25.3119266055046,43.3333333333333" />
-                  <mssgle:LineSegment
-                    End="-43,43.3333333333333" />
+                    End="82,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Row Count Output 1]"
-          TopLeft="354,82.1666666666667">
+          TopLeft="858,344.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-37.5,38"
+              EndConnector="114,0"
               Start="0,0"
-              End="-30,38">
+              End="106.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-14.7689777327935,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-14.7689777327935,0"
-                    Point2="-18.7689777327935,0"
-                    Point3="-18.7689777327935,4" />
-                  <mssgle:LineSegment
-                    End="-18.7689777327935,34" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-18.7689777327935,34"
-                    Point2="-18.7689777327935,38"
-                    Point3="-22.7689777327935,38" />
-                  <mssgle:LineSegment
-                    End="-30,38" />
+                    End="106.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[pk_not_null]"
-          TopLeft="316.5,131.833333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="42,33"
-              Start="0,0"
-              End="34.5,33">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="16.9787449392712,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="16.9787449392712,0"
-                    Point2="20.9787449392712,0"
-                    Point3="20.9787449392712,4" />
-                  <mssgle:LineSegment
-                    End="20.9787449392712,29" />
-                  <mssgle:CubicBezierSegment
-                    Point1="20.9787449392712,29"
-                    Point2="20.9787449392712,33"
-                    Point3="24.9787449392712,33" />
-                  <mssgle:LineSegment
-                    End="34.5,33" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-5.10500506072876,-17.609375,52.1675,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[OLE DB Source Output]"
-          TopLeft="323.5,26.5">
+          TopLeft="473.5,55.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="30.5000000000001,44.3333333333333"
+              EndConnector="0,38"
               Start="0,0"
-              End="23.0000000000001,44.3333333333333">
+              End="0,30.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="13.6284403669725,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.6284403669725,0"
-                    Point2="17.6284403669725,0"
-                    Point3="17.6284403669725,4" />
-                  <mssgle:LineSegment
-                    End="17.6284403669725,40.3333333333333" />
-                  <mssgle:CubicBezierSegment
-                    Point1="17.6284403669725,40.3333333333333"
-                    Point2="17.6284403669725,44.3333333333333"
-                    Point3="21.6284403669725,44.3333333333333" />
-                  <mssgle:LineSegment
-                    End="23.0000000000001,44.3333333333333" />
+                    End="0,30.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[OLE DB Command Output]"
-          TopLeft="108,405.5">
+          TopLeft="225.5,399.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="92.8333333333333,24"
+              EndConnector="0,27.5"
               Start="0,0"
-              End="92.8333333333333,16.5">
+              End="0,20">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.215088282504" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,10.215088282504"
-                    Point2="0,14.215088282504"
-                    Point3="4,14.215088282504" />
-                  <mssgle:LineSegment
-                    End="88.8333333333333,14.215088282504" />
-                  <mssgle:CubicBezierSegment
-                    Point1="88.8333333333333,14.215088282504"
-                    Point2="92.8333333333333,14.215088282504"
-                    Point3="92.8333333333333,18.215088282504" />
-                  <mssgle:LineSegment
-                    End="92.8333333333333,16.5" />
+                    End="0,20" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[New Output]"
-          TopLeft="235.583333333333,240.5">
+          TopLeft="469.75,244.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,189"
+              EndConnector="0,109.5"
               Start="0,0"
-              End="0,181.5">
+              End="0,102">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,181.5" />
+                    End="0,102" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-27.09138671875,85.0332031250001,54.1827734375,11.43359375"
+              BoundingBox="-27.09138671875,45.283203125,54.1827734375,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Historical Attribute Inserts Output]"
-          TopLeft="196,240.5">
+          TopLeft="433,244.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-91.5,58.0000000000001"
+              EndConnector="-207.5,47"
               Start="0,0"
-              End="-91.5,50.5000000000001">
+              End="-207.5,39.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16" />
+                    End="0,12.2068965517241" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16"
-                    Point2="0,20"
-                    Point3="-4,20" />
+                    Point1="0,12.2068965517241"
+                    Point2="0,16.2068965517241"
+                    Point3="-4,16.2068965517241" />
                   <mssgle:LineSegment
-                    End="-87.5,20" />
+                    End="-203.5,16.2068965517241" />
                   <mssgle:CubicBezierSegment
-                    Point1="-87.5,20"
-                    Point2="-91.5,20"
-                    Point3="-91.5,24" />
+                    Point1="-203.5,16.2068965517241"
+                    Point2="-207.5,16.2068965517241"
+                    Point3="-207.5,20.2068965517241" />
                   <mssgle:LineSegment
-                    End="-91.5,50.5000000000001" />
+                    End="-207.5,39.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-120.80638671875,25,150.1127734375,11.609375"
+              BoundingBox="-178.80638671875,21.2068965517241,150.1127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Derived Column Output1]"
-          TopLeft="685.5,449.5">
+          TopLeft="842.5,452">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="55,0"
+              EndConnector="135,0"
               Start="0,0"
-              End="47.5,0">
+              End="127.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="47.5,0" />
+                    End="127.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Derived Column Output]"
-          TopLeft="106.25,340.5">
+          TopLeft="224.75,333.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,23"
+              EndConnector="0,24"
               Start="0,0"
-              End="0,15.5">
+              End="0,16.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.5" />
+                    End="0,16.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (Table Growth)\Load SCD DimTable.Paths[Changing Attribute Updates Output]"
-          TopLeft="268,240.5">
+          TopLeft="505,244.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="133,67"
+              EndConnector="262,81.5"
               Start="0,0"
-              End="133,59.5">
+              End="262,74">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.1034482758621" />
+                    End="0,24.1034482758621" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19.1034482758621"
-                    Point2="0,23.1034482758621"
-                    Point3="4,23.1034482758621" />
+                    Point1="0,24.1034482758621"
+                    Point2="0,28.1034482758621"
+                    Point3="4,28.1034482758621" />
                   <mssgle:LineSegment
-                    End="129,23.1034482758621" />
+                    End="258,28.1034482758621" />
                   <mssgle:CubicBezierSegment
-                    Point1="129,23.1034482758621"
-                    Point2="133,23.1034482758621"
-                    Point3="133,27.1034482758621" />
+                    Point1="258,28.1034482758621"
+                    Point2="262,28.1034482758621"
+                    Point3="262,32.1034482758621" />
                   <mssgle:LineSegment
-                    End="133,59.5" />
+                    End="262,74" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-12.03390625,28.1034482758621,157.0678125,11.6630859375"
+              BoundingBox="52.46609375,33.1034482758621,157.0678125,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (Table Growth)\Load SCD DimTable\Insert Destination Dim Table">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (Table Growth)\Load SCD DimTable\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load Dimension (Table Growth)\Load SCD DimTable\SCD DimTable">
     <Properties>
@@ -4162,6 +4068,32 @@ WHERE id_table=? and database_name =?</property>
   &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
   &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
 &lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (Table Growth)\Load SCD DimTable\Insert Destination Dim Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (Table Growth)\Load SCD DimTable\Read Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

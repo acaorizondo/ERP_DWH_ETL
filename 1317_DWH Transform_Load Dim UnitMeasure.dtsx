@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load Dim UnitMeasure"
   DTS:PackageType="5"
-  DTS:VersionBuild="201"
-  DTS:VersionGUID="{75900B1E-BA06-45BA-9935-456A0CD6E437}">
+  DTS:VersionBuild="209"
+  DTS:VersionGUID="{AB352BE2-645C-4709-B8DA-788FE11E8ACA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -284,7 +284,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{9C7C962B-EAEF-4606-B7D4-5BCFFF9973D3}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimUnitMeasure"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimUnitMeasure"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -306,7 +306,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{9C7C962B-EAEF-4606-B7D4-5BCFFF9973D3}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from DimUnitMeasure"
+              SQLTask:SqlStatementSource="select count(*) as RowCountFinal from [ERP].DimUnitMeasure"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountFinal"
@@ -328,7 +328,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{9C7C962B-EAEF-4606-B7D4-5BCFFF9973D3}"
-              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from DimUnitMeasure"
+              SQLTask:SqlStatementSource="select count(*) as RowCountInitial from [ERP].DimUnitMeasure"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="RowCountInitial"
@@ -368,7 +368,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[dbo].[DimUnitMeasure]</property>
+                      name="OpenRowset">[ERP].[DimUnitMeasure]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -446,6 +446,12 @@
                           cachedScale="5"
                           externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Insert DimUnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[Factor]"
                           lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[Factor]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Insert DimUnitMeasure.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Insert DimUnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductKey]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -469,6 +475,10 @@
                           name="Factor"
                           precision="18"
                           scale="5" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Insert DimUnitMeasure.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -511,13 +521,13 @@
                       description="Specifies the SQL statement that generates the lookup table."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimUnitMeasure]</property>
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [ERP].[DimUnitMeasure]</property>
                     <property
                       dataType="System.String"
                       description="Specifies a SQL statement that uses parameters to generate the lookup table."
                       expressionType="Notify"
                       name="SqlCommandParam"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimUnitMeasure]) [refTable]
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [ERP].[DimUnitMeasure]) [refTable]
 where [refTable].[ProductUnitMeasureKey] = ?</property>
                     <property
                       dataType="System.Int32"
@@ -549,7 +559,7 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                     <property
                       dataType="System.String"
                       description="Indicates whether to reference metadata in an XML format."
-                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="IdDimUnitMeasure" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductUnitMeasureKey" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductUnitMeasureCode" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Factor" dataType="DT_NUMERIC" length="0" precision="18" scale="5" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                      name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="IdDimUnitMeasure" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductUnitMeasureKey" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductUnitMeasureCode" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Factor" dataType="DT_NUMERIC" length="0" precision="18" scale="5" codePage="0"/&gt;&lt;referenceColumn name="ProductKey" dataType="DT_GUID" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -635,6 +645,20 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                               dataType="System.String"
                               description="Specifies the column in the reference table from which a column is copied."
                               name="CopyFromReferenceColumn">Factor</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup.Outputs[Lookup Match Output].Columns[DimProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Copy Column"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup.Outputs[Lookup Match Output].Columns[DimProductKey]"
+                          name="DimProductKey"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              description="Specifies the column in the reference table from which a column is copied."
+                              name="CopyFromReferenceColumn">ProductKey</property>
                           </properties>
                         </outputColumn>
                       </outputColumns>
@@ -764,6 +788,15 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                           precision="18"
                           scale="5"
                           truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                          name="ProductKey"
+                          truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -783,6 +816,10 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                           name="Factor"
                           precision="18"
                           scale="5" />
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                          dataType="guid"
+                          name="ProductKey" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -809,6 +846,11 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                           name="Factor"
                           precision="18"
                           scale="5" />
+                        <outputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          dataType="guid"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                          name="ProductKey" />
                         <outputColumn
                           refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -851,6 +893,35 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                       refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Extrated.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
                       synchronousInputId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Extrated.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count Filtered">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::FilteredRowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -1043,9 +1114,10 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                       description="The SQL command to be executed."
                       expressionType="Notify"
                       name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE DimUnitMeasure
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [ERP].DimUnitMeasure
    SET ProductUnitMeasureCode = ?
            ,Factor = ?
+           ,ProductKey = ?
  WHERE ProductUnitMeasureKey = ?</property>
                     <property
                       dataType="System.Int32"
@@ -1069,12 +1141,6 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                       name="OLE DB Command Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].Columns[ProductUnitMeasureKey]"
-                          cachedDataType="guid"
-                          cachedName="ProductUnitMeasureKey"
-                          externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]" />
-                        <inputColumn
                           refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].Columns[ProductUnitMeasureCode]"
                           cachedCodepage="1252"
                           cachedDataType="str"
@@ -1090,6 +1156,18 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                           cachedScale="5"
                           externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                           lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[Factor]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].Columns[ProductUnitMeasureKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductUnitMeasureKey"
+                          externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductUnitMeasureKey]" />
+                        <inputColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].Columns[ProductKey]"
+                          cachedDataType="guid"
+                          cachedName="ProductKey"
+                          externalMetadataColumnId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                          lineageId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure.Outputs[OLE DB Source Output].Columns[ProductKey]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -1123,6 +1201,17 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                           refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
                           dataType="guid"
                           name="Param_2">
+                          <properties>
+                            <property
+                              dataType="System.Int32"
+                              description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                              name="DBParamInfoFlags">65</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                          dataType="guid"
+                          name="Param_3">
                           <properties>
                             <property
                               dataType="System.Int32"
@@ -1172,6 +1261,11 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                   endId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Updated.Inputs[Row Count Input 1]"
                   name="change"
                   startId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Unit Measure or factor change.Outputs[change]" />
+                <path
+                  refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Conditional Split Default Output]"
+                  endId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered.Inputs[Row Count Input 1]"
+                  name="Conditional Split Default Output"
+                  startId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Unit Measure or factor change.Outputs[Conditional Split Default Output]" />
                 <path
                   refId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Lookup Match Output]"
                   endId="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Unit Measure or factor change.Inputs[Conditional Split Input]"
@@ -1299,7 +1393,7 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{9C7C962B-EAEF-4606-B7D4-5BCFFF9973D3}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1681,53 +1775,57 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
     design-time-name="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="178,42"
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Updated"
-          TopLeft="607,305" />
+          Size="115,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup"
+          TopLeft="414,145" />
         <NodeLayout
-          Size="176,42"
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Inserted"
-          TopLeft="209,229" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Extrated"
-          TopLeft="376,47" />
+          Size="169,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Filtered"
+          TopLeft="601,322" />
         <NodeLayout
           Size="208,42"
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure"
           TopLeft="56,40" />
         <NodeLayout
-          Size="115,42"
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup"
-          TopLeft="431,146" />
-        <NodeLayout
-          Size="199,42"
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure"
-          TopLeft="601,378" />
+          Size="177,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Extrated"
+          TopLeft="376,47" />
         <NodeLayout
           Size="226,42"
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Unit Measure or factor change"
           TopLeft="577,230" />
         <NodeLayout
+          Size="199,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Update DimUnitMeasure"
+          TopLeft="873,319" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Updated"
+          TopLeft="876,230" />
+        <NodeLayout
           Size="191,42"
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Insert DimUnitMeasure"
-          TopLeft="200,370" />
+          TopLeft="204,323" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Row Count Inserted"
+          TopLeft="209,229" />
         <EdgeLayout
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Row Count Output 12]"
-          TopLeft="698.25,347">
+          TopLeft="968.75,272">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31"
+              EndConnector="0,47"
               Start="0,0"
-              End="0,23.5">
+              End="0,39.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5" />
+                    End="0,39.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1738,18 +1836,18 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Row Count Output 11]"
-          TopLeft="296.25,271">
+          TopLeft="298.25,271">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,99"
+              EndConnector="0,52"
               Start="0,0"
-              End="0,91.5">
+              End="0,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,91.5" />
+                    End="0,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1760,30 +1858,18 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Row Count Output 1]"
-          TopLeft="464.5,89">
+          TopLeft="468,89">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="24,57"
+              EndConnector="0,56"
               Start="0,0"
-              End="24,49.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.5"
-                    Point2="0,28.5"
-                    Point3="4,28.5" />
-                  <mssgle:LineSegment
-                    End="20,28.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="20,28.5"
-                    Point2="24,28.5"
-                    Point3="24,32.5" />
-                  <mssgle:LineSegment
-                    End="24,49.5" />
+                    End="0,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1816,49 +1902,13 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Lookup No Match Output]"
-          TopLeft="470.666666666667,188">
+          TopLeft="453.666666666667,187">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-173.666666666667,41"
+              EndConnector="-156.666666666667,42"
               Start="0,0"
-              End="-173.666666666667,33.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.73756432247" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.73756432247"
-                    Point2="0,16.73756432247"
-                    Point3="-4,16.73756432247" />
-                  <mssgle:LineSegment
-                    End="-169.666666666667,16.73756432247" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-169.666666666667,16.73756432247"
-                    Point2="-173.666666666667,16.73756432247"
-                    Point3="-173.666666666667,20.73756432247" />
-                  <mssgle:LineSegment
-                    End="-173.666666666667,33.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-142.639720052083,21.73756432247,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Lookup Match Output]"
-          TopLeft="506.333333333333,188">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="183.666666666667,42"
-              Start="0,0"
-              End="183.666666666667,34.5">
+              End="-156.666666666667,34.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1867,52 +1917,135 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
                   <mssgle:CubicBezierSegment
                     Point1="0,13.1457975986278"
                     Point2="0,17.1457975986278"
-                    Point3="4,17.1457975986278" />
+                    Point3="-4,17.1457975986278" />
                   <mssgle:LineSegment
-                    End="179.666666666667,17.1457975986278" />
+                    End="-152.666666666667,17.1457975986278" />
                   <mssgle:CubicBezierSegment
-                    Point1="179.666666666667,17.1457975986278"
-                    Point2="183.666666666667,17.1457975986278"
-                    Point3="183.666666666667,21.1457975986278" />
+                    Point1="-152.666666666667,17.1457975986278"
+                    Point2="-156.666666666667,17.1457975986278"
+                    Point3="-156.666666666667,21.1457975986278" />
                   <mssgle:LineSegment
-                    End="183.666666666667,34.5" />
+                    End="-156.666666666667,34.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="43.6419466145833,22.1457975986278,96.3827734375,11.609375"
+              BoundingBox="-134.139720052083,22.1457975986278,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Lookup Match Output]"
+          TopLeft="489.333333333333,187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="200.666666666667,43"
+              Start="0,0"
+              End="200.666666666667,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5540308747856" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5540308747856"
+                    Point2="0,17.5540308747856"
+                    Point3="4,17.5540308747856" />
+                  <mssgle:LineSegment
+                    End="196.666666666667,17.5540308747856" />
+                  <mssgle:CubicBezierSegment
+                    Point1="196.666666666667,17.5540308747856"
+                    Point2="200.666666666667,17.5540308747856"
+                    Point3="200.666666666667,21.5540308747856" />
+                  <mssgle:LineSegment
+                    End="200.666666666667,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="52.1419466145833,22.5540308747856,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[Conditional Split Default Output]"
+          TopLeft="687.75,272">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.61390625,15.4208984375,141.2278125,11.658203125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure.Paths[change]"
-          TopLeft="693,272">
+          TopLeft="803,251">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,33"
+              EndConnector="73,0"
               Start="0,0"
-              End="0,25.5">
+              End="65.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.5" />
+                    End="65.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-16.63095703125,6.91845703125,33.2619140625,11.6630859375"
+              BoundingBox="16.11904296875,5,33.2619140625,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[ERP].[DimUnitMeasure]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Read Source UnitMeasure">
     <Properties>
@@ -1923,29 +2056,6 @@ where [refTable].[ProductUnitMeasureKey] = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load Dimension (UnitMeasure)\Load DimUnitMeasure\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimUnitMeasure]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_Vendor"
   DTS:PackageType="5"
-  DTS:VersionBuild="156"
-  DTS:VersionGUID="{402CF355-1B09-4E82-AED0-11185529DEBA}">
+  DTS:VersionBuild="162"
+  DTS:VersionGUID="{CD7810BD-2F5C-4066-8A7D-840482D1E4B2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -228,201 +228,213 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join"
-                  componentClassID="Microsoft.MergeJoin"
-                  contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-                  description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
-                  name="Merge Join"
-                  version="1">
+                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Read Product Department"
+                  usesDispositions="true"
+                  version="7">
                   <properties>
                     <property
                       dataType="System.Int32"
-                      description="Specifies the type of join to perform."
-                      name="JoinType"
-                      typeConverter="JoinType">2</property>
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ERP].[v_StagingProductDepartment]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
                     <property
                       dataType="System.Int32"
-                      description="Specifies the number of columns in the ordering key."
-                      name="NumKeyColumns">1</property>
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
                     <property
                       dataType="System.Boolean"
-                      description="Indicates whether the null values are treated as equal values."
-                      name="TreatNullsAsEqual">true</property>
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
                     <property
                       dataType="System.Int32"
-                      description="Indicates the requested maximum buffers per input before blocking."
-                      name="MaxBuffersPerInput">5</property>
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
                   </properties>
-                  <inputs>
-                    <input
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input]"
-                      hasSideEffects="true"
-                      name="Merge Join Left Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[CompanyGroupKey]"
-                          cachedDataType="guid"
-                          cachedName="CompanyGroupKey"
-                          cachedSortKeyPosition="1"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[CompanyGroupKey]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[ProductDepartmentKey]"
-                          cachedDataType="guid"
-                          cachedName="ProductDepartmentKey"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[ProductDepartmentKey]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[SiteId]"
-                          cachedDataType="i2"
-                          cachedName="SiteId"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[SiteId]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[Code]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="2"
-                          cachedName="Code"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Code]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[Name]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="Name"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Name]" />
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                    <input
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input]"
-                      hasSideEffects="true"
-                      name="Merge Join Right Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input].Columns[CompanyGroupKey]"
-                          cachedDataType="guid"
-                          cachedName="CompanyGroupKey"
-                          cachedSortKeyPosition="1"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[CompanyGroupKey]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input].Columns[Code]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="Code"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Code]" />
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input].Columns[Name]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="150"
-                          cachedName="Name"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Name]" />
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
+                  <connections>
+                    <connection
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Connections[OleDbConnection]"
+                      connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
                   <outputs>
                     <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output]"
-                      name="Merge Join Output">
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[ProductDepartmentKey]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]"
                           dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[ProductDepartmentKey]"
-                          name="ProductDepartmentKey">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[ProductDepartmentKey]}</property>
-                          </properties>
-                        </outputColumn>
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentKey]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]"
+                          name="ProductDepartmentKey"
+                          truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[SiteId]"
-                          dataType="i2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[SiteId]"
-                          name="SiteId">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[SiteId]}</property>
-                          </properties>
-                        </outputColumn>
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Code]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                          length="2"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Code]"
+                          name="Code"
+                          truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Code]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Name]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Name]"
+                          name="Name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupCode]"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]"
+                          name="CompanyGroupCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupName]"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupName]"
+                          name="CompanyGroupName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentKey]"
+                          dataType="guid"
+                          name="ProductDepartmentKey" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[Code]"
                           codePage="1252"
                           dataType="str"
                           length="2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Code]"
-                          name="Code">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[Code]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Name]"
+                          name="Code" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[Name]"
                           codePage="1252"
                           dataType="str"
                           length="50"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Name]"
-                          name="Name">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input].Columns[Name]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupCode]"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupCode]"
                           codePage="1252"
                           dataType="str"
                           length="10"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupCode]"
-                          name="CompanyGroupCode">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input].Columns[Code]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupName]"
+                          name="CompanyGroupCode" />
+                        <externalMetadataColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupName]"
                           codePage="1252"
                           dataType="str"
                           length="150"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupName]"
-                          name="CompanyGroupName">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="The input column associated with this output column"
-                              name="InputColumnID">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input].Columns[Name]}</property>
-                          </properties>
-                        </outputColumn>
+                          name="CompanyGroupName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ProductDepartmentKey]"
+                          dataType="guid"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ProductDepartmentKey]"
+                          name="ProductDepartmentKey" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[Code]"
+                          name="Code" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[Name]"
+                          name="Name" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[CompanyGroupCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[CompanyGroupCode]"
+                          name="CompanyGroupCode" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[CompanyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[CompanyGroupName]"
+                          name="CompanyGroupName" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
                       </outputColumns>
                       <externalMetadataColumns />
                     </output>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination"
+                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
-                  name="OLE DB Destination"
+                  name="Write Product Department"
                   usesDispositions="true"
                   version="4">
                   <properties>
@@ -475,7 +487,7 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Connections[OleDbConnection]"
                       connectionManagerID="{577EE43B-4DB0-4B0D-B5D7-BDC3A45C581C}:external"
                       connectionManagerRefId="Project.ConnectionManagers[localhost.Staging]"
                       description="The OLE DB runtime connection used to access the database."
@@ -483,77 +495,77 @@
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProductDepartmentKey]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].Columns[ProductDepartmentKey]"
                           cachedDataType="guid"
                           cachedName="ProductDepartmentKey"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProductDepartmentKey]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[ProductDepartmentKey]" />
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[ProductDepartmentKey]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]" />
                         <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Code]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].Columns[Code]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="2"
                           cachedName="Code"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Code]" />
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Code]" />
                         <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].Columns[Name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Name"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[Name]" />
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[Name]" />
                         <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompanyGroupCode]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].Columns[CompanyGroupCode]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="10"
                           cachedName="CompanyGroupCode"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupCode]" />
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupCode]" />
                         <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompanyGroupName]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].Columns[CompanyGroupName]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="150"
                           cachedName="CompanyGroupName"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output].Columns[CompanyGroupName]" />
+                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output].Columns[CompanyGroupName]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProductDepartmentKey]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[ProductDepartmentKey]"
                           dataType="guid"
                           name="ProductDepartmentKey" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
                           codePage="1252"
                           dataType="str"
                           length="2"
                           name="Code" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="Name" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupCode]"
                           codePage="1252"
                           dataType="str"
                           length="10"
                           name="CompanyGroupCode" />
                         <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input].ExternalColumns[CompanyGroupName]"
                           codePage="1252"
                           dataType="str"
                           length="150"
@@ -563,801 +575,24 @@
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup)"
-                  componentClassID="Microsoft.OLEDBSource"
-                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-                  description="OLE DB Source"
-                  name="Read Source (ERP_ICS_CompanyGroup)"
-                  usesDispositions="true"
-                  version="7">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                      name="CommandTimeout">0</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[Global].[CompanyGroup]</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the variable that contains the name of the database object used to open a rowset."
-                      name="OpenRowsetVariable"></property>
-                    <property
-                      dataType="System.String"
-                      description="The SQL command to be executed."
-                      name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                    <property
-                      dataType="System.String"
-                      description="The variable that contains the SQL command to be executed."
-                      name="SqlCommandVariable"></property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the column code page to use when code page information is unavailable from the data source."
-                      name="DefaultCodePage">1252</property>
-                    <property
-                      dataType="System.Boolean"
-                      description="Forces the use of the DefaultCodePage property value when describing character data."
-                      name="AlwaysUseDefaultCodePage">false</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the mode used to access the database."
-                      name="AccessMode"
-                      typeConverter="AccessMode">0</property>
-                    <property
-                      dataType="System.String"
-                      description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
-                  </properties>
-                  <connections>
-                    <connection
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
-                      description="The OLE DB runtime connection used to access the database."
-                      name="OleDbConnection" />
-                  </connections>
-                  <outputs>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output]"
-                      name="OLE DB Source Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupKey]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[Code]"
-                          length="10"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Code]"
-                          name="Code"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[Name]"
-                          length="150"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Name]"
-                          name="Name"
-                          truncationRowDisposition="FailComponent" />
-                      </outputColumns>
-                      <externalMetadataColumns
-                        isUsed="True">
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupKey]"
-                          dataType="guid"
-                          name="CompanyGroupKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[SiteId]"
-                          dataType="i2"
-                          name="SiteId" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          name="Code" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          name="Name" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
-                          dataType="bool"
-                          name="IsActive" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
-                          dataType="bool"
-                          name="IsDeleted" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[CreationUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CreationUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[CreationDate]"
-                          dataType="dbTimeStamp"
-                          name="CreationDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[LastModifiedUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="LastModifiedUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="LastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                          dataType="bytes"
-                          length="8"
-                          name="RowVersion" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[SourceLastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="SourceLastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].ExternalColumns[SourceId]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="SourceId" />
-                      </externalMetadataColumns>
-                    </output>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output]"
-                      isErrorOut="true"
-                      name="OLE DB Source Error Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[Code]"
-                          name="Code" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Error Output].Columns[Name]"
-                          name="Name" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment)"
-                  componentClassID="Microsoft.OLEDBSource"
-                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-                  description="OLE DB Source"
-                  name="Read Source (ERP_ICS_ProductDepartment)"
-                  usesDispositions="true"
-                  version="7">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                      name="CommandTimeout">0</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[ICS].[ProductDepartment]</property>
-                    <property
-                      dataType="System.String"
-                      description="Specifies the variable that contains the name of the database object used to open a rowset."
-                      name="OpenRowsetVariable"></property>
-                    <property
-                      dataType="System.String"
-                      description="The SQL command to be executed."
-                      name="SqlCommand"
-                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
-     ICS.Vendor.VendorKey
-	,ICS.Vendor.Code AS VendorCode
-	,ICS.Vendor.Name AS VendorName
-	,GLOBAL.CompanyGroup.Code AS CompanyGroupCode
-	,GLOBAL.CompanyGroup.Name AS CompanyGroupName
-	,GLOBAL.Currency.Code AS CurrencyCode
-	,GLOBAL.Currency.Name AS CurrencyName
-	,GLOBAL.Country.Code AS CountryCode
-	,GLOBAL.Country.Name AS CountryName
-FROM ICS.Vendor
-LEFT JOIN GLOBAL.CompanyGroup ON ICS.Vendor.CompanyGroupKey = GLOBAL.CompanyGroup.CompanyGroupKey
-LEFT JOIN GLOBAL.Country ON ICS.Vendor.CountryKey = GLOBAL.Country.CountryKey
-LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKey</property>
-                    <property
-                      dataType="System.String"
-                      description="The variable that contains the SQL command to be executed."
-                      name="SqlCommandVariable"></property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the column code page to use when code page information is unavailable from the data source."
-                      name="DefaultCodePage">1252</property>
-                    <property
-                      dataType="System.Boolean"
-                      description="Forces the use of the DefaultCodePage property value when describing character data."
-                      name="AlwaysUseDefaultCodePage">false</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the mode used to access the database."
-                      name="AccessMode"
-                      typeConverter="AccessMode">0</property>
-                    <property
-                      dataType="System.String"
-                      description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping"></property>
-                  </properties>
-                  <connections>
-                    <connection
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Connections[OleDbConnection]"
-                      connectionManagerID="{715AF5B2-4721-4203-8E5E-3B85F64F7021}:external"
-                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.ApolloERP]"
-                      description="The OLE DB runtime connection used to access the database."
-                      name="OleDbConnection" />
-                  </connections>
-                  <outputs>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output]"
-                      name="OLE DB Source Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]"
-                          dataType="guid"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentKey]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]"
-                          name="ProductDepartmentKey"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[SiteId]"
-                          dataType="i2"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[SiteId]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[SiteId]"
-                          name="SiteId"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupKey]"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[Code]"
-                          length="2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Code]"
-                          name="Code"
-                          truncationRowDisposition="FailComponent" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[Name]"
-                          length="50"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Name]"
-                          name="Name"
-                          truncationRowDisposition="FailComponent" />
-                      </outputColumns>
-                      <externalMetadataColumns
-                        isUsed="True">
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[ProductDepartmentKey]"
-                          dataType="guid"
-                          name="ProductDepartmentKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[SiteId]"
-                          dataType="i2"
-                          name="SiteId" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[CompanyGroupKey]"
-                          dataType="guid"
-                          name="CompanyGroupKey" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          name="Code" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="Name" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
-                          dataType="bool"
-                          name="IsActive" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
-                          dataType="bool"
-                          name="IsDeleted" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[CreationUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="CreationUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[CreationDate]"
-                          dataType="dbTimeStamp"
-                          name="CreationDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[LastModifiedUser]"
-                          codePage="1252"
-                          dataType="str"
-                          length="15"
-                          name="LastModifiedUser" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="LastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[RowVersion]"
-                          dataType="bytes"
-                          length="8"
-                          name="RowVersion" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[Flags]"
-                          dataType="i4"
-                          name="Flags" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[SourceLastModifiedDate]"
-                          dataType="dbTimeStamp"
-                          name="SourceLastModifiedDate" />
-                        <externalMetadataColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].ExternalColumns[SourceId]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="SourceId" />
-                      </externalMetadataColumns>
-                    </output>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output]"
-                      isErrorOut="true"
-                      name="OLE DB Source Error Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ProductDepartmentKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ProductDepartmentKey]"
-                          name="ProductDepartmentKey" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[SiteId]"
-                          dataType="i2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[SiteId]"
-                          name="SiteId" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[Code]"
-                          name="Code" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[Name]"
-                          name="Name" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort"
-                  componentClassID="Microsoft.Sort"
-                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-                  name="Sort"
-                  version="1">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
-                      name="EliminateDuplicates">false</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the maximum number of threads to use for sorting."
-                      expressionType="Notify"
-                      name="MaximumThreads">-1</property>
-                  </properties>
-                  <inputs>
-                    <input
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input]"
-                      name="Sort Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input].Columns[ProductDepartmentKey]"
-                          cachedDataType="guid"
-                          cachedName="ProductDepartmentKey"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input].Columns[SiteId]"
-                          cachedDataType="i2"
-                          cachedName="SiteId"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[SiteId]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input].Columns[CompanyGroupKey]"
-                          cachedDataType="guid"
-                          cachedName="CompanyGroupKey"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">1</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input].Columns[Code]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="2"
-                          cachedName="Code"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Code]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input].Columns[Name]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="Name"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Name]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output]"
-                      isSorted="true"
-                      name="Sort Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[ProductDepartmentKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[ProductDepartmentKey]"
-                          name="ProductDepartmentKey">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[ProductDepartmentKey]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[SiteId]"
-                          dataType="i2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[SiteId]"
-                          name="SiteId">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[SiteId]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey"
-                          sortKeyPosition="1">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="2"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Code]"
-                          name="Code">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Code]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output].Columns[Name]"
-                          name="Name">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output].Columns[Name]}</property>
-                          </properties>
-                        </outputColumn>
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1"
-                  componentClassID="Microsoft.Sort"
-                  contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-                  description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-                  name="Sort 1"
-                  version="1">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      description="Indicates whether the Sort transformation removes rows with duplicate sort values."
-                      name="EliminateDuplicates">false</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the maximum number of threads to use for sorting."
-                      expressionType="Notify"
-                      name="MaximumThreads">-1</property>
-                  </properties>
-                  <inputs>
-                    <input
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Inputs[Sort Input]"
-                      name="Sort Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Inputs[Sort Input].Columns[CompanyGroupKey]"
-                          cachedDataType="guid"
-                          cachedName="CompanyGroupKey"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">1</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Inputs[Sort Input].Columns[Code]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="Code"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Code]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                        <inputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Inputs[Sort Input].Columns[Name]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="150"
-                          cachedName="Name"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Name]">
-                          <properties>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the comparison options for character data."
-                              name="NewComparisonFlags">0</property>
-                            <property
-                              dataType="System.Int32"
-                              description="Specifies the sort order of the column."
-                              name="NewSortKeyPosition">0</property>
-                          </properties>
-                        </inputColumn>
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output]"
-                      isSorted="true"
-                      name="Sort Output">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[CompanyGroupKey]"
-                          dataType="guid"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[CompanyGroupKey]"
-                          name="CompanyGroupKey"
-                          sortKeyPosition="1">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[CompanyGroupKey]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="10"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Code]"
-                          name="Code">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Code]}</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="150"
-                          lineageId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output].Columns[Name]"
-                          name="Name">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the lineage identifier of the input column that is associated with this output column."
-                              name="SortColumnId">#{Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output].Columns[Name]}</property>
-                          </properties>
-                        </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns />
                     </output>
@@ -1366,35 +601,15 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
               </components>
               <paths>
                 <path
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Merge Join Output]"
-                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
-                  name="Merge Join Output"
-                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Outputs[Merge Join Output]" />
-                <path
                   refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[OLE DB Source Output]"
                   endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Extract Row Count.Inputs[Row Count Input 1]"
                   name="OLE DB Source Output"
-                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment).Outputs[OLE DB Source Output]" />
-                <path
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[OLE DB Source Output1]"
-                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Inputs[Sort Input]"
-                  name="OLE DB Source Output"
-                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup).Outputs[OLE DB Source Output]" />
+                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department.Outputs[OLE DB Source Output]" />
                 <path
                   refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Row Count Output 1]"
-                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Inputs[Sort Input]"
+                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
                   startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Extract Row Count.Outputs[Row Count Output 1]" />
-                <path
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Sort Output]"
-                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Left Input]"
-                  name="Sort Output"
-                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort.Outputs[Sort Output]" />
-                <path
-                  refId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Sort Output1]"
-                  endId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join.Inputs[Merge Join Right Input]"
-                  name="Sort Output"
-                  startId="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1.Outputs[Sort Output]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1419,6 +634,22 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
                 SQLTask:ResultName="0"
                 SQLTask:DtsVariableName="User::RowCountInserts" />
             </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Extract from Source to Staging (ProductDepartment)\Final Row Count"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{58e45172-3415-4256-8db8-60402d7aceb3}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Final Row Count"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::RowCountFinal]= @[User::RowCountInserts]" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1456,6 +687,14 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Extract from Source to Staging (ProductDepartment)\Count rows in staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Extract from Source to Staging (ProductDepartment).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{D2217CA6-A5BC-47B8-8E01-B845B3831B00}"
+          DTS:From="Package\Extract from Source to Staging (ProductDepartment)\Count rows in staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Extract from Source to Staging (ProductDepartment)\Final Row Count" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1534,7 +773,7 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{C3B4E8CF-14F6-4397-BAC3-1CE1A5878403}"
-          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;RunPackages where &#xA;TableName = ? and DatabaseName = ?"
+          SQLTask:SqlStatementSource="SELECT RunStatus FROM &#xA;[audit].RunPackages where &#xA;TableName = ? and DatabaseName = ?"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
             SQLTask:ResultName="0"
@@ -1669,6 +908,10 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
           Id="Package\Extract from Source to Staging (ProductDepartment)\Count rows in staging"
           TopLeft="59,265" />
         <NodeLayout
+          Size="156,42"
+          Id="Package\Extract from Source to Staging (ProductDepartment)\Final Row Count"
+          TopLeft="66,357" />
+        <NodeLayout
           Size="188,42"
           Id="Package\Extract from Source to Staging (ProductDepartment)\Truncate staging table"
           TopLeft="58,92" />
@@ -1716,11 +959,33 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract from Source to Staging (ProductDepartment).PrecedenceConstraints[Constraint 2]"
+          TopLeft="147.5,307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="350,362"
-          Size="350,405"
+          PanelSize="350,464"
+          Size="350,507"
           Id="Package\Extract from Source to Staging (ProductDepartment)"
           TopLeft="413,71" />
         <NodeLayout
@@ -1761,18 +1026,30 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="278,270.25">
+          TopLeft="278,267">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="135,0"
+              EndConnector="135,57.5"
               Start="0,0"
-              End="127.5,0">
+              End="127.5,57.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="127.5,0" />
+                    End="63.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.5,0"
+                    Point2="67.5,0"
+                    Point3="67.5,4" />
+                  <mssgle:LineSegment
+                    End="67.5,53.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.5,53.5"
+                    Point2="67.5,57.5"
+                    Point3="71.5,57.5" />
+                  <mssgle:LineSegment
+                    End="127.5,57.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1783,18 +1060,30 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="763,272.75">
+          TopLeft="763,324.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="94,0"
+              EndConnector="94,-52.5"
               Start="0,0"
-              End="86.5,0">
+              End="86.5,-52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="86.5,0" />
+                    End="43,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43,0"
+                    Point2="47,0"
+                    Point3="47,-4" />
+                  <mssgle:LineSegment
+                    End="47,-48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="47,-48.5"
+                    Point2="47,-52.5"
+                    Point3="51,-52.5" />
+                  <mssgle:LineSegment
+                    End="86.5,-52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1810,95 +1099,33 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
     design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="98,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort"
-          TopLeft="198,222" />
-        <NodeLayout
-          Size="107,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Sort 1"
-          TopLeft="384,229" />
-        <NodeLayout
-          Size="269,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup)"
-          TopLeft="387,34" />
-        <NodeLayout
-          Size="130,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Merge Join"
-          TopLeft="274,311" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Extract Row Count"
           TopLeft="115,122" />
         <NodeLayout
-          Size="288,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment)"
-          TopLeft="59,32" />
+          Size="202,42"
+          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department"
+          TopLeft="94,210" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination"
-          TopLeft="258,406" />
+          Size="201,42"
+          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department"
+          TopLeft="92,40" />
         <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Sort Output1]"
-          TopLeft="437.5,271">
+          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[OLE DB Source Output]"
+          TopLeft="196.25,82">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-78.1666666666667,40"
+              EndConnector="0,40"
               Start="0,0"
-              End="-78.1666666666667,32.5">
+              End="0,32.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.7082066869301" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.7082066869301"
-                    Point2="0,23.7082066869301"
-                    Point3="-4,23.7082066869301" />
-                  <mssgle:LineSegment
-                    End="-74.1666666666667,23.7082066869301" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-74.1666666666667,23.7082066869301"
-                    Point2="-78.1666666666667,23.7082066869301"
-                    Point3="-78.1666666666667,27.7082066869301" />
-                  <mssgle:LineSegment
-                    End="-78.1666666666667,32.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Sort Output]"
-          TopLeft="247,264">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="71.6666666666667,47"
-              Start="0,0"
-              End="71.6666666666667,39.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.8571428571429" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.8571428571429"
-                    Point2="0,27.8571428571429"
-                    Point3="4,27.8571428571429" />
-                  <mssgle:LineSegment
-                    End="67.6666666666667,27.8571428571429" />
-                  <mssgle:CubicBezierSegment
-                    Point1="67.6666666666667,27.8571428571429"
-                    Point2="71.6666666666667,27.8571428571429"
-                    Point3="71.6666666666667,31.8571428571429" />
-                  <mssgle:LineSegment
-                    End="71.6666666666667,39.5" />
+                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1909,108 +1136,18 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Row Count Output 1]"
-          TopLeft="200,164">
+          TopLeft="197.5,164">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="47,58"
+              EndConnector="0,46"
               Start="0,0"
-              End="47,50.5">
+              End="0,38.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25"
-                    Point2="0,29"
-                    Point3="4,29" />
-                  <mssgle:LineSegment
-                    End="43,29" />
-                  <mssgle:CubicBezierSegment
-                    Point1="43,29"
-                    Point2="47,29"
-                    Point3="47,33" />
-                  <mssgle:LineSegment
-                    End="47,50.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[OLE DB Source Output1]"
-          TopLeft="521.5,76">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-84,153"
-              Start="0,0"
-              End="-84,145.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,72.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,72.5"
-                    Point2="0,76.5"
-                    Point3="-4,76.5" />
-                  <mssgle:LineSegment
-                    End="-80,76.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-80,76.5"
-                    Point2="-84,76.5"
-                    Point3="-84,80.5" />
-                  <mssgle:LineSegment
-                    End="-84,145.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[OLE DB Source Output]"
-          TopLeft="201.5,74">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,48"
-              Start="0,0"
-              End="0,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging.Paths[Merge Join Output]"
-          TopLeft="341.25,353">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,53"
-              Start="0,0"
-              End="0,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="0,38.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2023,7 +1160,7 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_CompanyGroup)">
+    design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Write Product Department">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2036,7 +1173,7 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Source (ERP_ICS_ProductDepartment)">
+    design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\Read Product Department">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2044,20 +1181,7 @@ LEFT JOIN GLOBAL.Currency ON ICS.Vendor.CurrencyKey = GLOBAL.Currency.CurrencyKe
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract from Source to Staging (ProductDepartment)\Copy data from source to staging\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
