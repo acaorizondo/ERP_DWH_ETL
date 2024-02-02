@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load Dim LocationEnum"
   DTS:PackageType="5"
-  DTS:VersionBuild="183"
-  DTS:VersionGUID="{890726B0-8DC7-49D2-ABCD-5FB2634B0487}">
+  DTS:VersionBuild="184"
+  DTS:VersionGUID="{82F14499-9515-485E-B5DB-C81F8D993065}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1870,35 +1870,13 @@ where [refTable].[LocationKey] = ? and [refTable].[LocationCode] = ? and [refTab
           Id="Package\Load Dimension (LocationEnum)\Count Final Rows"
           TopLeft="93,223" />
         <NodeLayout
-          Size="190,42"
-          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum"
-          TopLeft="78,118" />
-        <EdgeLayout
-          Id="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint 4]"
-          TopLeft="173,160">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,63"
-              Start="0,0"
-              End="0,55.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,55.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="160,42"
           Id="Package\Load Dimension (LocationEnum)\Initial Row Count"
           TopLeft="92,34" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Load Dimension (LocationEnum)\Load DimLocationEnum"
+          TopLeft="78,118" />
         <EdgeLayout
           Id="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint]"
           TopLeft="172.5,76">
@@ -1913,6 +1891,28 @@ where [refTable].[LocationKey] = ? and [refTable].[LocationCode] = ? and [refTab
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (LocationEnum).PrecedenceConstraints[Constraint 4]"
+          TopLeft="173,160">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

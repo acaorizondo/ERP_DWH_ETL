@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Extract ERP_ICS_DeliveryDetail"
   DTS:PackageType="5"
-  DTS:VersionBuild="228"
-  DTS:VersionGUID="{B2EC7860-2B4A-41CB-B594-BD771C1B4AA2}">
+  DTS:VersionBuild="231"
+  DTS:VersionGUID="{B7EE268A-1590-4A45-8309-55ACE536BAD5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -240,7 +240,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Final Row Count 1"
           DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <ExpressionTask
@@ -1398,7 +1398,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{200372F3-1CE5-4782-96F4-235A67AEF25F}"
-              SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC spStagingDeliveryDetailIncrementalLoad  @RowCountExt = @Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="DECLARE @Result INT;&#xA;SET @Result=0;&#xA;&#xA;EXEC ERP.spStagingDeliveryDetailIncrementalLoad  @RowCountExt = @Result OUTPUT;&#xA;SET ? = @Result;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
                 SQLTask:DtsVariableName="User::RowCountExtracts"
@@ -1433,7 +1433,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Row Count Inserts"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1455,7 +1455,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Set Incremental"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1780,11 +1780,11 @@
         <NodeLayout
           Size="184,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Count rows in staging"
-          TopLeft="39,307" />
+          TopLeft="50,306" />
         <NodeLayout
           Size="156,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Final Row Count"
-          TopLeft="48,380" />
+          TopLeft="58,380" />
         <NodeLayout
           Size="165,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Final Row Count 1"
@@ -1808,7 +1808,7 @@
         <NodeLayout
           Size="166,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Row Count Inserts"
-          TopLeft="304,310" />
+          TopLeft="309,309" />
         <NodeLayout
           Size="154,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Set Incremental"
@@ -1841,30 +1841,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (DeliveryDetail).PrecedenceConstraints[Constraint 1]"
-          TopLeft="140.5,282">
+          TopLeft="141.25,282">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9.5,25"
+              EndConnector="0,24"
               Start="0,0"
-              End="-9.5,17.5">
+              End="0,16.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.5"
-                    Point2="0,12.5"
-                    Point3="-4,12.5" />
-                  <mssgle:LineSegment
-                    End="-5.5,12.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.5,12.5"
-                    Point2="-9.5,12.5"
-                    Point3="-9.5,16.5" />
-                  <mssgle:LineSegment
-                    End="-9.5,17.5" />
+                    End="0,16.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1875,18 +1863,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (DeliveryDetail).PrecedenceConstraints[Constraint 2]"
-          TopLeft="128.5,349">
+          TopLeft="139,348">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31"
+              EndConnector="0,32"
               Start="0,0"
-              End="0,23.5">
+              End="0,24.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5" />
+                    End="0,24.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1969,30 +1957,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (DeliveryDetail).PrecedenceConstraints[Constraint 5]"
-          TopLeft="396.5,283">
+          TopLeft="394.25,283">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-9.5,27"
+              EndConnector="0,26"
               Start="0,0"
-              End="-9.5,19.5">
+              End="0,18.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9.5"
-                    Point2="0,13.5"
-                    Point3="-4,13.5" />
-                  <mssgle:LineSegment
-                    End="-5.5,13.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-5.5,13.5"
-                    Point2="-9.5,13.5"
-                    Point3="-9.5,17.5" />
-                  <mssgle:LineSegment
-                    End="-9.5,19.5" />
+                    End="0,18.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2003,18 +1979,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract from Source to Staging (DeliveryDetail).PrecedenceConstraints[Constraint 6]"
-          TopLeft="386.25,352">
+          TopLeft="388.75,351">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,27"
+              EndConnector="0,28"
               Start="0,0"
-              End="0,19.5">
+              End="0,20.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.5" />
+                    End="0,20.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2185,7 +2161,7 @@
     design-time-name="Package\Extract from Source to Staging (DeliveryDetail)\Full Load DeliveryDetail">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="211,42"
           Id="Package\Extract from Source to Staging (DeliveryDetail)\Full Load DeliveryDetail\Write Staging DeliveryDetail"
@@ -2217,7 +2193,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2239,7 +2217,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

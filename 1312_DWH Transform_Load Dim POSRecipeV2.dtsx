@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DWH Transform_Load Dim POSRecipeV2"
   DTS:PackageType="5"
-  DTS:VersionBuild="230"
-  DTS:VersionGUID="{F06AE7E4-A731-4C35-B92E-FB0463FAB777}">
+  DTS:VersionBuild="233"
+  DTS:VersionGUID="{47E88013-90B0-41AF-A6FC-8B60E5C6C662}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -376,7 +376,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{870C537D-B350-4E28-A79E-6AB12FD07D90}"
-              SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;DECLARE @Result3 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;SET @Result3=0;&#xA;&#xA;EXEC spDimensionPOSRecipe @RowCountNew = @Result1 OUTPUT&#xA;                                &#x9; ,@RowCountUpd = @Result2  OUTPUT&#xA;                                &#x9; ,@RowCountDlt = @Result3  OUTPUT&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;&#xA;SET ? = @Result3;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="DECLARE @Result1 INT;&#xA;DECLARE @Result2 INT;&#xA;DECLARE @Result3 INT;&#xA;&#xA;SET @Result1=0;&#xA;SET @Result2=0;&#xA;SET @Result3=0;&#xA;&#xA;EXEC ERP.spDimensionPOSRecipe @RowCountNew = @Result1 OUTPUT, @RowCountUpd = @Result2  OUTPUT, @RowCountDlt = @Result3  OUTPUT&#xA;&#xA;SET ? = @Result1;&#xA;SET ? = @Result2;&#xA;SET ? = @Result3;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
                 SQLTask:DtsVariableName="User::RowCountInserts"
@@ -674,9 +674,21 @@
           Id="Package\Load Dimension (POSRecipe)\Count initial Row Count"
           TopLeft="125,17" />
         <NodeLayout
+          Size="142,42"
+          Id="Package\Load Dimension (POSRecipe)\Filtered Rows"
+          TopLeft="34,395" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Load Dimension (POSRecipe)\Load DimPOSRecipe"
+          TopLeft="22,242" />
+        <NodeLayout
           Size="197,42"
           Id="Package\Load Dimension (POSRecipe)\Load SCD DimPOSRecipe"
           TopLeft="222,181" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Load Dimension (POSRecipe)\Row count extract"
+          TopLeft="22,176" />
         <NodeLayout
           Size="206,42"
           Id="Package\Load Dimension (POSRecipe)\Update Dimension Type 2"
@@ -701,6 +713,42 @@
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 1]"
+          TopLeft="182,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-77.5,47"
+              Start="0,0"
+              End="-77.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.0173410404624" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.0173410404624"
+                    Point2="0,19.0173410404624"
+                    Point3="-4,19.0173410404624" />
+                  <mssgle:LineSegment
+                    End="-73.5,19.0173410404624" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-73.5,19.0173410404624"
+                    Point2="-77.5,19.0173410404624"
+                    Point3="-77.5,23.0173410404624" />
+                  <mssgle:LineSegment
+                    End="-77.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-62.94421875,24.0173410404624,48.3884375,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -761,50 +809,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="174,42"
-          Id="Package\Load Dimension (POSRecipe)\Load DimPOSRecipe"
-          TopLeft="22,242" />
-        <NodeLayout
-          Size="165,42"
-          Id="Package\Load Dimension (POSRecipe)\Row count extract"
-          TopLeft="22,176" />
-        <EdgeLayout
-          Id="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 1]"
-          TopLeft="182,129">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-77.5,47"
-              Start="0,0"
-              End="-77.5,39.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,15.0173410404624" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,15.0173410404624"
-                    Point2="0,19.0173410404624"
-                    Point3="-4,19.0173410404624" />
-                  <mssgle:LineSegment
-                    End="-73.5,19.0173410404624" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-73.5,19.0173410404624"
-                    Point2="-77.5,19.0173410404624"
-                    Point3="-77.5,23.0173410404624" />
-                  <mssgle:LineSegment
-                    End="-77.5,39.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-62.94421875,24.0173410404624,48.3884375,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 4]"
           TopLeft="106.75,218">
@@ -849,10 +853,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="142,42"
-          Id="Package\Load Dimension (POSRecipe)\Filtered Rows"
-          TopLeft="34,395" />
         <EdgeLayout
           Id="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 6]"
           TopLeft="103.5,361">
@@ -1414,11 +1414,11 @@
     </LayoutInfo>
   </TaskHost>
   <PrecedenceConstraint
-    design-time-name="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 2]">
+    design-time-name="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 1]">
     <ShowAnnotation>ConstraintDescription</ShowAnnotation>
   </PrecedenceConstraint>
   <PrecedenceConstraint
-    design-time-name="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 1]">
+    design-time-name="Package\Load Dimension (POSRecipe).PrecedenceConstraints[Constraint 2]">
     <ShowAnnotation>ConstraintDescription</ShowAnnotation>
   </PrecedenceConstraint>
 </Objects>]]></DTS:DesignTimeProperties>

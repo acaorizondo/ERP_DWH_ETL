@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transform_Load_Dimensions"
   DTS:PackageType="5"
-  DTS:VersionBuild="52"
-  DTS:VersionGUID="{2C60AB21-EE78-4891-8F51-A3A2D3B0B50B}">
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{EE937176-847C-442E-A6B2-CF50CFEC1DD4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -465,7 +465,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{B7375D5F-3C55-4620-922A-A73E5E5844FD}"
-          SQLTask:SqlStatementSource="spAuditUpdateEndDateTime ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="audit.spAuditUpdateEndDateTime ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::AuditKey"

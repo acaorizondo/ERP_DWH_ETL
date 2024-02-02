@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Transform Load Jobs"
   DTS:PackageType="5"
-  DTS:VersionBuild="72"
-  DTS:VersionGUID="{6CA4269E-3FF5-4886-A9B6-14CED920076F}">
+  DTS:VersionBuild="80"
+  DTS:VersionGUID="{0D12CC38-5FBB-4ECE-B3E9-97FFB47AEB71}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -117,7 +117,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{EE77D065-B3D5-4F0E-BE21-A83B2580E544}"
-              SQLTask:SqlStatementSource="TruncateDataWarehouseTables" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="audit.TruncateDataWarehouseTables" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -294,7 +294,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EE77D065-B3D5-4F0E-BE21-A83B2580E544}"
-          SQLTask:SqlStatementSource="spAuditUpdateEndDateTime ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="audit.spAuditUpdateEndDateTime ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::AuditKey"
@@ -491,7 +491,7 @@
         <NodeLayout
           Size="250,42"
           Id="Package\Update EndDateTime in audit table"
-          TopLeft="772,220" />
+          TopLeft="739,211" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="214,249">
@@ -554,26 +554,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="182,-43"
+              EndConnector="149,-52"
               Start="0,0"
-              End="182,-35.5">
+              End="149,-44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-17.5" />
+                    End="0,-22" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-17.5"
-                    Point2="0,-21.5"
-                    Point3="4,-21.5" />
+                    Point1="0,-22"
+                    Point2="0,-26"
+                    Point3="4,-26" />
                   <mssgle:LineSegment
-                    End="178,-21.5" />
+                    End="145,-26" />
                   <mssgle:CubicBezierSegment
-                    Point1="178,-21.5"
-                    Point2="182,-21.5"
-                    Point3="182,-25.5" />
+                    Point1="145,-26"
+                    Point2="149,-26"
+                    Point3="149,-30" />
                   <mssgle:LineSegment
-                    End="182,-35.5" />
+                    End="149,-44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
